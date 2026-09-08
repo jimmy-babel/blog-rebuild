@@ -1,0 +1,7 @@
+{
+  "workflowId": "OBSeO3C7qUzbhu1Q",
+  "workflowName": "wechat-article-extractor",
+  "webhookUrl": "http://localhost:5678/webhook/wechat-article-extractor",
+  "timeoutSeconds": 45
+}
+

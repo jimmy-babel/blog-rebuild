@@ -1,0 +1,18 @@
+const $ = (selector) => document.querySelector(selector);
+const labels = {queued:'排队', processing:'处理中', completed:'已完成', failed:'失败'};
+let poller;
+
+function escapeHtml(value=''){return String(value).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function formatTime(value){if(!value)return '';const date=new Date(value);return Number.isNaN(date.getTime())?value:date.toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});}
+function validateUrl(value){return /^https:\/\/mp\.weixin\.qq\.com\/s\//.test(value.trim());}
+
+async function loadHealth(){try{const res=await fetch('/api/health');const data=await res.json();$('#health').className='health '+(data.ok?'ok':'bad');$('#health span:last-child').textContent=data.api_key_configured?'本地服务已就绪':'服务已启动 · 待配置 API Key';}catch{$('#health').className='health bad';$('#health span:last-child').textContent='无法连接本地服务';}}
+
+function renderTask(task){const title=task.title||task.url;const action=task.preview_url?`<a class="primary-link" href="${task.preview_url}" target="_blank">打开 HTML</a>`:'';const error=task.error?`<div class="task-error">${escapeHtml(task.error)}</div>`:'';return `<article class="task-card"><div class="task-top"><div class="task-title" title="${escapeHtml(title)}">${escapeHtml(title)}</div><span class="badge ${task.status}">${labels[task.status]||task.status}</span></div><div class="task-meta"><span>${escapeHtml(task.image_mode)} + ${escapeHtml(task.caption_mode)}</span><span>${formatTime(task.created_at)}</span></div><div class="task-progress">${escapeHtml(task.progress||'')}</div>${error}<div class="task-actions">${action}<button data-delete="${task.id}">删除</button></div></article>`;}
+
+async function loadTasks(){const q=encodeURIComponent($('#search').value.trim());const status=encodeURIComponent($('#status-filter').value);try{const res=await fetch(`/api/tasks?q=${q}&status=${status}&page_size=50`);const data=await res.json();$('#task-count').textContent=data.total;$('#tasks').innerHTML=data.items.length?data.items.map(renderTask).join(''):`<div class="empty"><div class="empty-icon">◌</div><p>没有匹配任务</p><small>换个关键词试试</small></div>`;document.querySelectorAll('[data-delete]').forEach(button=>button.addEventListener('click',()=>removeTask(button.dataset.delete)));if(data.items.some(t=>['queued','processing'].includes(t.status))){if(!poller)poller=setInterval(loadTasks,1500);}else if(poller){clearInterval(poller);poller=null;}}catch(e){console.error(e);}}
+
+async function removeTask(id){if(!confirm('确定删除这个任务及其本地结果吗？'))return;const res=await fetch(`/api/tasks/${id}`,{method:'DELETE'});if(!res.ok){const data=await res.json().catch(()=>({}));alert(data.detail||'删除失败');return;}loadTasks();}
+
+$('#task-form').addEventListener('submit',async(event)=>{event.preventDefault();const url=$('#url').value.trim();$('#url-error').textContent=validateUrl(url)?'':'请输入有效的微信公众号文章链接';if(!validateUrl(url))return;const button=$('#submit');button.disabled=true;button.querySelector('span').textContent='已加入队列';try{const res=await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,image_mode:$('#image-mode').value,caption_mode:$('#caption-mode').value,brand:$('#brand').value})});if(!res.ok){const data=await res.json().catch(()=>({}));throw new Error(data.detail||'创建任务失败');}$('#url').value='';await loadTasks();}catch(error){alert(error.message);}finally{button.disabled=false;button.querySelector('span').textContent='开始重构';}});
+$('#search').addEventListener('input',()=>{clearTimeout(window.searchTimer);window.searchTimer=setTimeout(loadTasks,250);});$('#status-filter').addEventListener('change',loadTasks);loadHealth();loadTasks();
