@@ -17,7 +17,7 @@ from pydantic import BaseModel, field_validator, model_validator
 WEB_ROOT = Path(__file__).resolve().parent
 load_dotenv(WEB_ROOT / ".env")
 
-from database import TaskStore, now_iso
+from database import TaskStore, now_iso, project_relative_path
 from website_pipeline import BLOG_ROOT, PipelineError, run_pipeline
 
 
@@ -25,6 +25,15 @@ DB = TaskStore(WEB_ROOT / "data" / "tasks.db")
 MAX_CONCURRENT = max(1, int(os.getenv("MAX_CONCURRENT_TASKS", "2")))
 SEMAPHORE = asyncio.Semaphore(MAX_CONCURRENT)
 RUNNING: dict[str, asyncio.Task] = {}
+
+
+def resolve_project_path(value: str | None) -> Path | None:
+    if not value:
+        return None
+    path = Path(value)
+    if not path.is_absolute():
+        path = BLOG_ROOT / path
+    return path.resolve()
 
 
 class TaskCreate(BaseModel):
@@ -76,7 +85,8 @@ async def execute_task(task_id: str) -> None:
             )
             DB.update(
                 task_id, status="completed", title=result["title"], progress="处理完成",
-                result_dir=result["result_dir"], html_file=result["html_file"], finished_at=now_iso(),
+                result_dir=project_relative_path(result["result_dir"], BLOG_ROOT),
+                html_file=project_relative_path(result["html_file"], BLOG_ROOT), finished_at=now_iso(),
             )
         except Exception as exc:
             DB.update(task_id, status="failed", progress="处理失败", error=str(exc), finished_at=now_iso())
@@ -94,6 +104,7 @@ def schedule(task_id: str) -> None:
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    DB.migrate_result_paths(BLOG_ROOT)
     DB.recover_on_start()
     queued, _ = DB.list(status="queued", page=1, page_size=100)
     for task in queued:
@@ -164,9 +175,9 @@ async def delete_task(task_id: str) -> dict:
     if work_dir.exists():
         shutil.rmtree(work_dir, ignore_errors=True)
     if task.get("result_dir"):
-        result_dir = Path(task["result_dir"]).resolve()
+        result_dir = resolve_project_path(task["result_dir"])
         result_root = (BLOG_ROOT / "result").resolve()
-        if result_dir != result_root and result_root in result_dir.parents and result_dir.exists():
+        if result_dir and result_dir != result_root and result_root in result_dir.parents and result_dir.exists():
             shutil.rmtree(result_dir, ignore_errors=True)
     return {"deleted": bool(deleted), "id": task_id}
 
@@ -176,7 +187,9 @@ async def result_file(task_id: str, file_path: str) -> FileResponse:
     task = DB.get(task_id)
     if not task or not task.get("result_dir"):
         raise HTTPException(404, "结果不存在")
-    root = Path(task["result_dir"]).resolve()
+    root = resolve_project_path(task["result_dir"])
+    if root is None:
+        raise HTTPException(404, "结果不存在")
     target = (root / file_path).resolve()
     if target != root and root not in target.parents:
         raise HTTPException(403, "非法路径")

@@ -31,6 +31,27 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def project_relative_path(value: object, project_root: Path) -> object:
+    """Store project files independently of the absolute checkout location."""
+    if not isinstance(value, str) or not value:
+        return value
+
+    path = Path(value)
+    if not path.is_absolute():
+        return path.as_posix()
+
+    root = project_root.resolve()
+    try:
+        return path.resolve().relative_to(root).as_posix()
+    except ValueError:
+        # Migrate legacy absolute paths even when the old checkout no longer exists.
+        parts = path.parts
+        for index, part in enumerate(parts):
+            if part.lower() == "result":
+                return Path(*parts[index:]).as_posix()
+        return value
+
+
 class TaskStore:
     def __init__(self, path: Path):
         self.path = path.resolve()
@@ -115,3 +136,22 @@ class TaskStore:
                 "WHERE status='processing'",
                 (now_iso(),),
             )
+
+    def migrate_result_paths(self, project_root: Path) -> int:
+        """Convert legacy absolute result paths to paths relative to project_root."""
+        changed = 0
+        with self.lock, self.connect() as connection:
+            rows = connection.execute(
+                "SELECT id, result_dir, html_file FROM tasks "
+                "WHERE result_dir IS NOT NULL OR html_file IS NOT NULL"
+            ).fetchall()
+            for row in rows:
+                result_dir = project_relative_path(row["result_dir"], project_root)
+                html_file = project_relative_path(row["html_file"], project_root)
+                if result_dir != row["result_dir"] or html_file != row["html_file"]:
+                    connection.execute(
+                        "UPDATE tasks SET result_dir = ?, html_file = ? WHERE id = ?",
+                        (result_dir, html_file, row["id"]),
+                    )
+                    changed += 1
+        return changed
