@@ -1,0 +1,83 @@
+{
+  "method": "POST",
+  "url": "http://127.0.0.1:8317/v1/images/edits",
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer {{OPENAI_API_KEY}}",
+      "type": "text"
+    },
+    {
+      "key": "Accept",
+      "value": "application/json",
+      "type": "text"
+    }
+  ],
+  "model": "gpt-image-2",
+  "prompt": "忠实参考对应来源图片的构图与手绘漫画风格：纯白背景，黑色简洁线稿，一位头发略显凌乱的人坐在桌前，一只手扶着额头，面露疲惫又无奈的表情，另一只手握笔在纸上书写，画面留白充足，人物位于中央偏上位置。保留朴素、幽默、略带自嘲的漫画气质，去除二维码、作者署名、公众号名称、广告信息和无关装饰，不添加品牌标识，不生成大段可辨识文字。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：有些矛盾，最后被一句体谅轻轻带过。。",
+  "fields": {
+    "model": "gpt-image-2",
+    "prompt": "忠实参考对应来源图片的构图与手绘漫画风格：纯白背景，黑色简洁线稿，一位头发略显凌乱的人坐在桌前，一只手扶着额头，面露疲惫又无奈的表情，另一只手握笔在纸上书写，画面留白充足，人物位于中央偏上位置。保留朴素、幽默、略带自嘲的漫画气质，去除二维码、作者署名、公众号名称、广告信息和无关装饰，不添加品牌标识，不生成大段可辨识文字。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：有些矛盾，最后被一句体谅轻轻带过。。",
+    "size": "1024x1536",
+    "quality": "medium"
+  },
+  "files": [
+    {
+      "field": "image[]",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\c8729f98ec1541dba67289228d3b6a99\\source-images\\image-001.jpg",
+      "filename": "image-001.jpg",
+      "content_type": "image/jpeg"
+    },
+    {
+      "field": "image[]",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+      "filename": "通用1.png",
+      "content_type": "image/png"
+    }
+  ],
+  "response_body_file": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\c8729f98ec1541dba67289228d3b6a99\\api-debug\\image-001.response.body",
+  "response_status": 200,
+  "response_headers": {
+    "access-control-allow-headers": "*",
+    "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+    "access-control-allow-origin": "*",
+    "access-control-expose-headers": "X-CPA-TRACE-ID, X-CPA-VERSION, X-CPA-COMMIT, X-CPA-BUILD-DATE, X-CPA-SUPPORT-PLUGIN, X-CPA-HOME-VERSION, X-CPA-HOME-BUILD-DATE, X-SERVER-VERSION, X-SERVER-BUILD-DATE, Location, Retry-After, X-Request-Id, OpenAI-Request-Id",
+    "content-type": "application/json",
+    "x-cpa-trace-id": "20260914111013-3860ac096aca049b-16e4524b",
+    "date": "Mon, 14 Sep 2026 03:10:46 GMT",
+    "transfer-encoding": "chunked"
+  },
+  "note": "Authorization 使用 {{OPENAI_API_KEY}} 占位符；不要手动设置 multipart Content-Type。",
+  "form_data": [
+    {
+      "key": "model",
+      "value": "gpt-image-2",
+      "type": "text"
+    },
+    {
+      "key": "prompt",
+      "value": "忠实参考对应来源图片的构图与手绘漫画风格：纯白背景，黑色简洁线稿，一位头发略显凌乱的人坐在桌前，一只手扶着额头，面露疲惫又无奈的表情，另一只手握笔在纸上书写，画面留白充足，人物位于中央偏上位置。保留朴素、幽默、略带自嘲的漫画气质，去除二维码、作者署名、公众号名称、广告信息和无关装饰，不添加品牌标识，不生成大段可辨识文字。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：有些矛盾，最后被一句体谅轻轻带过。。",
+      "type": "text"
+    },
+    {
+      "key": "size",
+      "value": "1024x1536",
+      "type": "text"
+    },
+    {
+      "key": "quality",
+      "value": "medium",
+      "type": "text"
+    },
+    {
+      "key": "image[]",
+      "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\c8729f98ec1541dba67289228d3b6a99\\source-images\\image-001.jpg",
+      "type": "file"
+    },
+    {
+      "key": "image[]",
+      "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+      "type": "file"
+    }
+  ]
+}

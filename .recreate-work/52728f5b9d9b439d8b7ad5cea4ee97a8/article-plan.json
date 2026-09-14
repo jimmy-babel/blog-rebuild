@@ -1,0 +1,56 @@
+{
+  "title": "婚姻到最后，风花雪月都变成了柴米油盐",
+  "removedSourceIndexes": [
+    0,
+    6
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "01"
+    },
+    {
+      "type": "text",
+      "text": "他忘了结婚纪念日\n你刚要发火\n他转了你五千块\n你说\n“算了，有心就好”\n他问\n“那明年还转吗”\n你说“转”\n他记下了\n你也不气了"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "alt": "黑白手绘漫画表现忘记重要日子后懊恼的场景",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\52728f5b9d9b439d8b7ad5cea4ee97a8\\cards\\image-001.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "02"
+    },
+    {
+      "type": "text",
+      "text": "你们商量要不要生二胎\n吵了一周\n最后算账\n换大房子多花一百万\n奶粉尿布每月三千\n学区房再加五十万\n算完两人沉默\n他说“一个也挺好”\n你说“对”"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "alt": "黑白手绘漫画表现生育后家庭购物和育儿用品负担",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\52728f5b9d9b439d8b7ad5cea4ee97a8\\cards\\image-002.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "03"
+    },
+    {
+      "type": "text",
+      "text": "婚姻到最后\n风花雪月都变成了柴米油盐\n我爱你变成了我赚够了吗\n你不浪漫没关系\n你会赚钱就行\n我不温柔没关系\n我会管钱就行\n两个人把日子过成一家合伙公司\n利润不高\n但没倒闭\n就是胜利"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "手绘漫画表现夫妻多年相伴、一起享受平凡生活",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\52728f5b9d9b439d8b7ad5cea4ee97a8\\cards\\image-003.png"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

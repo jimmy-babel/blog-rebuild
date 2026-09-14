@@ -1,0 +1,3 @@
+curl --request POST --url 'http://127.0.0.1:8317/v1/images/edits' --header 'Authorization: Bearer {{OPENAI_API_KEY}}' --header 'Accept: application/json' --form-string 'model=gpt-image-2' --form-string 'prompt=使用项目角色参考图，保持人物身份一致：可爱中国风小女孩，黑色双丸子发髻，红色蝴蝶结发饰，蓝色传统服饰，黑色下装，细腻手绘插画风，白色背景。小女孩侧身站立，背着小包，手持一根简洁的长柄物件，抬头望向远方，神情坚定又充满期待，表现善良、笃定、即将迎来好运的感觉。画面留白充足，人物居中，色彩清爽柔和，不添加任何文字、水印、边框或标识。
+来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。
+生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：你尽管善良，福报都在来的路上。。' --form-string 'size=1024x1536' --form-string 'quality=medium' --form 'image[]=@E:\JIMMY\github\blog-rebuild\.recreate-work\b5a07c5e048c48b08f49648b1246bf85\source-images\image-002.jpg;type=image/jpeg' --form 'image[]=@E:\JIMMY\github\blog-rebuild\photos\通用1.png;type=image/png'

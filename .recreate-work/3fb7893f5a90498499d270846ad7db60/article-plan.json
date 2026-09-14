@@ -1,0 +1,41 @@
+{
+  "title": "顺而不从：和婆婆相处的双赢智慧",
+  "summary": "有些家庭相处，不必处处争辩，嘴上答应得快，行动拐弯得快，也能让彼此都自在。",
+  "removedSourceIndexes": [
+    6
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "01 她非要给孩子穿三层\n我说“妈你真细心”\n出门就给娃脱了一件\n回来再穿上\n她摸摸娃后背说“没出汗”\n我说“妈你真有经验”\n她得意了"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 1,
+      "alt": "年轻妈妈、孩子和婆婆围绕孩子穿衣问题互动的家庭漫画场景",
+      "error": "图片生成 API 调用失败：Server error '500 Internal Server Error' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+    },
+    {
+      "type": "text",
+      "text": "02 家婆说“省着点花\n别买那些没用的东西”\n我不争不辩\n转头买的快递都寄到公司\n拆了塞包里带回家\n她问“新买的？”\n我说“同事不要的”\n她说“这同事不错”"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 3,
+      "alt": "年轻女性将快递带回家并机智应对婆婆询问的手绘漫画场景",
+      "error": "图片生成 API 调用失败：Server error '500 Internal Server Error' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+    },
+    {
+      "type": "text",
+      "text": "03 顺而不从的精髓：\n嘴上答应得快\n行动拐弯得快\n她高兴了\n我也自由了\n两全其美\n这叫双赢"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "年轻女性与婆婆轻松相处、彼此满意的家庭漫画场景",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\3fb7893f5a90498499d270846ad7db60\\cards\\image-003.png"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

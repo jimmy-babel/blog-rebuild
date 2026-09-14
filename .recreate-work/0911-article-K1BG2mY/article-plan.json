@@ -1,0 +1,54 @@
+{
+  "articleMode": "trans",
+  "imageMode": "copy",
+  "title": "家人之间，赢了道理也未必赢了关系",
+  "summary": "家人相处，少一点硬碰硬，多一点留台阶。",
+  "removedSourceIndexes": [6],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "接住关心"
+    },
+    {
+      "type": "text",
+      "text": "长辈替孩子添衣，先肯定她的细心，再按天气调整。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "path": "cards/image-001.png",
+      "alt": "家人一起照顾孩子，先接住关心再调整做法"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "守住边界"
+    },
+    {
+      "type": "text",
+      "text": "消费观不同，不必当场争输赢；安排好自己的选择，换个轻松说法。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "path": "cards/image-002.png",
+      "alt": "家人讨论家庭开支，在分歧中保留体面"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "顺势而为"
+    },
+    {
+      "type": "text",
+      "text": "嘴上接住情绪，行动保留主见。让对方安心，也让自己自在。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "path": "cards/image-003.png",
+      "alt": "陪伴父母并及时联系，让关心落在当下"
+    }
+  ]
+}

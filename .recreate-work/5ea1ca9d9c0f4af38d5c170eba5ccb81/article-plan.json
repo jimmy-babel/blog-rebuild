@@ -1,0 +1,40 @@
+{
+  "title": "顺而不从：和长辈相处的双赢",
+  "removedSourceIndexes": [
+    6
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "01 她非要给孩子穿三层\n我说“妈你真细心”\n出门就给娃脱了一件\n回来再穿上\n她摸摸娃后背说“没出汗”\n我说“妈你真有经验”\n她得意了"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 1,
+      "alt": "来源配图，按原图完整保留。",
+      "error": "图片生成 API 调用失败：Client error '400 Bad Request' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+    },
+    {
+      "type": "text",
+      "text": "02 家婆说“省着点花 别买那些没用的东西”\n我不争不辩\n转头买的快递都寄到公司\n拆了塞包里带回家\n她问“新买的？”\n我说“同事不要的”\n她说“这同事不错”"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 3,
+      "alt": "来源配图，按原图完整保留。",
+      "error": "图片生成 API 调用失败：Client error '400 Bad Request' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+    },
+    {
+      "type": "text",
+      "text": "03 顺而不从的精髓：\n嘴上答应得快\n行动拐弯得快\n她高兴了\n我也自由了\n两全其美\n这叫双赢"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 5,
+      "alt": "来源配图，按原图完整保留。",
+      "error": "图片生成 API 调用失败：Client error '400 Bad Request' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

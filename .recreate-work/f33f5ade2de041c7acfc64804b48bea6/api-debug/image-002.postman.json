@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Web-v2 image request - image-002",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "image-002",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{OPENAI_API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "model",
+              "value": "gpt-image-2",
+              "type": "text"
+            },
+            {
+              "key": "prompt",
+              "value": "请生成一幅温暖克制的原创手绘漫画风插画，表现一对成年伴侣在家中分担生活琐事：一人表情傲娇地递出水杯或食物，另一人嘴上嫌弃却伸手接过，同时旁边有正在清洗的餐具、拖把或小锅，体现两人默契分工和嘴硬心软。白色背景，黑色手绘线条，人物比例自然，面部带淡淡红晕，使用少量暖棕色、浅粉色和米黄色，画面干净留白充足。不要出现任何文字、标语、水印、品牌、二维码或作者信息。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：好的伴侣不怕彼此麻烦，因为每一次照顾都已经成为习惯。。",
+              "type": "text"
+            },
+            {
+              "key": "size",
+              "value": "1024x1536",
+              "type": "text"
+            },
+            {
+              "key": "quality",
+              "value": "medium",
+              "type": "text"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\f33f5ade2de041c7acfc64804b48bea6\\source-images\\image-002.jpg",
+              "type": "file"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+              "type": "file"
+            }
+          ]
+        },
+        "url": "http://127.0.0.1:8317/v1/images/edits"
+      }
+    }
+  ]
+}

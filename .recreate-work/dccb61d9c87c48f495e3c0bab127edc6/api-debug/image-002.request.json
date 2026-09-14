@@ -1,0 +1,83 @@
+{
+  "method": "POST",
+  "url": "http://127.0.0.1:8317/v1/images/edits",
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer {{OPENAI_API_KEY}}",
+      "type": "text"
+    },
+    {
+      "key": "Accept",
+      "value": "application/json",
+      "type": "text"
+    }
+  ],
+  "model": "gpt-image-2",
+  "prompt": "参考来源图片中情侣人物的简洁手绘身份与造型，创作一幅生活化的东方漫画插画：一对成年恋人共同处理家务，女性拿着拖把站在一旁故作嫌弃，男性在水池边认真刷锅，双方表情带有拌嘴后的轻松和默契，画面突出不说谢谢却彼此照顾的日常感。采用黑色手绘线条、白色留白背景、少量柔和肤色与暖黄色生活细节，构图简洁幽默。禁止任何文字、对白、标题、署名、二维码、广告、品牌标识和水印。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：相爱不是句句动听，而是你需要时，他已经把事情做完。。",
+  "fields": {
+    "model": "gpt-image-2",
+    "prompt": "参考来源图片中情侣人物的简洁手绘身份与造型，创作一幅生活化的东方漫画插画：一对成年恋人共同处理家务，女性拿着拖把站在一旁故作嫌弃，男性在水池边认真刷锅，双方表情带有拌嘴后的轻松和默契，画面突出不说谢谢却彼此照顾的日常感。采用黑色手绘线条、白色留白背景、少量柔和肤色与暖黄色生活细节，构图简洁幽默。禁止任何文字、对白、标题、署名、二维码、广告、品牌标识和水印。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：相爱不是句句动听，而是你需要时，他已经把事情做完。。",
+    "size": "1024x1536",
+    "quality": "medium"
+  },
+  "files": [
+    {
+      "field": "image[]",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\dccb61d9c87c48f495e3c0bab127edc6\\source-images\\image-002.jpg",
+      "filename": "image-002.jpg",
+      "content_type": "image/jpeg"
+    },
+    {
+      "field": "image[]",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+      "filename": "通用1.png",
+      "content_type": "image/png"
+    }
+  ],
+  "response_body_file": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\dccb61d9c87c48f495e3c0bab127edc6\\api-debug\\image-002.response.body",
+  "response_status": 200,
+  "response_headers": {
+    "access-control-allow-headers": "*",
+    "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+    "access-control-allow-origin": "*",
+    "access-control-expose-headers": "X-CPA-TRACE-ID, X-CPA-VERSION, X-CPA-COMMIT, X-CPA-BUILD-DATE, X-CPA-SUPPORT-PLUGIN, X-CPA-HOME-VERSION, X-CPA-HOME-BUILD-DATE, X-SERVER-VERSION, X-SERVER-BUILD-DATE, Location, Retry-After, X-Request-Id, OpenAI-Request-Id",
+    "content-type": "application/json",
+    "x-cpa-trace-id": "20260912012522-3860ac096aca049b-7d91f962",
+    "date": "Fri, 11 Sep 2026 17:25:57 GMT",
+    "transfer-encoding": "chunked"
+  },
+  "note": "Authorization 使用 {{OPENAI_API_KEY}} 占位符；不要手动设置 multipart Content-Type。",
+  "form_data": [
+    {
+      "key": "model",
+      "value": "gpt-image-2",
+      "type": "text"
+    },
+    {
+      "key": "prompt",
+      "value": "参考来源图片中情侣人物的简洁手绘身份与造型，创作一幅生活化的东方漫画插画：一对成年恋人共同处理家务，女性拿着拖把站在一旁故作嫌弃，男性在水池边认真刷锅，双方表情带有拌嘴后的轻松和默契，画面突出不说谢谢却彼此照顾的日常感。采用黑色手绘线条、白色留白背景、少量柔和肤色与暖黄色生活细节，构图简洁幽默。禁止任何文字、对白、标题、署名、二维码、广告、品牌标识和水印。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：相爱不是句句动听，而是你需要时，他已经把事情做完。。",
+      "type": "text"
+    },
+    {
+      "key": "size",
+      "value": "1024x1536",
+      "type": "text"
+    },
+    {
+      "key": "quality",
+      "value": "medium",
+      "type": "text"
+    },
+    {
+      "key": "image[]",
+      "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\dccb61d9c87c48f495e3c0bab127edc6\\source-images\\image-002.jpg",
+      "type": "file"
+    },
+    {
+      "key": "image[]",
+      "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+      "type": "file"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "title": "婚姻到最后，风花雪月都变成了柴米油盐",
+  "removedSourceIndexes": [
+    6
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "01 他忘了结婚纪念日"
+    },
+    {
+      "type": "text",
+      "text": "你刚要发火 他转了你五千块 你说“算了，有心就好” 他问“那明年还转吗” 你说“转” 他记下了 你也不气了"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "alt": "一位疲惫的人扶额坐在桌前写字，呈现无奈又释然的手绘漫画画面。",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\c8729f98ec1541dba67289228d3b6a99\\cards\\image-001.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "02 你们商量要不要生二胎"
+    },
+    {
+      "type": "text",
+      "text": "吵了一周 最后算账 换大房子多花一百万 奶粉尿布每月三千 学区房再加五十万 算完两人沉默 他说“一个也挺好” 你说“对”"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "alt": "一位女性抱着堆满生活用品和婴幼儿用品的购物物品，表现家庭生活的忙碌与负担。",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\c8729f98ec1541dba67289228d3b6a99\\cards\\image-002.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "03 婚姻到最后"
+    },
+    {
+      "type": "text",
+      "text": "风花雪月都变成了柴米油盐 我爱你变成了我赚够了吗 你不浪漫没关系 你会赚钱就行 我不温柔没关系 我会管钱就行 两个人把日子过成一家合伙公司 利润不高 但没倒闭 就是胜利"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "一对白发老人并肩追逐蝴蝶，展现相伴多年后的温暖与默契。",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\c8729f98ec1541dba67289228d3b6a99\\cards\\image-003.png"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

@@ -1,0 +1,17 @@
+{
+  "articleMode": "trans",
+  "imageMode": "copy",
+  "title": "家人难相处时，先接住情绪，再保留自己",
+  "removedSourceIndexes": [6],
+  "blocks": [
+    {"type": "heading", "level": 2, "text": "先接住关心"},
+    {"type": "text", "text": "长辈让孩子多穿，是在表达担心。先接住心意，再按体感增减，大家都安心。"},
+    {"type": "image", "sourceIndex": 1, "path": "cards/image-001.png", "alt": "家人围绕孩子表达关心"},
+    {"type": "heading", "level": 2, "text": "给差异留余地"},
+    {"type": "text", "text": "消费观不同，不必争辩。安排好自己的选择，也给家人留点体面。"},
+    {"type": "image", "sourceIndex": 3, "path": "cards/image-002.png", "alt": "在生活选择中给彼此留空间"},
+    {"type": "heading", "level": 2, "text": "柔软地守边界"},
+    {"type": "text", "text": "顺而不从：先接住情绪，再守住边界。语气柔软，生活自己负责。"},
+    {"type": "image", "sourceIndex": 5, "path": "cards/image-003.png", "alt": "家人温柔沟通并尊重彼此边界"}
+  ]
+}

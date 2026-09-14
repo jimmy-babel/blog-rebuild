@@ -1,0 +1,40 @@
+{
+  "title": "和婆婆相处的智慧：顺而不从",
+  "removedSourceIndexes": [
+    6
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "她非要给孩子穿三层。我说：“妈你真细心。”出门就给娃脱了一件，回来再穿上。她摸摸娃后背说：“没出汗。”我说：“妈你真有经验。”她得意了。"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 1,
+      "alt": "漫画中一家人拿着手机站在一起，配有关于相亲相爱一家的手写文字。",
+      "error": "图片生成 API 调用失败：Server error '503 Service Unavailable' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+    },
+    {
+      "type": "text",
+      "text": "02 家婆说：“省着点花，别买那些没用的东西。”我不争不辩，转头买的快递都寄到公司，拆了塞包里带回家。她问：“新买的？”我说：“同事不要的。”她说：“这同事不错。”"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 3,
+      "alt": "漫画中孩子伸手摘树上的果子，地上放着篮子，配有关于生活压力的手写文字。",
+      "error": "图片生成 API 调用失败：Server error '503 Service Unavailable' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+    },
+    {
+      "type": "text",
+      "text": "03 顺而不从的精髓：嘴上答应得快，行动拐弯得快。她高兴了，我也自由了，两全其美。这叫双赢。"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 5,
+      "alt": "漫画中两位老人坐在桌旁喝茶聊天，旁边有母鸡和小鸡，配有关于父母理解与牵挂的手写文字。",
+      "error": "图片生成 API 调用失败：Server error '503 Service Unavailable' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

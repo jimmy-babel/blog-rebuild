@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Web-v2 image request - image-002",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "image-002",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{OPENAI_API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "model",
+              "value": "gpt-image-2",
+              "type": "text"
+            },
+            {
+              "key": "prompt",
+              "value": "复制来源图片的黑白手绘漫画风格与构图，保持原图人物身份、线条质感和留白布局一致：表现一位忙于家庭生活的女性，怀中抱着大量婴儿用品和生活用品，身旁还有散落的纸巾或日用品，突出育儿开销与生活负担；简洁黑色手绘线稿，白色背景，适度夸张但温和幽默，不添加二维码、署名、公众号信息、广告或任何来源标识。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：关于二胎的讨论，最后还是回到了现实账本。。",
+              "type": "text"
+            },
+            {
+              "key": "size",
+              "value": "1024x1536",
+              "type": "text"
+            },
+            {
+              "key": "quality",
+              "value": "medium",
+              "type": "text"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\52728f5b9d9b439d8b7ad5cea4ee97a8\\source-images\\image-002.jpg",
+              "type": "file"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+              "type": "file"
+            }
+          ]
+        },
+        "url": "http://127.0.0.1:8317/v1/images/edits"
+      }
+    }
+  ]
+}

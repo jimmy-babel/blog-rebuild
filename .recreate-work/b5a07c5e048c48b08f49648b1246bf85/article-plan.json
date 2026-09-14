@@ -1,0 +1,69 @@
+{
+  "title": "所有的姗姗来迟，都是为了最好的相逢",
+  "summary": "愿你继续沉淀，保持善良与笃定，静待时光馈赠惊喜。",
+  "removedSourceIndexes": [],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1"
+    },
+    {
+      "type": "text",
+      "text": "此刻的你，或许默默坚持了很久。有些满心期待的美好，暂时还没有如约而至；有些默默的付出，暂时还没有开花结果。但请你一定相信，生活从不会辜负真诚。"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 1,
+      "alt": "中国风小女孩躺在橙色靠枕上捧杯微笑的治愈插画",
+      "error": "图片生成 API 调用失败：HTTP 500；响应 body：{\"error\":{\"message\":\"Post \\\"https://chatgpt.com/backend-api/codex/images/edits\\\": unexpected EOF\",\"type\":\"server_error\",\"code\":\"internal_server_error\"}}；请求备份：E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\api-debug\\image-001.postman.json；响应日志：E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\api-debug\\image-001.response.body"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2"
+    },
+    {
+      "type": "text",
+      "text": "有句话说，所有的姗姗来迟，都是为了最好的相逢。所以请继续沉淀，继续保持你的善良与笃定，继续对生活怀揣热爱，静待时光馈赠惊喜。你会告别所有低谷，迎来稳稳的顺遂与安稳。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "alt": "中国风小女孩背着小包抬头望向远方的手绘插画",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\cards\\image-002.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3"
+    },
+    {
+      "type": "text",
+      "text": "终会在某个风平浪静的日子懂得，原来那些迟迟未到的圆满，一直在默默为你铺路前行。愿你所有的默默耕耘，最后都能开花结果；愿你熬过的所有灰暗，都变成未来的星光璀璨；愿往后的岁岁年年，温柔自愈，万事皆甜。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "中国风小女孩张开双臂开心跳跃的明亮手绘插画",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\cards\\image-003.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4"
+    },
+    {
+      "type": "text",
+      "text": "我永远相信，我就是命好，心想就会事成。我注定会被运气和福气一生眷顾。所有的好运正向我涌来，我值得一切的好事在我身上发生。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 7,
+      "alt": "中国风小女孩坐在屋檐上喝茶享受阳光的手绘插画",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\cards\\image-004.png"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

@@ -1,0 +1,53 @@
+{
+  "articleMode": "ori",
+  "imageMode": "copy",
+  "title": "婚姻走到最后，拼的是把日子过稳",
+  "removedSourceIndexes": [6],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "01 他忘了结婚纪念日"
+    },
+    {
+      "type": "text",
+      "text": "你刚要发火\n他转了你五千块\n你说\n“算了，有心就好”\n他问\n“那明年还转吗”\n你说“转”\n他记下了\n你也不气了"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "path": "cards/image-001.png",
+      "alt": "忘记纪念日后用实际行动补救的幽默场景"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "02 你们商量要不要生二胎"
+    },
+    {
+      "type": "text",
+      "text": "吵了一周\n最后算账\n换大房子多花一百万\n奶粉尿布每月三千\n学区房再加五十万\n算完两人沉默\n他说“一个也挺好”\n你说“对”"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "path": "cards/image-002.png",
+      "alt": "面对育儿用品和家庭开支的现实计算"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "03 婚姻到最后"
+    },
+    {
+      "type": "text",
+      "text": "风花雪月都变成了柴米油盐\n我爱你变成了我赚够了吗\n你不浪漫没关系\n你会赚钱就行\n我不温柔没关系\n我会管钱就行\n两个人把日子过成一家合伙公司\n利润不高\n但没倒闭\n就是胜利"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "path": "cards/image-003.png",
+      "alt": "相伴多年仍然一起把生活过得热闹温暖"
+    }
+  ]
+}

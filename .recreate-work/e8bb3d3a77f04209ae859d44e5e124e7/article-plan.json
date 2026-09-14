@@ -1,0 +1,51 @@
+{
+  "title": "和长辈相处，最高级的智慧是顺而不从",
+  "summary": "不必每件事都争个输赢，换一种回应方式，既让长辈安心，也给自己留下空间。",
+  "removedSourceIndexes": [
+    6
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "先接住关心，再保留判断"
+    },
+    {
+      "type": "text",
+      "text": "长辈提醒孩子添衣，出发前坚持多穿一层，回来发现没出汗便默默脱下。面对这种关心，不妨先肯定她的用心，再根据孩子的状态调整。被需要的满足感有了，实际照料也不必僵化。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "alt": "家人围绕孩子表达关心的手绘漫画",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\e8bb3d3a77f04209ae859d44e5e124e7\\cards\\image-001.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "不必硬碰硬，给生活留一点转弯"
+    },
+    {
+      "type": "text",
+      "text": "面对“别乱花钱”的提醒，争辩往往只会让气氛变紧。把自己的消费安排好，减少正面冲突，反而更容易维持相处的体面。顺着情绪回应，不等于放弃主见，而是选择更省力的表达。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "alt": "孩子摘取树上果实的简洁手绘漫画",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\e8bb3d3a77f04209ae859d44e5e124e7\\cards\\image-002.png"
+    },
+    {
+      "type": "text",
+      "text": "真正成熟的相处方式，是嘴上给台阶，行动守边界；让对方感到被尊重，也让自己拥有选择。少一些对抗，多一点变通，日子才能过得自在。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "可爱卡通人物头像",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\e8bb3d3a77f04209ae859d44e5e124e7\\cards\\image-003.png"
+    }
+  ],
+  "articleMode": "trans",
+  "imageMode": "copy"
+}

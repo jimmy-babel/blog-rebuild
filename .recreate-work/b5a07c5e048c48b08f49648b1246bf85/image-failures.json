@@ -1,0 +1,12 @@
+{
+  "count": 1,
+  "failures": [
+    {
+      "image": "image-001",
+      "sourceIndex": 1,
+      "error": "图片生成 API 调用失败：HTTP 500；响应 body：{\"error\":{\"message\":\"Post \\\"https://chatgpt.com/backend-api/codex/images/edits\\\": unexpected EOF\",\"type\":\"server_error\",\"code\":\"internal_server_error\"}}；请求备份：E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\api-debug\\image-001.postman.json；响应日志：E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\api-debug\\image-001.response.body",
+      "postmanRequest": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\api-debug\\image-001.postman.json",
+      "responseBody": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\api-debug\\image-001.response.body"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "婚姻到最后，浪漫变成了柴米油盐",
+  "removedSourceIndexes": [
+    0,
+    6
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "01 他忘了结婚纪念日"
+    },
+    {
+      "type": "text",
+      "text": "你刚要发火\n他转了你五千块\n你说 “算了，有心就好”\n他问 “那明年还转吗”\n你说“转”\n他记下了\n你也不气了"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "alt": "一位人物捂着额头伏案写字，呈现无奈又自我调侃的状态",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\7debebcd285f49d0932ae06ec8131c4d\\cards\\image-001.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "02 你们商量要不要生二胎"
+    },
+    {
+      "type": "text",
+      "text": "吵了一周\n最后算账\n换大房子多花一百万\n奶粉尿布每月三千\n学区房再加五十万\n算完两人沉默\n他说“一个也挺好”\n你说“对”"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "alt": "一位母亲抱着装满婴儿用品和生活用品的购物篮，显得忙碌而充实",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\7debebcd285f49d0932ae06ec8131c4d\\cards\\image-002.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "03 婚姻到最后"
+    },
+    {
+      "type": "text",
+      "text": "风花雪月都变成了柴米油盐\n我爱你变成了我赚够了吗\n你不浪漫没关系\n你会赚钱就行\n我不温柔没关系\n我会管钱就行\n两个人把日子过成一家合伙公司\n利润不高\n但没倒闭\n就是胜利"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "一对白发夫妻笑着并肩追逐蝴蝶，展现长久婚姻中的深情陪伴",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\7debebcd285f49d0932ae06ec8131c4d\\cards\\image-003.png"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

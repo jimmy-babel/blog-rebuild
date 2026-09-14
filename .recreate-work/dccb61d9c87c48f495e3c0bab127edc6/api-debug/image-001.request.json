@@ -1,0 +1,83 @@
+{
+  "method": "POST",
+  "url": "http://127.0.0.1:8317/v1/images/edits",
+  "headers": [
+    {
+      "key": "Authorization",
+      "value": "Bearer {{OPENAI_API_KEY}}",
+      "type": "text"
+    },
+    {
+      "key": "Accept",
+      "value": "application/json",
+      "type": "text"
+    }
+  ],
+  "model": "gpt-image-2",
+  "prompt": "以来源图片中的两位女性朋友为身份与画风参考，创作一幅温暖克制的手绘漫画式生活插画：两位成年女性朋友在搬家场景中互相帮忙，一人抱着纸箱，另一人推着折叠推车，表情带着夸张的嫌弃和开心的笑意，动作亲密自然，体现嘴上抱怨但彼此可靠的友情。保留简洁黑色线稿、少量柔和肤色和暖色点缀、留白背景、轻松幽默的东方手绘插画质感。画面不要出现任何文字、对话框、印章、署名、二维码、品牌标识或水印。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：真正的朋友，嘴上嫌弃，行动却总是比承诺更快。。",
+  "fields": {
+    "model": "gpt-image-2",
+    "prompt": "以来源图片中的两位女性朋友为身份与画风参考，创作一幅温暖克制的手绘漫画式生活插画：两位成年女性朋友在搬家场景中互相帮忙，一人抱着纸箱，另一人推着折叠推车，表情带着夸张的嫌弃和开心的笑意，动作亲密自然，体现嘴上抱怨但彼此可靠的友情。保留简洁黑色线稿、少量柔和肤色和暖色点缀、留白背景、轻松幽默的东方手绘插画质感。画面不要出现任何文字、对话框、印章、署名、二维码、品牌标识或水印。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：真正的朋友，嘴上嫌弃，行动却总是比承诺更快。。",
+    "size": "1024x1536",
+    "quality": "medium"
+  },
+  "files": [
+    {
+      "field": "image[]",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\dccb61d9c87c48f495e3c0bab127edc6\\source-images\\image-001.jpg",
+      "filename": "image-001.jpg",
+      "content_type": "image/jpeg"
+    },
+    {
+      "field": "image[]",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+      "filename": "通用1.png",
+      "content_type": "image/png"
+    }
+  ],
+  "response_body_file": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\dccb61d9c87c48f495e3c0bab127edc6\\api-debug\\image-001.response.body",
+  "response_status": 200,
+  "response_headers": {
+    "access-control-allow-headers": "*",
+    "access-control-allow-methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+    "access-control-allow-origin": "*",
+    "access-control-expose-headers": "X-CPA-TRACE-ID, X-CPA-VERSION, X-CPA-COMMIT, X-CPA-BUILD-DATE, X-CPA-SUPPORT-PLUGIN, X-CPA-HOME-VERSION, X-CPA-HOME-BUILD-DATE, X-SERVER-VERSION, X-SERVER-BUILD-DATE, Location, Retry-After, X-Request-Id, OpenAI-Request-Id",
+    "content-type": "application/json",
+    "x-cpa-trace-id": "20260912012522-3860ac096aca049b-f329d0ad",
+    "date": "Fri, 11 Sep 2026 17:27:05 GMT",
+    "transfer-encoding": "chunked"
+  },
+  "note": "Authorization 使用 {{OPENAI_API_KEY}} 占位符；不要手动设置 multipart Content-Type。",
+  "form_data": [
+    {
+      "key": "model",
+      "value": "gpt-image-2",
+      "type": "text"
+    },
+    {
+      "key": "prompt",
+      "value": "以来源图片中的两位女性朋友为身份与画风参考，创作一幅温暖克制的手绘漫画式生活插画：两位成年女性朋友在搬家场景中互相帮忙，一人抱着纸箱，另一人推着折叠推车，表情带着夸张的嫌弃和开心的笑意，动作亲密自然，体现嘴上抱怨但彼此可靠的友情。保留简洁黑色线稿、少量柔和肤色和暖色点缀、留白背景、轻松幽默的东方手绘插画质感。画面不要出现任何文字、对话框、印章、署名、二维码、品牌标识或水印。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：真正的朋友，嘴上嫌弃，行动却总是比承诺更快。。",
+      "type": "text"
+    },
+    {
+      "key": "size",
+      "value": "1024x1536",
+      "type": "text"
+    },
+    {
+      "key": "quality",
+      "value": "medium",
+      "type": "text"
+    },
+    {
+      "key": "image[]",
+      "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\dccb61d9c87c48f495e3c0bab127edc6\\source-images\\image-001.jpg",
+      "type": "file"
+    },
+    {
+      "key": "image[]",
+      "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+      "type": "file"
+    }
+  ]
+}

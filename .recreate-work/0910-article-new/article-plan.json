@@ -1,0 +1,40 @@
+{
+  "articleMode": "ori",
+  "imageMode": "copy",
+  "captionMode": "ai",
+  "brand": "on",
+  "title": "顺着关心回应，也按自己的方式生活",
+  "removedSourceIndexes": [0, 7],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "01 她非要给孩子穿三层 我说“妈你真细心” 出门就给娃脱了一件 回来再穿上 她摸摸娃后背说“没出汗” 我说“妈你真有经验” 她得意了"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 2,
+      "path": "cards/image-001.png",
+      "alt": "家人照顾孩子时，用温和方式协调不同习惯"
+    },
+    {
+      "type": "text",
+      "text": "02 家婆说“省着点花 别买那些没用的东西” 我不争不辩 转头买的快递都寄到公司 拆了塞包里带回家 她问“新买的？” 我说“同事不要的” 她说“这同事不错”"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 4,
+      "path": "cards/image-002.png",
+      "alt": "面对家人的节俭提醒，用机智减少正面冲突"
+    },
+    {
+      "type": "text",
+      "text": "03 顺而不从的精髓： 嘴上答应得快 行动拐弯得快 她高兴了 我也自由了 两全其美 这叫双赢"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 6,
+      "path": "cards/image-003.png",
+      "alt": "即使观念不同，父母仍然会惦记你的生活和身体"
+    }
+  ]
+}

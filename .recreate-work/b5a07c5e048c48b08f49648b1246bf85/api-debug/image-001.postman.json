@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Web-v2 image request - image-001",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "image-001",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{OPENAI_API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "model",
+              "value": "gpt-image-2",
+              "type": "text"
+            },
+            {
+              "key": "prompt",
+              "value": "使用项目角色参考图，保持人物身份一致：可爱中国风小女孩，黑色双丸子发髻，红色发饰，蓝色传统服饰，黑色下装，细腻手绘插画风，白色背景。小女孩慵懒地躺在橙色靠枕上，双手捧着一只小茶杯，闭眼微笑，脸颊泛红，身旁有小红心装饰，氛围温暖、安心、治愈。画面构图简洁，人物居中偏下，保留留白，不添加任何文字、水印、边框或标识。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：希望你的眼睛可以一直笑，想要的东西都得到。。",
+              "type": "text"
+            },
+            {
+              "key": "size",
+              "value": "1024x1536",
+              "type": "text"
+            },
+            {
+              "key": "quality",
+              "value": "medium",
+              "type": "text"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\b5a07c5e048c48b08f49648b1246bf85\\source-images\\image-001.jpg",
+              "type": "file"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+              "type": "file"
+            }
+          ]
+        },
+        "url": "http://127.0.0.1:8317/v1/images/edits"
+      }
+    }
+  ]
+}

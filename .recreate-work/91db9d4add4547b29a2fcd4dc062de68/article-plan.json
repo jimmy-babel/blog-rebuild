@@ -1,0 +1,55 @@
+{
+  "title": "顺而不从的生活智慧",
+  "removedSourceIndexes": [
+    6
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "01"
+    },
+    {
+      "type": "text",
+      "text": "她非要给孩子穿三层 我说“妈你真细心” 出门就给娃脱了一件 回来再穿上 她摸摸娃后背说“没出汗” 我说“妈你真有经验” 她得意了"
+    },
+    {
+      "type": "sourceImageLink",
+      "sourceIndex": 1,
+      "alt": "手绘漫画风格的家庭相处场景，表现长辈照顾孩子时的温馨幽默氛围",
+      "error": "图片生成 API 调用失败：Server error '500 Internal Server Error' for url 'http://127.0.0.1:8317/v1/images/edits'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "02"
+    },
+    {
+      "type": "text",
+      "text": "家婆说“省着点花 别买那些没用的东西” 我不争不辩 转头买的快递都寄到公司 拆了塞包里带回家 她问“新买的？” 我说“同事不要的” 她说“这同事不错”"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "alt": "彩色手绘漫画风格的家庭对话场景，表现生活观念差异中的幽默感",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\91db9d4add4547b29a2fcd4dc062de68\\cards\\image-002.png"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "03"
+    },
+    {
+      "type": "text",
+      "text": "顺而不从的精髓： 嘴上答应得快 行动拐弯得快 她高兴了 我也自由了 两全其美 这叫双赢"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "alt": "手绘漫画风格的家庭生活场景，传达顺而不从、彼此体谅的处世智慧",
+      "path": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\91db9d4add4547b29a2fcd4dc062de68\\cards\\image-003.png"
+    }
+  ],
+  "articleMode": "ori",
+  "imageMode": "copy"
+}

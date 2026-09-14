@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Web-v2 image request - image-001",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "image-001",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{OPENAI_API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "model",
+              "value": "gpt-image-2",
+              "type": "text"
+            },
+            {
+              "key": "prompt",
+              "value": "沿用项目角色参考图中的人物身份与整体画风，创作一幅简洁温暖的手绘漫画：两位成年女性朋友站在一起，其中一人表情夸张地抱怨、指向前方，另一人笑着拉住她或跟在她身后，体现“嘴上嫌弃、实际上愿意陪伴”的朋友默契。白色留白背景，黑色粗线条，少量柔和腮红与淡彩点缀，构图轻巧幽默，不添加任何文字、品牌、二维码、作者信息或装饰性广告元素。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：真正的朋友，嘴上嫌你麻烦，行动却总是站在你这边。。",
+              "type": "text"
+            },
+            {
+              "key": "size",
+              "value": "1024x1536",
+              "type": "text"
+            },
+            {
+              "key": "quality",
+              "value": "medium",
+              "type": "text"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\978a5f2a3fff4de9a28f7e893bff26cd\\source-images\\image-001.jpg",
+              "type": "file"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+              "type": "file"
+            }
+          ]
+        },
+        "url": "http://127.0.0.1:8317/v1/images/edits"
+      }
+    }
+  ]
+}

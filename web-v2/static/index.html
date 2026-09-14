@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文章重构工作台</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div><p class="eyebrow">BLOG / LOCAL STUDIO</p><h1>文章重构工作台</h1><p class="subtitle">把一篇文章，重新写成自己的表达。</p></div>
+      <div id="health" class="health"><span class="dot"></span><span>正在检查服务</span></div>
+    </header>
+    <section class="grid">
+      <section class="panel composer">
+        <div class="panel-head"><div><span class="kicker">NEW TASK</span><h2>开始一篇新文章</h2></div><span class="spark">✦</span></div>
+        <form id="task-form">
+          <label for="url">原文链接</label>
+          <div class="input-wrap"><span>↗</span><input id="url" name="url" placeholder="粘贴 mp.weixin.qq.com/s/..." required /></div>
+          <p id="url-error" class="field-error"></p>
+          <div class="select-grid">
+            <div><label for="article-mode">文章模式</label><select id="article-mode"><option value="trans">trans · 原创重构</option><option value="ori">ori · 清洗后原文</option></select></div>
+            <div><label for="image-mode">图片模式</label><select id="image-mode"><option value="copy">copy · 保留信息结构</option><option value="rebuild">rebuild · 重新构图</option><option value="comic">comic · 连续叙事</option></select></div>
+            <div><label for="caption-mode">文案模式</label><select id="caption-mode"><option value="ai">ai · AI 生成完整卡片</option><option value="local">local · 本地排版文案</option></select></div>
+            <div><label for="brand">品牌人物参考</label><select id="brand"><option value="on">on · 使用品牌人物</option><option value="off">off · 不使用品牌人物</option></select></div>
+            <div id="comic-count-wrap" hidden><label for="comic-count">Comic 张数</label><input id="comic-count" type="number" min="1" value="5" /></div>
+          </div>
+          <button id="submit" class="primary" type="submit"><span>开始重构</span><b>→</b></button>
+        </form>
+        <div class="tip"><span>⌁</span><p>文章直接从微信公众号页面获取，图片、文章和成品都保留在本机。任务运行期间可以离开页面，回来后继续查看。</p></div>
+      </section>
+      <section class="panel tasks-panel">
+        <div class="panel-head task-head"><div><span class="kicker">WORKSPACE</span><h2>任务记录</h2></div><span id="task-count" class="count">0</span></div>
+        <div class="filters"><div class="search"><span>⌕</span><input id="search" placeholder="搜索标题、链接或任务 ID" /></div><select id="status-filter"><option value="">全部状态</option><option value="queued">排队</option><option value="processing">处理中</option><option value="completed">已完成</option><option value="failed">失败</option></select></div>
+        <div id="tasks" class="task-list"><div class="empty"><div class="empty-icon">◌</div><p>还没有任务</p><small>从左侧开始你的第一篇文章</small></div></div>
+      </section>
+    </section>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

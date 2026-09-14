@@ -1,0 +1,53 @@
+{
+  "articleMode": "trans",
+  "imageMode": "copy",
+  "title": "把日子过回自己手里",
+  "removedSourceIndexes": [6],
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "一、先哄好自己"
+    },
+    {
+      "type": "text",
+      "text": "纪念日被忘了，就送自己一束花；别人的猜测无需解释，自己的心情值得照顾。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "path": "cards/image-001.png",
+      "alt": "成年人买花哄自己开心"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "二、边界比争辩重要"
+    },
+    {
+      "type": "text",
+      "text": "遇到甩锅，先拉对方一起确认责任。少争输赢，不替别人的混乱买单。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "path": "cards/image-002.png",
+      "alt": "职场中冷静挡住甩锅"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "三、快乐不必延期"
+    },
+    {
+      "type": "text",
+      "text": "别把享受推给未来。今天少生气、睡久一点，拒绝不想要的事，就是在爱自己。"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "path": "cards/image-003.png",
+      "alt": "在草地上享受当下的休息"
+    }
+  ]
+}

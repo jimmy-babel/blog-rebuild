@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Web-v2 image request - image-001",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "image-001",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{OPENAI_API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "model",
+              "value": "gpt-image-2",
+              "type": "text"
+            },
+            {
+              "key": "prompt",
+              "value": "根据来源图片进行高保真复刻，保持项目角色参考图中的人物身份与整体手绘漫画风格一致：简洁的黑色线稿，少量柔和粉色和暖色晕染，白色留白背景。画面表现两位关系亲密的成年女性朋友，一人带着夸张又 playful 的嫌弃表情，伸手指责或吐槽；另一人笑着跟在身后，神情无奈却亲近，形成“嘴上嫌弃、实际上陪伴”的反差。构图简洁、人物动态自然、线条略带手绘质感，不要出现任何文字、对话框、品牌、作者署名、水印或装饰性广告元素。\n来源图片负责信息结构、动作、道具、空间关系和排版气质；品牌人物参考拥有主体身份与统一 3D 风格的最高优先级，不复制水印、署名或像素布局。\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：朋友之间，嘴上总有抱怨，行动却从不缺席。。",
+              "type": "text"
+            },
+            {
+              "key": "size",
+              "value": "1024x1536",
+              "type": "text"
+            },
+            {
+              "key": "quality",
+              "value": "medium",
+              "type": "text"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\.recreate-work\\cb62a97e3e7c4e25b55de14e82bf2ff5\\source-images\\image-001.jpg",
+              "type": "file"
+            },
+            {
+              "key": "image[]",
+              "src": "E:\\JIMMY\\github\\blog-rebuild\\photos\\通用1.png",
+              "type": "file"
+            }
+          ]
+        },
+        "url": "http://127.0.0.1:8317/v1/images/edits"
+      }
+    }
+  ]
+}

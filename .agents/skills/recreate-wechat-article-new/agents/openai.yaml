@@ -1,0 +1,4 @@
+interface:
+  display_name: "微信文章原创重构（新流程）"
+  short_description: "使用独立新流程提取、重构微信文章并归档图文"
+  default_prompt: "使用 $recreate-wechat-article-new [--article-mode trans|ori] [--image-mode rebuild|copy|comic] [--comic-count N] [--caption-mode ai|local] [--brand on|off] 处理微信公众号文章链接；文章默认采用 trans，图片默认采用 copy + ai + brand on，comic 默认生成 5 张连续叙事图，并输出含原文归档的离线文章目录。"

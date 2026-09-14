@@ -1,0 +1,38 @@
+{
+  "articleMode": "ori",
+  "imageMode": "copy",
+  "title": "别替父母接管他们的因果",
+  "removedSourceIndexes": [6],
+  "blocks": [
+    {
+      "type": "text",
+      "text": "01 你妈跟你抱怨你弟不孝顺 你打电话骂你弟 苦口婆心劝他对你妈好一点 你弟说你多管闲事 你妈又说 “你怎么能骂他，他是我儿子” 你气得想撞墙 他俩母子情深 你成了恶人"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 1,
+      "path": "cards/image-001.png",
+      "alt": "家人争执时，孩子被夹在中间"
+    },
+    {
+      "type": "text",
+      "text": "02 爸妈吵架 你冲上去评理 帮妈说话，爸说你偏心 帮爸说话，妈说你白眼狼 你闭嘴，两边说你冷漠 你开口，两边说你挑事 最后他俩和好了 一起骂你"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 3,
+      "path": "cards/image-002.png",
+      "alt": "父母争吵时，孩子被迫承受指责"
+    },
+    {
+      "type": "text",
+      "text": "03 过度介入父母因果 就是 你替他们操心 他们给你添堵 你帮他们解决问题 他们给你制造问题 你以为你是在拯救他们 其实那是他们的舒适区"
+    },
+    {
+      "type": "image",
+      "sourceIndex": 5,
+      "path": "cards/image-003.png",
+      "alt": "孩子站在父母矛盾之外，重新交还责任"
+    }
+  ]
+}
