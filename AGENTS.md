@@ -2,7 +2,7 @@
 
 ## 固定目录
 
-- 角色参考图只从 `photos/` 读取。当前约定文件为 `喜1.png`、`怒1.png`、`哀1.png`、`乐1.png`、`通用1.png`。
+- 角色参考图只从 `photos/` 读取。旧 `recreate-wechat-article-new` 与 `web-v2` 保持原有情绪参考图逻辑；`recreate-wechat-article-v3` 与 `web-v3` 使用 `girl.png`、`girl-baby.png`、`girl-old.png`、`boy.png`、`boy-baby.png`、`boy-old.png`，无法判断时默认使用 `girl.png`。
 - 成品只写入 `result/`。临时抓取文件写入 `.recreate-work/`，不得混入成品目录。
 - 项目级 skill 位于 `.agents/skills/recreate-wechat-article/`。
 - n8n 提取工作流为 `wechat-article-extractor`；不得修改现有 `test-2`。
