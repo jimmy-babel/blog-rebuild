@@ -1,0 +1,838 @@
+{
+  "schema_version": 1,
+  "collection_name": "每日一笑",
+  "records": [
+    {
+      "id": "reference-001",
+      "text": "儿子：妈妈，醒醒！\n妈妈：干嘛😴😴\n儿子：语文35，数学25，英语20\n妈妈：又要交资料费了吗🥱\n一会儿找你爸要去～\n儿子：没有，这是上周考试的成绩🫣\n我又拿了倒数第一🙃\n妈妈：(不敢睁开眼，希望是幻觉)😵‍💫\n儿子：妈你又睡着了吗？\n妈妈：我不睡觉还能干嘛😡\n难道你想让我跳起来打你吗？",
+      "source": {
+        "title": "demo.txt 第 1 条",
+        "url": "local://joke/demo.txt#1"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "亲子",
+        "考试",
+        "家庭"
+      ],
+      "twist_type": "误解反转",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "home",
+        "premise": "poor-exam-results",
+        "punchline": "parent-escapes-reality"
+      },
+      "character_count": 134,
+      "line_count": 11,
+      "fingerprints": {
+        "normalized_sha256": "2592465232aa85360c014e0e41e179da1748e2b1f49436c8d39d51b24c722770",
+        "semantic_key": "child-parent|home|poor-exam-results|parent-escapes-reality"
+      }
+    },
+    {
+      "id": "reference-002",
+      "text": "护士：您不是刚出院嘛🤯\n怎么又住进来了啊？\n大爷无奈摇头：\n这不是腿又受伤了嘛😅\n护士好奇问道：咋回事？\n大爷支支吾吾地回答：\n爬山的时候不小心磕的🫣\n护士：不对呀！\n昨天我还看见您跟一群阿姨\n在公园跳广场舞呢～🤔\n大爷委屈巴巴地说：\n哎呀！别说了…\n这不是我老伴也看见了吗😭",
+      "source": {
+        "title": "demo.txt 第 2 条",
+        "url": "local://joke/demo.txt#2"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "夫妻",
+        "医院",
+        "日常"
+      ],
+      "twist_type": "身份错位",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "patient-clinician",
+        "setting": "hospital",
+        "premise": "injury-excuse",
+        "punchline": "spouse-caught-dancing"
+      },
+      "character_count": 126,
+      "line_count": 13,
+      "fingerprints": {
+        "normalized_sha256": "a67f7ac9378d6729dd4f8f361f4b1f80c01c0a40475a4006ac68e423c682b47a",
+        "semantic_key": "patient-clinician|hospital|injury-excuse|spouse-caught-dancing"
+      }
+    },
+    {
+      "id": "reference-003",
+      "text": "整个家族就剩我还没结婚🫡\n有一回过年，\n饭桌上，我妈带领全家逼婚😅\n我安安静静地吃完说了句：\n你们说够了嘛？\n下次再提我就掀桌子😤\n第二年回家发现：\n我妈把桌子换成了大理石板🤯\n再次带领全家逼婚...🙃",
+      "source": {
+        "title": "demo.txt 第 3 条",
+        "url": "local://joke/demo.txt#3"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "家庭",
+        "过年",
+        "婚恋"
+      ],
+      "twist_type": "字面化反转",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "adult-family",
+        "setting": "family-dinner",
+        "premise": "marriage-pressure",
+        "punchline": "marble-table"
+      },
+      "character_count": 93,
+      "line_count": 9,
+      "fingerprints": {
+        "normalized_sha256": "07c312d440895f02e3ea9d58a4948264c6e1caf32b831a02745554bde71c6091",
+        "semantic_key": "adult-family|family-dinner|marriage-pressure|marble-table"
+      }
+    },
+    {
+      "id": "reference-004",
+      "text": "小明考试考了90分，\n妈妈却很生气，\n妈妈：你上次考6分，这次90分，\n老师说这个0是你加上去的😡\n小明：我没有，\n妈妈：那就好…\n小明：那个9才是我画上去的🤣",
+      "source": {
+        "title": "demo.txt 第 4 条",
+        "url": "local://joke/demo.txt#4"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "亲子",
+        "考试",
+        "校园"
+      ],
+      "twist_type": "信息反转",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "school",
+        "premise": "suspicious-score",
+        "punchline": "other-digit-forged"
+      },
+      "character_count": 74,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "54734753b71d18589a98d208e2e92fad728d83ac2e345a02b714df8b6359a76b",
+        "semantic_key": "child-parent|school|suspicious-score|other-digit-forged"
+      }
+    },
+    {
+      "id": "reference-005",
+      "text": "我：老公，你这么多年，\n都没干过家务，\n你是怎么做到的？😡\n\n老公：靠脸。😎\n我：你在说自己帅嘛？！！\n老公：我说的是厚度！🤣",
+      "source": {
+        "title": "demo.txt 第 5 条",
+        "url": "local://joke/demo.txt#5"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "夫妻",
+        "家务",
+        "家庭"
+      ],
+      "twist_type": "双关误解",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "home",
+        "premise": "no-housework",
+        "punchline": "thick-skinned"
+      },
+      "character_count": 57,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "2434b77899db6a4b72bb883c977eb7984a6600b712f2b4bdafc5bc372c5ac13a",
+        "semantic_key": "couple|home|no-housework|thick-skinned"
+      }
+    },
+    {
+      "id": "reference-006",
+      "text": "老公：其实我也有错～🥺\n我不应该对你说重话的🫡\n老婆：我反省了一夜…\n老公：我这一天心里也不好受。\n老婆：全是你的错！😤\n老公：what？？？\n老婆：能重新吵吗？我没发挥好！🙃\n老公：......😅",
+      "source": {
+        "title": "demo.txt 第 6 条",
+        "url": "local://joke/demo.txt#6"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "夫妻",
+        "吵架",
+        "家庭"
+      ],
+      "twist_type": "立场反转",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "home",
+        "premise": "argument-apology",
+        "punchline": "redo-argument"
+      },
+      "character_count": 92,
+      "line_count": 8,
+      "fingerprints": {
+        "normalized_sha256": "9c3e24d2f51caa6dac047dfcaa40f475b920823fba5eb7e23385d7781e3af0fb",
+        "semantic_key": "couple|home|argument-apology|redo-argument"
+      }
+    },
+    {
+      "id": "reference-007",
+      "text": "第一次去女朋友家🫣\n心里有点紧张，\n门一开我立马打招呼：\n阿姨您好😊\n看她有些尴尬…\n我又叫：岳母您好！🫡\n还是有点尴尬🤔\n难道嫌我太生分了？\n忙改口：妈～您好！\n女朋友笑着说：这是我姐😅\n我当时真想找个地洞钻进去😭",
+      "source": {
+        "title": "demo.txt 第 7 条",
+        "url": "local://joke/demo.txt#7"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "情侣",
+        "见家长",
+        "尴尬"
+      ],
+      "twist_type": "身份误认",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "partner-family",
+        "setting": "partner-home",
+        "premise": "first-family-meeting",
+        "punchline": "sister-mistaken-for-mother"
+      },
+      "character_count": 98,
+      "line_count": 11,
+      "fingerprints": {
+        "normalized_sha256": "c07eec65115d5b359c724450de13b8c11aef68479e56df2c44901c1877c059ba",
+        "semantic_key": "partner-family|partner-home|first-family-meeting|sister-mistaken-for-mother"
+      }
+    },
+    {
+      "id": "reference-008",
+      "text": "爸爸：这么简单的题，你考23分？😮‍💨\n同桌考了几分啊？\n儿子：100分…😅\n爸爸：什么？你跟人家排排坐，\n看一样的书，上一样的课，\n人家拿满分，你就考这么点？😡\n给我好好想想差哪儿了！？\n儿子：我想了，就差一根胳膊……🤔\n爸爸：什么胳膊？\n难不成人家那胳膊天生就会考试🤯\n儿子：不是啊！\n他考试的时候老用胳膊挡住卷子，\n我费了老大劲才抄到的23分！😊\n爸爸：......😵‍💫",
+      "source": {
+        "title": "demo.txt 第 8 条",
+        "url": "local://joke/demo.txt#8"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "亲子",
+        "考试",
+        "校园"
+      ],
+      "twist_type": "误解反转",
+      "state": "reference",
+      "batch_id": "demo-reference",
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "school",
+        "premise": "score-gap",
+        "punchline": "copying-blocked"
+      },
+      "character_count": 176,
+      "line_count": 14,
+      "fingerprints": {
+        "normalized_sha256": "7dad11450830d92ff0e81a522238be185bcea7c35fdd9f2ecef67994e560760f",
+        "semantic_key": "child-parent|school|score-gap|copying-blocked"
+      }
+    },
+    {
+      "id": "web-001",
+      "text": "儿子：「爸爸，你小时候家里穷吗？」\n爸爸：「可穷了，连肉都吃不上。」\n儿子：「那你怎么还长这么胖？」\n爸爸沉默了一下：「...这是成年后才胖的。」",
+      "source": {
+        "title": "儿童幽默笑话——15个和孩子笑到停不下来的段子",
+        "url": "https://www.qiushile.com/xiaohua/ertong/95230.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "亲子",
+        "家庭",
+        "日常"
+      ],
+      "twist_type": "预期反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "home",
+        "premise": "childhood-poverty-current-body",
+        "punchline": "adult-weight-gain"
+      },
+      "character_count": 70,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "c4ef0c97d85bf3c20dea4850fc801719f361eb0b07538c8b25753e5ee7122eb5",
+        "semantic_key": "child-parent|home|childhood-poverty-current-body|adult-weight-gain"
+      }
+    },
+    {
+      "id": "web-002",
+      "text": "六岁的女儿问妈妈：「为什么大人可以说脏话，小孩不可以？」\n妈妈：「因为你还小，不能学。」\n女儿：「那我长大了再说——可是你能不能先别说，免得我被污染。」",
+      "source": {
+        "title": "儿童幽默笑话——15个和孩子笑到停不下来的段子",
+        "url": "https://www.qiushile.com/xiaohua/ertong/95230.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "亲子",
+        "家庭",
+        "童言"
+      ],
+      "twist_type": "立场反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "home",
+        "premise": "adult-language-rule",
+        "punchline": "child-warns-parent"
+      },
+      "character_count": 74,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "cd5422acceadb67445ec5749a2aff9e81f8ad59bce23b999d899a0716a0ef62b",
+        "semantic_key": "child-parent|home|adult-language-rule|child-warns-parent"
+      }
+    },
+    {
+      "id": "web-003",
+      "text": "老师：「请用'果然'造句。」\n小明：「我先吃苹果然后喝水。」\n老师：「...我说的是果然不是果然后！」\n小明：「老师，我说的就是果然——先吃苹'果'，'然'后喝水。」",
+      "source": {
+        "title": "儿童幽默笑话——15个和孩子笑到停不下来的段子",
+        "url": "https://www.qiushile.com/xiaohua/ertong/95230.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "校园",
+        "文字",
+        "师生"
+      ],
+      "twist_type": "拆字双关",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "classroom",
+        "premise": "word-sentence-task",
+        "punchline": "word-split"
+      },
+      "character_count": 80,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "af3dd8a68b9c80807bc30f25aec2793dadaa78040027b45f028c901714847472",
+        "semantic_key": "student-teacher|classroom|word-sentence-task|word-split"
+      }
+    },
+    {
+      "id": "web-004",
+      "text": "老师：「如果有一辆车，小明开车，小华坐副驾，小红坐后面，请问这辆车是谁的？」\n全班沉默。\n角落里传来声音：「'如果'的——老师您开头说了'如果有一辆车'。」",
+      "source": {
+        "title": "儿童幽默笑话——15个和孩子笑到停不下来的段子",
+        "url": "https://www.qiushile.com/xiaohua/ertong/95230.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "校园",
+        "文字",
+        "师生"
+      ],
+      "twist_type": "字面化反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "classroom",
+        "premise": "logic-question-vehicle",
+        "punchline": "if-owns-car"
+      },
+      "character_count": 76,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "1c517e59760033cbb65b82b7f9119659415eba09d70d98b31330d83dfeea4700",
+        "semantic_key": "student-teacher|classroom|logic-question-vehicle|if-owns-car"
+      }
+    },
+    {
+      "id": "web-005",
+      "text": "期中考试，全班倒数第二向倒数第一要答案抄，倒数第一把答案递给了他。\n结果成绩出来后，倒数第一还是倒数第一，倒数第二的学生却考到了班级中游。\n倒数第一大惑不解，倒数第二拿着试卷向他解释说：\n“做选择题时，排除你和我选的答案之后，正确率果然比较高。”",
+      "source": {
+        "title": "关于学校考试的笑话段子",
+        "url": "https://k.sina.com.cn/article_6378011195_17c28ba3b001002t6c.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "校园",
+        "考试",
+        "同学"
+      ],
+      "twist_type": "逻辑反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "student-peers",
+        "setting": "exam",
+        "premise": "borrowed-answers",
+        "punchline": "elimination-improves-score"
+      },
+      "character_count": 120,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "5524d264196f8866238e3cd2c668424957d7ef5ed2d2578c0ca7a10d467cafd7",
+        "semantic_key": "student-peers|exam|borrowed-answers|elimination-improves-score"
+      }
+    },
+    {
+      "id": "web-006",
+      "text": "今天考完英语四级的感受:\n卷子的质量很好，拿到手以后和卖家图片上的一样，没有色差，手感很棒，拿在手上很舒服。\n监考老师的服务态度很好，考场也很舒适，朋友很满意，明年还会再来的……",
+      "source": {
+        "title": "关于学校考试的笑话段子",
+        "url": "https://k.sina.com.cn/article_6378011195_17c28ba3b001002t6c.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "校园",
+        "考试",
+        "日常"
+      ],
+      "twist_type": "语境错位",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "student-institution",
+        "setting": "exam",
+        "premise": "post-exam-review",
+        "punchline": "product-review-style"
+      },
+      "character_count": 87,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "642edff33fb2f22d3c79aedf6615b528211bf8a4e59b58accfcc7e119edd2166",
+        "semantic_key": "student-institution|exam|post-exam-review|product-review-style"
+      }
+    },
+    {
+      "id": "web-007",
+      "text": "A：\"师傅，我这鞋又坏了，上次您刚修好没多久。\"\nB：\"小伙子，你这鞋是做什么用啊，怎么这么容易坏？\"\nA：\"不是我的。是老板让我穿上假装我们公司还在正常运营，在街上跑给投资人看的。\"",
+      "source": {
+        "title": "2026反转段子｜朋友问我最近忙什么",
+        "url": "https://www.sohu.com/a/992185225_121123957"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "创业",
+        "日常"
+      ],
+      "twist_type": "身份反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "employee-boss",
+        "setting": "street",
+        "premise": "worn-shoes",
+        "punchline": "pretend-company-operates"
+      },
+      "character_count": 90,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "f535939e7d0c37ef5c9d00ee8930b1b7767d5d8e4ccf3e7f3ea1c91b90e05033",
+        "semantic_key": "employee-boss|street|worn-shoes|pretend-company-operates"
+      }
+    },
+    {
+      "id": "web-008",
+      "text": "领导：“小郑，客户说我们的方案太普通了，要加点‘互联网思维’。”\n小郑：“领导，我加了啊。我在方案里写了‘赋能’、‘抓手’、‘底层逻辑’、‘闭环’，还画了个思维导图。\n客户看完说，‘你们这方案，除了不说人话，什么都好’。”",
+      "source": {
+        "title": "搞笑段子：反转笑话",
+        "url": "https://www.sohu.com/a/1060783911_121382791"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "沟通",
+        "办公室"
+      ],
+      "twist_type": "语言反讽",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "employee-boss",
+        "setting": "office",
+        "premise": "add-internet-jargon",
+        "punchline": "not-human-language"
+      },
+      "character_count": 109,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "63969be7c5b5f629d3a1632cc9952e98c533711508956aad140b1a8341c6c4c3",
+        "semantic_key": "employee-boss|office|add-internet-jargon|not-human-language"
+      }
+    },
+    {
+      "id": "web-009",
+      "text": "同事A：“你每天戴个降噪耳机，是在听歌吗？”\n同事B：“不，我是在进行‘职场物理隔离’。”\n同事A：“有效果吗？”\n同事B：“有啊，只要我戴着耳机，领导叫我，我就可以理直气壮地说‘没听见’。\n就算听见了，我也可以说‘耳机没电了’。降噪耳机，打工人的防弹衣。”",
+      "source": {
+        "title": "搞笑段子：反转笑话",
+        "url": "https://www.sohu.com/a/1060783911_121382791"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "同事",
+        "办公室"
+      ],
+      "twist_type": "概念错位",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "coworkers",
+        "setting": "office",
+        "premise": "noise-cancelling-headphones",
+        "punchline": "avoid-boss"
+      },
+      "character_count": 125,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "1f77c6e47f28812906bef78fa0e2e9a99007a522dfc76eea4f02f0b584a20395",
+        "semantic_key": "coworkers|office|noise-cancelling-headphones|avoid-boss"
+      }
+    },
+    {
+      "id": "web-010",
+      "text": "送醉酒女同事回家，怕老婆多想。\n第二天送老婆上班，发现脚边有只女鞋，偷偷扔窗外。\n到公司老婆大喊：\n“找不到另一只鞋！”\n扔的是老婆的。",
+      "source": {
+        "title": "2026年最新最幽默的笑话段子",
+        "url": "https://www.qiushile.com/xiaohua/kaixin/94508.html"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "夫妻",
+        "家庭",
+        "乌龙"
+      ],
+      "twist_type": "信息反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-initial",
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "commute",
+        "premise": "found-womens-shoe",
+        "punchline": "wife-shoe-thrown"
+      },
+      "character_count": 64,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "d2592572b597847fd4ae173f01510482d5660d5ee651f9ef9edf29c037dd737f",
+        "semantic_key": "couple|commute|found-womens-shoe|wife-shoe-thrown"
+      }
+    },
+    {
+      "id": "web-v2-001",
+      "text": "同事A：“你昨天怎么在群里发了个‘收到’，然后就去上厕所了？”\n同事B：“这叫‘职场条件反射式敷衍’。领导发话，不管三七二十一，先回个‘收到’，表示我在听。\n至于听没听懂，做不做得到，那是下一个小时该考虑的问题。”",
+      "source": {
+        "title": "搞笑段子：反转笑话，点进来就会笑出腹肌，赶走所有的不开心",
+        "url": "https://www.sohu.com/a/1060783911_121382791"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "同事",
+        "沟通"
+      ],
+      "twist_type": "概念错位",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "coworkers",
+        "setting": "office",
+        "premise": "automatic-received-reply",
+        "punchline": "understanding-later"
+      },
+      "character_count": 105,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "77184a92c13145c043c0bfe89fc62862ec4723ec2bde080f4d7f459b07290609",
+        "semantic_key": "coworkers|office|automatic-received-reply|understanding-later"
+      }
+    },
+    {
+      "id": "web-v2-002",
+      "text": "同事A：“你昨天怎么把锅甩给隔壁部门了？”\n同事B：“这不叫甩锅，这叫‘跨部门协同推进’。”\n同事A：“说人话！”\n同事B：“我跟领导说，这个数据需要隔壁部门提供，他们不给，所以我没法做。领导一听，立马去催隔壁部门了。\n我这不叫甩锅，我这叫‘借力打力’。”",
+      "source": {
+        "title": "搞笑段子：反转笑话，点进来就会笑出腹肌，赶走所有的不开心",
+        "url": "https://www.sohu.com/a/1060783911_121382791"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "同事",
+        "办公室"
+      ],
+      "twist_type": "语言反讽",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "coworkers",
+        "setting": "office",
+        "premise": "shift-responsibility",
+        "punchline": "leverage-other-department"
+      },
+      "character_count": 124,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "7b760345d5d8463c921a4faf099eb6fa7dc9c6c60d104dc735fa2ee8be0864f3",
+        "semantic_key": "coworkers|office|shift-responsibility|leverage-other-department"
+      }
+    },
+    {
+      "id": "web-v2-003",
+      "text": "同事 A 抱怨最近工作太多，压力太大。\n同事 B 安慰他说：“别愁啦，你就把工作当成打游戏，一个任务就是一个关卡，完成了就有成就感。”\n同事 A 苦着脸说：“那要是任务失败了呢？”\n同事 B 笑着说：“那就当是游戏里挂了呗，重新再来。”\n正说着，老板走过来，听到他们的对话，严肃地说：“工作可不是游戏，都给我认真点！”\n两人赶紧低下头，等老板走后，同事 A 小声对同事 B 说：“这下好了，游戏难度直接调到‘地狱模式’了。”",
+      "source": {
+        "title": "搞笑段子：5条办公室的笑话",
+        "url": "https://www.sohu.com/a/822236661_121637092"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "同事",
+        "办公室"
+      ],
+      "twist_type": "比喻反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "coworkers-boss",
+        "setting": "office",
+        "premise": "work-as-game",
+        "punchline": "hell-mode"
+      },
+      "character_count": 195,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "54ad62fe757b490378e66e9028311dce3a306b2624cb2f5afd58830f79db191c",
+        "semantic_key": "coworkers-boss|office|work-as-game|hell-mode"
+      }
+    },
+    {
+      "id": "web-v2-004",
+      "text": "同事 G 早上来上班，一脸疲惫。\n同事 H 问他：“怎么了？没睡好啊？”\n同事 G 叹了口气说：“别提了，我昨晚做梦都在上班，累得我啊……”\n同事 H 笑着说：“那你这可真是‘日有所思，夜有所梦’啊。不过你这也太敬业了吧，做梦都不忘工作。”\n同事 G 无奈地说：“我也不想啊，可这工作压力太大了，都快把我压垮了。”",
+      "source": {
+        "title": "搞笑段子：5条办公室的笑话",
+        "url": "https://www.sohu.com/a/822236661_121637092"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "职场",
+        "同事",
+        "日常"
+      ],
+      "twist_type": "夸张反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "coworkers",
+        "setting": "office",
+        "premise": "dream-of-work",
+        "punchline": "work-pressure"
+      },
+      "character_count": 143,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "44e785908551c6b218170570a6da196424f23ae87e5d96b3e66f8a41cd272cea",
+        "semantic_key": "coworkers|office|dream-of-work|work-pressure"
+      }
+    },
+    {
+      "id": "web-v2-005",
+      "text": "有人问我:上海话里螃蟹怎么说?\n我说:哈\n她重复:\"你们螃蟹怎么说?\"\n我说:哈\n她很无奈的问:那你们鱼怎么说?\n我:嗯\n她奇怪地问:那虾怎么说呢？\n我说：嚯\n她又问：那鸭怎么说呢？\n我说：啊\n她又重复：鸭怎么说？\n我说：啊\n她很同情地看看我：\n多好的一个孩子，可惜是个哑巴……",
+      "source": {
+        "title": "〖段子〗只有在上海生活的人才看得懂这些冷笑话！",
+        "url": "https://www.sohu.com/a/113382885_383591"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "方言",
+        "日常",
+        "误会"
+      ],
+      "twist_type": "谐音误会",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 10,
+      "semantic_signature": {
+        "relationship": "friends",
+        "setting": "conversation",
+        "premise": "dialect-animal-words",
+        "punchline": "mistaken-for-mute"
+      },
+      "character_count": 126,
+      "line_count": 14,
+      "fingerprints": {
+        "normalized_sha256": "938f89ce122e589a8c24d2796c8569c7971ad526819cb16412b11ad538039e21",
+        "semantic_key": "friends|conversation|dialect-animal-words|mistaken-for-mute"
+      }
+    },
+    {
+      "id": "web-v2-006",
+      "text": "刚才女朋友问我要钱买口红，我言辞严厉地说：\n“上回你买衣服要了两千，后来做头发要了一千，昨天跟朋友聚会又要了五百。\n天天这样要，谁能受得了。”\n见她委屈地撅起嘴，我补充道：\n“你不能一次多要点吗！咱俩都省心！”",
+      "source": {
+        "title": "搞笑段子：反转笑话，点进来就会笑出腹肌，赶走所有的不开心",
+        "url": "https://m.sohu.com/a/807502931_121382791/"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "情侣",
+        "日常",
+        "反转"
+      ],
+      "twist_type": "立场反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "conversation",
+        "premise": "lipstick-money-request",
+        "punchline": "ask-for-more-once"
+      },
+      "character_count": 101,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "999808f71b5a98d8c95aff7161622c9eb01bf3b77f2ea2cdbf4abf28417637d2",
+        "semantic_key": "couple|conversation|lipstick-money-request|ask-for-more-once"
+      }
+    },
+    {
+      "id": "web-v2-007",
+      "text": "今天读大学的表弟来我家吃饭，问到他有没有交女朋友时候，表弟说还小。\n然后我老妈子不知道抽了哪条筋说了一句。\n不小了啊，你表哥像你那么大时候有女孩子都在咱家住着不肯走了，说完大家都笑了，突然觉得哪里不对劲。\n回头看了一下老婆.一股杀气涌在我身上，老妈你肿么什么都说呀......",
+      "source": {
+        "title": "搞笑段子：老妈嘴瓢，表哥当年竟让姑娘赖着不走",
+        "url": "https://fun.sohu.com/a/1040313657_627861"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "家庭",
+        "亲戚",
+        "乌龙"
+      ],
+      "twist_type": "信息反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "adult-family",
+        "setting": "family-meal",
+        "premise": "cousin-dating-question",
+        "punchline": "mother-reveals-history"
+      },
+      "character_count": 135,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "74e347f8a3058b4ea4858d9a2825b6f4d565e69b489d1a21470be1724363f499",
+        "semantic_key": "adult-family|family-meal|cousin-dating-question|mother-reveals-history"
+      }
+    },
+    {
+      "id": "web-v2-008",
+      "text": "一天，某医院收进一个心脏病突发的病人。\n医生甲：“病人怎么发病的？”\n医生乙：“这位大爷大清早提了一桶水，帮儿子洗车，爬上爬下洗了一个半小时！”\n医生甲：“哦，劳累过度是吧？”\n医生乙：“不是！”\n医生甲：“那是因为……”\n医生乙：“最后发现洗的不是他儿子的车，于是心脏病就发作了。”",
+      "source": {
+        "title": "搞笑段子：老妈嘴瓢，表哥当年竟让姑娘赖着不走",
+        "url": "https://fun.sohu.com/a/1040313657_627861"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "医院",
+        "家庭",
+        "乌龙"
+      ],
+      "twist_type": "信息反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "clinicians",
+        "setting": "hospital",
+        "premise": "heart-attack-cause",
+        "punchline": "washed-wrong-car"
+      },
+      "character_count": 136,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "c57c6fa3644f32a243f4c91685b315c7e3c58e543ec9ba004ff2988225fb0d18",
+        "semantic_key": "clinicians|hospital|heart-attack-cause|washed-wrong-car"
+      }
+    },
+    {
+      "id": "web-v2-009",
+      "text": "今天坐公交车上班，堵车，因为无聊就在搜附近的人，搜出个妹子0.01km，于是打招呼：堵车堵的好烦啊！\n妹子：你也在这条路上啊，好巧啊！\n我：是啊，我还等着出去谈生意呢，谁知道堵成这样！\n妹子：你车牌号多少啊？\n我随手发了前边一辆凯迪拉克的车牌号。\n妹子：大哥，你发的是我的车牌号！\n我~~~",
+      "source": {
+        "title": "搞笑段子：回答老婆的问题还是要谨慎，一不小心就会掉进坑",
+        "url": "https://www.sohu.com/a/374710688_120407411"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "出行",
+        "社交",
+        "乌龙"
+      ],
+      "twist_type": "身份反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "strangers",
+        "setting": "traffic",
+        "premise": "nearby-chat",
+        "punchline": "shared-car-plate"
+      },
+      "character_count": 139,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "09bc9187ca0cd540f34413caffde2c8b6ee6af3db1f6806dca67e5379d58beed",
+        "semantic_key": "strangers|traffic|nearby-chat|shared-car-plate"
+      }
+    },
+    {
+      "id": "web-v2-010",
+      "text": "有一兄弟，厨艺超好，没事我们喜欢带上酒，去他家喝两杯。\n自从他找了媳妇，我们再也没有尝到他的手艺，他媳妇不知道他会烧饭。\n前几天，他媳妇出差了，他叫我们去他家小喝两杯，我们早早就到了，协助洗菜切菜打下手。\n正忙得如火如荼，他媳妇提前回来了，他媳妇看他在厨房忙活，问他，你会烧饭？\n他说，这不，过几天你生日么，我在网上看了下菜谱，叫兄弟们过来陪我练练手，预备届时给你个惊喜。\n那天正午，是我们吃过最难吃的饭...",
+      "source": {
+        "title": "〖搞笑段子〗首先她老公不同意，其次我老婆也不同意",
+        "url": "https://www.sohu.com/a/483879075_121154108"
+      },
+      "accessed_at": "2026-09-21",
+      "tags": [
+        "朋友",
+        "夫妻",
+        "家庭"
+      ],
+      "twist_type": "身份反转",
+      "state": "shown",
+      "batch_id": "2026-09-21-v2",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "friends-couple",
+        "setting": "home",
+        "premise": "hidden-cooking-skill",
+        "punchline": "pretend-practice"
+      },
+      "character_count": 200,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "a69d815c8ea48a662e70ad10c5747843b50543f69dd0fb40d915c57e478be2d0",
+        "semantic_key": "friends-couple|home|hidden-cooking-skill|pretend-practice"
+      }
+    }
+  ]
+}

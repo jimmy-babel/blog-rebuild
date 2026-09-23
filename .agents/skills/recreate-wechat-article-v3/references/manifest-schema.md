@@ -14,7 +14,7 @@ Codex 只创建精简文章计划，不手工复制原文 blocks：
   "blocks": [
     {"type": "heading", "level": 2, "text": "新章节标题"},
     {"type": "text", "text": "原创段落。"},
-    {"type": "image", "sourceIndex": 12, "path": "cards/image-001.png", "alt": "新场景说明", "sceneType": "mixed_pair", "character": "boy", "characters": [{"role": "boy", "purpose": "main"}, {"role": "girl", "purpose": "partner"}], "sceneCharacterCount": 2, "secondaryCharacterNotes": "女性角色使用不同发型和服装", "allowIntentionalDuplicate": false},
+    {"type": "image", "sourceIndex": 12, "path": "cards/image-001.png", "alt": "新场景说明", "sceneType": "mixed_pair", "character": "boy", "characters": [{"role": "boy", "purpose": "main", "ageGroup": "adult", "ageEvidence": "青年男性"}, {"role": "girl", "purpose": "partner", "ageGroup": "adult", "ageEvidence": "青年女性"}], "sceneCharacterCount": 2, "secondaryCharacterNotes": "女性角色使用不同发型和服装", "allowIntentionalDuplicate": false},
     {"type": "sourceImageLink", "sourceIndex": 25, "alt": "生成失败的配图"}
   ]
 }
@@ -30,14 +30,14 @@ comic 示例：
   "title": "文章标题",
   "blocks": [
     {"type": "text", "text": "清洗后的原文正文"},
-    {"type": "image", "path": "cards/comic-001.png", "alt": "第一幕", "sceneType": "single", "character": "girl", "characters": [{"role": "girl", "purpose": "main"}], "sceneCharacterCount": 1, "secondaryCharacterNotes": "", "allowIntentionalDuplicate": false},
+    {"type": "image", "path": "cards/comic-001.png", "alt": "第一幕", "sceneType": "single", "character": "girl", "characters": [{"role": "girl", "purpose": "main", "ageGroup": "unknown", "ageEvidence": "年龄不明"}], "sceneCharacterCount": 1, "secondaryCharacterNotes": "", "allowIntentionalDuplicate": false},
     {"type": "generatedImageLink", "alt": "第二幕", "error": "生成失败"}
   ]
 }
 ```
 
 - `removedSourceIndexes` 只写二次语义审查从 `source.json.blocks` 删除的索引；省略时视为空数组。
-- 图片计划可附带 `sceneType`、`character`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate` 供生图提示词使用；`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`，`characters[].role` 只能是 `girl`、`girl-baby`、`girl-old`、`boy`、`boy-baby` 或 `boy-old`。缺失 `characters` 时从 `character` 回退为单角色，非法角色回退为 `girl`，非法 `sceneType` 按 `single`，缺失人物数量按 1，缺失或非法的 `allowIntentionalDuplicate` 按 `false` 处理。构建完整 manifest 时这些规划字段不进入最终文章块。
+- 图片计划可附带 `sceneType`、`character`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate` 供生图提示词使用；每个 `characters` 项包含 `role`、`purpose`、`ageGroup` 和 `ageEvidence`。`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`，`characters[].role` 只能是 `girl`、`girl-baby`、`girl-old`、`boy`、`boy-baby` 或 `boy-old`，`ageGroup` 只能是 `child`、`adult`、`elder` 或 `unknown`。关系用途优先于外观：`parent` 使用 `adult`，`grandparent` 使用 `elder`，`child` 使用 `child`；缺失 `characters` 时从 `character` 回退为单角色，非法角色回退为 `girl`，非法 `sceneType` 按 `single`，缺失人物数量按 1，缺失或非法的 `allowIntentionalDuplicate` 按 `false` 处理。构建完整 manifest 时这些规划字段不进入最终文章块。
 - `articleMode=trans` 时，`text`、`heading`、`quote` 是重新创作后的文章内容；`articleMode=ori` 时正文必须是二次清洗后保留的原文内容，并保留原文显式换行（`text` 中使用 `\n`，不得合并连续原文行）。
 - 每张二次清洗后保留的来源图片必须按 `sourceIndex` 顺序出现一次且仅一次。
 - 生图成功使用 `image` 并提供本地 `path`；普通模式生图失败使用 `sourceImageLink`，无需手抄 URL。

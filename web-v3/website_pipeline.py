@@ -45,6 +45,7 @@ DEFAULT_CHARACTER = "girl"
 CHARACTER_VALUES = tuple(CHARACTER_REFERENCES)
 DEFAULT_SCENE_CHARACTER_COUNT = 1
 SCENE_TYPES = {"single", "mixed_pair", "romantic_pair", "family_trio", "other_group"}
+AGE_GROUPS = {"child", "adult", "elder", "unknown"}
 FEMALE_BY_AGE = {"girl": "girl", "girl-baby": "girl-baby", "girl-old": "girl-old"}
 MALE_BY_AGE = {"boy": "boy", "boy-baby": "boy-baby", "boy-old": "boy-old"}
 FEMALE_EQUIVALENTS = {**FEMALE_BY_AGE, "boy": "girl", "boy-baby": "girl-baby", "boy-old": "girl-old"}
@@ -522,15 +523,15 @@ class OpenAICompatible:
         }[article_mode]
         if image_mode == "comic":
             image_instruction = f"只根据清洗后的文字拆分为恰好 {comic_count} 个连续叙事节点；不要读取、引用或输出任何来源图片 sourceIndex。"
-            image_schema = '{"type":"image","sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"imagePrompt":"连续叙事画面提示词","alt":"第几幕"}'
+            image_schema = '{"type":"image","sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"imagePrompt":"连续叙事画面提示词","alt":"第几幕"}'
         else:
             image_instruction = "每张未被 removedSourceIndexes 删除的来源图片都必须恰好返回一个 type=image 的生图计划，并按 sourceIndex 递增。sourceImageLink 只由程序在真实生图或合成失败后自动写入，规划阶段不要返回 sourceImageLink。"
-            image_schema = '{"type":"image","sourceIndex":1,"sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"emotion":"通用","caption":"图片文案","imagePrompt":"详细生图提示词","alt":"图片说明"}'
+            image_schema = '{"type":"image","sourceIndex":1,"sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"emotion":"通用","caption":"图片文案","imagePrompt":"详细生图提示词","alt":"图片说明"}'
         brand_instruction = (
-            "使用项目角色参考图判断并返回 character；character 只能是 girl、girl-baby、girl-old、boy、boy-baby、boy-old，"
+            "使用项目角色参考图判断并返回 character、characters、ageGroup 和 ageEvidence；character/characters[].role 只能是 girl、girl-baby、girl-old、boy、boy-baby、boy-old，"
             "角色参考图输入顺序为 girl、girl-baby、girl-old、boy、boy-baby、boy-old；角色参考图只用于识别角色，不是最终图片的统一人物模板；"
-            "无法判断时使用 girl。emotion 只用于 local 模式配色。"
-            if brand == "on" else "不使用任何品牌人物参考图；仍须根据画面语义判断并返回 sceneType、character 和 characters，供生图 prompt 约束。"
+            "ageGroup 只能是 child、adult、elder、unknown；无法判断主角年龄时使用 role=girl、ageGroup=unknown。emotion 只用于 local 模式配色。"
+            if brand == "on" else "不使用任何品牌人物参考图；仍须根据画面语义判断并返回 sceneType、character、characters、ageGroup 和 ageEvidence，供生图 prompt 约束。"
         )
         prompt = f"""
 你是 Blog Article Studio 的文章重构规划器。只返回 JSON，不要 Markdown 或解释。
@@ -547,7 +548,7 @@ JSON 结构：
     {image_schema}
   ]
 }}
-要求：删除作者、来源、二维码、广告、推广、联系方式和无关装饰；所有图片计划必须包含 sceneType、character、characters、sceneCharacterCount、secondaryCharacterNotes、allowIntentionalDuplicate；brand on 时普通模式额外必须包含 emotion、caption、imagePrompt、alt，comic 图片必须包含 imagePrompt、alt。sceneType 只能是 single、mixed_pair、romantic_pair、family_trio、other_group。先判断是否存在一男一女组合、是否是夫妻/情侣、是否有孩子、每个人的年龄段以及普通场景主角年龄。明确夫妻/情侣、普通一男一女同框使用男角色+女角色；夫妻/情侣+孩子补充 baby 角色；年龄不明使用青年角色；孩子性别不明使用 girl-baby。其他场景保留喜/乐/怒/哀/通用语义，但角色只使用 girl、girl-baby 或 girl-old。characters 缺失时按 character 生成单角色列表；普通非男女组合强制只保留一个女性年龄角色。sceneCharacterCount 缺失时按 1，allowIntentionalDuplicate 默认 false；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许 true。多人场景中每张角色参考图只对应一个人物，次要人物必须与主角及彼此拥有明显不同的脸型、发型、发色、体型、年龄、服装、配饰或姿态；brand off 时也执行这条规则。不要伪造来源内容。
+要求：删除作者、来源、二维码、广告、推广、联系方式和无关装饰；所有图片计划必须包含 sceneType、character、characters、sceneCharacterCount、secondaryCharacterNotes、allowIntentionalDuplicate；每个 characters 项必须包含 role、purpose、ageGroup、ageEvidence；brand on 时普通模式额外必须包含 emotion、caption、imagePrompt、alt，comic 图片必须包含 imagePrompt、alt。sceneType 只能是 single、mixed_pair、romantic_pair、family_trio、other_group；ageGroup 只能是 child、adult、elder、unknown。先判断是否存在孩子、青年/成年人、爷爷奶奶辈，是否为父母、夫妻、情侣或祖孙关系，再判断每个人的 ageGroup。child/son/daughter 使用 child；parent/mother/father 使用 adult；grandparent/grandmother/grandfather 使用 elder。父母关系优先于白发、皱纹、服装或坐姿，不能仅凭显老外观使用 elder；只有明确爷爷奶奶辈、祖父母或老年身份才使用 elder。小孩使用 girl-baby/boy-baby，青年、成年人、父母、夫妻使用 girl/boy，明确老年人使用 girl-old/boy-old。年龄不明的主角必须使用 role=girl、ageGroup=unknown；多人场景中年龄不明但性别明确的角色使用对应青年 role；孩子性别不明使用 girl-baby。characters 缺失时按 character 生成单角色列表；普通非男女组合强制只保留一个女性角色。sceneCharacterCount 缺失时按 1，allowIntentionalDuplicate 默认 false；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许 true。每张角色参考图只对应一个人物，次要人物必须与主角及彼此拥有明显不同的脸型、发型、发色、体型、年龄、服装、配饰或姿态；brand off 时也执行这条规则。不要伪造来源内容。
 来源正文非空白字符数：{source_count}
 来源内容：
 {source_text}
@@ -708,6 +709,44 @@ def _normalize_scene_type(value: object) -> str:
     return scene_type if scene_type in SCENE_TYPES else "single"
 
 
+def _normalize_age_group(value: object) -> str:
+    age_group = str(value or "").strip().lower()
+    return age_group if age_group in AGE_GROUPS else "unknown"
+
+
+def _infer_age_group_from_role(role: object) -> str:
+    normalized = _normalize_character(role)
+    if normalized.endswith("-baby"):
+        return "child"
+    if normalized.endswith("-old"):
+        return "elder"
+    return "adult"
+
+
+def _purpose_age_group(purpose: object) -> str | None:
+    value = str(purpose or "").strip().lower().replace("_", "-")
+    if value in {"child", "son", "daughter"}:
+        return "child"
+    if value in {"grandparent", "grandmother", "grandfather", "grandma", "grandpa"}:
+        return "elder"
+    if value in {"parent", "mother", "father"}:
+        return "adult"
+    return None
+
+
+def _role_gender(role: object) -> str:
+    normalized = _normalize_character(role)
+    return "male" if normalized in MALE_BY_AGE else "female"
+
+
+def _role_for_gender_age(gender: str, age_group: str) -> str:
+    if age_group == "child":
+        return "boy-baby" if gender == "male" else "girl-baby"
+    if age_group == "elder":
+        return "boy-old" if gender == "male" else "girl-old"
+    return "boy" if gender == "male" else "girl"
+
+
 def _female_role(role: object) -> str:
     normalized = _normalize_character(role)
     return FEMALE_EQUIVALENTS.get(normalized, DEFAULT_CHARACTER)
@@ -726,11 +765,40 @@ def _raw_character_roles(block: dict) -> list[dict]:
             if isinstance(item, dict):
                 role = _normalize_character(item.get("role"))
                 purpose = str(item.get("purpose") or "support").strip() or "support"
-                roles.append({"role": role, "purpose": purpose})
+                raw_age_group = item.get("ageGroup")
+                age_group = (
+                    _normalize_age_group(raw_age_group)
+                    if raw_age_group is not None
+                    else _infer_age_group_from_role(role)
+                )
+                age_evidence = str(item.get("ageEvidence") or "").strip()
+                roles.append({
+                    "role": role,
+                    "purpose": purpose,
+                    "ageGroup": age_group,
+                    "ageEvidence": age_evidence,
+                })
             elif isinstance(item, str):
-                roles.append({"role": _normalize_character(item), "purpose": "support"})
+                role = _normalize_character(item)
+                roles.append({
+                    "role": role,
+                    "purpose": "support",
+                    "ageGroup": _infer_age_group_from_role(role),
+                    "ageEvidence": "",
+                })
     if not roles:
-        roles.append({"role": _normalize_character(block.get("character")), "purpose": "main"})
+        role = _normalize_character(block.get("character"))
+        raw_age_group = block.get("ageGroup")
+        roles.append({
+            "role": role,
+            "purpose": "main",
+            "ageGroup": (
+                _normalize_age_group(raw_age_group)
+                if raw_age_group is not None
+                else _infer_age_group_from_role(role)
+            ),
+            "ageEvidence": "",
+        })
     main_index = next((index for index, item in enumerate(roles) if item["purpose"] == "main"), None)
     if main_index is None:
         roles[0]["purpose"] = "main"
@@ -748,32 +816,100 @@ def _dedupe_roles(roles: list[dict]) -> list[dict]:
         if role in seen:
             continue
         seen.add(role)
-        result.append({"role": role, "purpose": str(item.get("purpose") or "support")})
+        result.append({
+            "role": role,
+            "purpose": str(item.get("purpose") or "support").strip() or "support",
+            "ageGroup": _normalize_age_group(item.get("ageGroup")),
+            "ageEvidence": str(item.get("ageEvidence") or "").strip(),
+        })
     return result
+
+
+def _effective_age_group(item: dict) -> str:
+    relation_group = _purpose_age_group(item.get("purpose"))
+    if relation_group:
+        return relation_group
+    return _normalize_age_group(item.get("ageGroup"))
+
+
+def _normalized_role_entry(item: dict, default_age_group: str) -> dict:
+    age_group = _effective_age_group(item)
+    if age_group == "unknown":
+        age_group = default_age_group
+    return {
+        "role": _role_for_gender_age(_role_gender(item.get("role")), age_group),
+        "purpose": str(item.get("purpose") or "support").strip() or "support",
+        "ageGroup": age_group,
+        "ageEvidence": str(item.get("ageEvidence") or "").strip(),
+    }
 
 
 def _normalize_character_roles(block: dict, scene_type: str) -> list[dict]:
     roles = _dedupe_roles(_raw_character_roles(block))
-    main = roles[0]["role"] if roles else DEFAULT_CHARACTER
+    main_entry = roles[0] if roles else {
+        "role": DEFAULT_CHARACTER,
+        "purpose": "main",
+        "ageGroup": "unknown",
+        "ageEvidence": "",
+    }
     if scene_type in {"mixed_pair", "romantic_pair", "family_trio"}:
-        raw_baby = next((item["role"] for item in roles if item["role"].endswith("-baby")), None)
-        male = next((item["role"] for item in roles if item["role"] in MALE_BY_AGE), None)
-        female = next((item["role"] for item in roles if item["role"] in FEMALE_BY_AGE), None)
-        if male is None:
-            male = _male_role(main)
-        if female is None:
-            female = _female_role(main)
-        pair = [{"role": main, "purpose": "main"}]
-        for role, purpose in ((male, "partner"), (female, "partner")):
-            if not any(item["role"] == role for item in pair):
-                pair.append({"role": role, "purpose": purpose})
+        if scene_type == "family_trio":
+            child_entries = [item for item in roles if _effective_age_group(item) == "child"]
+            adult_entries = [item for item in roles if _effective_age_group(item) != "child"]
+            default_age_group = next(
+                (
+                    _effective_age_group(item)
+                    for item in adult_entries
+                    if _effective_age_group(item) != "unknown"
+                ),
+                "adult",
+            )
+        else:
+            child_entries = []
+            adult_entries = roles
+            main_age_group = _effective_age_group(main_entry)
+            default_age_group = main_age_group if main_age_group != "unknown" else "adult"
+
+        male_entry = next((item for item in adult_entries if _role_gender(item["role"]) == "male"), None)
+        female_entry = next((item for item in adult_entries if _role_gender(item["role"]) == "female"), None)
+        main = _normalized_role_entry(main_entry, default_age_group)
+        if male_entry is None:
+            male_entry = {"role": "boy", "purpose": "partner", "ageGroup": default_age_group, "ageEvidence": ""}
+        if female_entry is None:
+            female_entry = {"role": "girl", "purpose": "partner", "ageGroup": default_age_group, "ageEvidence": ""}
+        pair = [main]
+        for entry in (male_entry, female_entry):
+            normalized = _normalized_role_entry(entry, default_age_group)
+            if not any(item["role"] == normalized["role"] for item in pair):
+                pair.append(normalized)
         roles = pair
         if scene_type == "family_trio":
-            roles.append({"role": raw_baby or "girl-baby", "purpose": "child"})
+            child_entry = child_entries[0] if child_entries else {
+                "role": "girl-baby",
+                "purpose": "child",
+                "ageGroup": "child",
+                "ageEvidence": "孩子性别不明，使用 girl-baby",
+            }
+            child = _normalized_role_entry(child_entry, "child")
+            child["ageGroup"] = "child"
+            if not any(item["role"] == child["role"] for item in roles):
+                roles.append(child)
     else:
-        # The former emotion reference represented a single female visual anchor.
-        # Preserve that behavior while selecting the matching age variant.
-        roles = [{"role": _female_role(main), "purpose": "main"}]
+        # Ordinary scenes keep one female visual anchor. Explicitly unknown
+        # age is intentionally conservative and never becomes an old role.
+        main_age_group = _effective_age_group(main_entry)
+        if main_age_group == "unknown":
+            main_age_group = "unknown"
+        if main_age_group == "unknown":
+            role = DEFAULT_CHARACTER
+        else:
+            role = _role_for_gender_age("female", main_age_group)
+        roles = [{
+            "role": role,
+            "purpose": "main",
+            "ageGroup": main_age_group,
+            "ageEvidence": str(main_entry.get("ageEvidence") or "").strip(),
+        }]
     return roles
 
 
@@ -782,10 +918,10 @@ def _reference_role_order(roles: list[dict]) -> list[str]:
     values = [item["role"] for item in roles]
     ordered: list[str] = []
     for role in values:
-        if role in MALE_BY_AGE and role not in ordered:
+        if role in MALE_BY_AGE and not role.endswith("-baby") and role not in ordered:
             ordered.append(role)
     for role in values:
-        if role in FEMALE_BY_AGE and role not in ordered:
+        if role in FEMALE_BY_AGE and not role.endswith("-baby") and role not in ordered:
             ordered.append(role)
     for role in values:
         if role.endswith("-baby") and role not in ordered:
@@ -863,7 +999,10 @@ def _scene_character_instruction(block: dict) -> str:
     allow_duplicate = block.get("allowIntentionalDuplicate") is True
     scene_type = _normalize_scene_type(block.get("sceneType"))
     roles = _normalize_character_roles(block, scene_type)
-    role_map = "、".join(item["role"] for item in roles)
+    role_map = "、".join(
+        f"{item['role']}/{item.get('ageGroup', 'unknown')}/{item.get('purpose', 'support')}"
+        for item in roles
+    )
     if count <= 1:
         return f"画面只安排 1 个主要人物，使用女性年龄角色 {role_map or 'girl'}，不要额外添加第二个人物。"
     if allow_duplicate:
@@ -884,7 +1023,14 @@ def _character_reference_instruction(block: dict) -> str:
     roles = _reference_role_order(_normalize_character_roles(block, _normalize_scene_type(block.get("sceneType"))))
     if not roles:
         return "角色参考图映射：参考图 1 = girl。"
-    mapping = "；".join(f"参考图 {index} = {role}" for index, role in enumerate(roles, 1))
+    role_lookup = {
+        item["role"]: item
+        for item in _normalize_character_roles(block, _normalize_scene_type(block.get("sceneType")))
+    }
+    mapping = "；".join(
+        f"参考图 {index} = {role} / {role_lookup.get(role, {}).get('ageGroup', 'unknown')} / {role_lookup.get(role, {}).get('purpose', 'support')}"
+        for index, role in enumerate(roles, 1)
+    )
     return f"角色参考图映射（不含 copy 模式最前面的来源图）：{mapping}。每张参考图只用于对应角色。"
 
 

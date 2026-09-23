@@ -17,10 +17,10 @@ python -m pip install -r requirements.txt
 
 打开 http://127.0.0.1:8000 。
 
-`IMAGE_API_MODE=edits` 会把允许的来源图片和角色参考图发送给 `/images/edits`；如果第三方只实现 `/images/generations`，改为 `generations`，但不会保留参考图输入。每张角色参考图只约束计划中的对应人物；多人画面中的其他人物会被要求使用明显不同的外观，默认不允许无意复制同一人物。
+`IMAGE_API_MODE=edits` 会把允许的来源图片和角色参考图发送给 `/images/edits`；如果第三方只实现 `/images/generations`，改为 `generations`，但不会保留参考图输入。每张角色参考图只约束计划中的对应人物；年龄计划区分 child、adult、elder、unknown，父母按 adult、明确爷爷奶奶辈按 elder；多人画面中的其他人物会被要求使用明显不同的外观，默认不允许无意复制同一人物。
 
 每张图片请求都会在 `.recreate-work/<任务ID>/api-debug/` 保存调试副本：`image-XXX.postman.json` 可直接导入 Postman，`image-XXX.curl.txt` 可复制或导入为 cURL，`image-XXX.request.json` 保存实际字段和本地文件路径，`image-XXX.response.body` 保存接口返回的原始 body。请求副本中的 API Key 使用 `{{OPENAI_API_KEY}}` 占位符，不保存真实密钥；multipart 请求不要手动设置 `Content-Type`。
 
 图片生成失败时，任务工作目录还会写入 `image-failures.json`，记录每张图的错误和对应调试文件；任务仍可降级完成时，界面进度会显示失败图片数量。结果目录提交遇到 Windows `WinError 5` 时会进行有限退避重试，重试耗尽后才标记任务失败。
 
-创建任务时可使用 `article_mode: "trans"|"ori"`、`image_mode: "copy"|"rebuild"|"comic"`、`comic_count`、`caption_mode: "ai"|"local"` 和 `brand: "on"|"off"`。`ori` 会保留来源正文的显式换行；`comic` 自动要求 `ori`，只依据文字生成连续叙事图，不读取来源图片；旧字段 `brand_reference` 仍兼容。启用品牌人物时必须使用 `IMAGE_API_MODE=edits`。明确夫妻/情侣或普通一男一女同框时使用男、女角色组合，夫妻/情侣+孩子追加 baby；其他场景按主角年龄使用 `girl`、`girl-baby` 或 `girl-old`，无法判断时回退到 `girl`。`emotion` 只控制 local 模式配色。
+创建任务时可使用 `article_mode: "trans"|"ori"`、`image_mode: "copy"|"rebuild"|"comic"`、`comic_count`、`caption_mode: "ai"|"local"` 和 `brand: "on"|"off"`。`ori` 会保留来源正文的显式换行；`comic` 自动要求 `ori`，只依据文字生成连续叙事图，不读取来源图片；旧字段 `brand_reference` 仍兼容。启用品牌人物时必须使用 `IMAGE_API_MODE=edits`。明确夫妻/情侣或普通一男一女同框时使用男、女角色组合，夫妻/情侣+孩子追加 baby；父母使用基础 `girl/boy`，只有明确爷爷奶奶辈才使用 old；其他场景按主角年龄使用 `girl`、`girl-baby` 或 `girl-old`，无法判断时回退到 `girl`。`emotion` 只控制 local 模式配色。

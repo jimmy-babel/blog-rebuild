@@ -1,0 +1,7 @@
+interface:
+  display_name: "笑话全网检索"
+  short_description: "全网检索原文笑话，按长度、对话轮数与语义去重后输出"
+  default_prompt: "使用 $search-jokes 全网检索 10 条符合原文、长度和去重规则的笑话。"
+
+policy:
+  allow_implicit_invocation: true

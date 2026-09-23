@@ -561,7 +561,8 @@ class PipelineTests(unittest.TestCase):
             warnings,
         )
         self.assertEqual(invalid_scene["sceneType"], "single")
-        self.assertEqual(invalid_scene["characters"], [{"role": "girl", "purpose": "main"}])
+        self.assertEqual(invalid_scene["characters"][0]["role"], "girl")
+        self.assertEqual(invalid_scene["characters"][0]["ageGroup"], "adult")
         self.assertEqual(invalid_scene["character"], "girl")
 
     def test_scene_roles_follow_gender_pair_and_female_age_fallbacks(self) -> None:
@@ -585,6 +586,10 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(
             normalized({"sceneType": "mixed_pair", "character": "boy-baby"}),
             ["boy-baby", "girl-baby"],
+        )
+        self.assertEqual(
+            normalized({"character": "girl-old", "ageGroup": "unknown"}),
+            ["girl"],
         )
 
     def test_family_trio_and_other_group_role_fallbacks(self) -> None:
@@ -628,6 +633,62 @@ class PipelineTests(unittest.TestCase):
             [],
         )
         self.assertEqual([item["role"] for item in other_group["characters"]], ["girl-old"])
+
+    def test_parent_role_overrides_old_and_grandparent_keeps_old(self) -> None:
+        parent_family = pipeline._normalize_scene_metadata(
+            {
+                "sceneType": "family_trio",
+                "characters": [
+                    {"role": "girl-baby", "purpose": "main", "ageGroup": "child"},
+                    {"role": "girl-old", "purpose": "parent", "ageGroup": "elder"},
+                    {"role": "boy-old", "purpose": "parent", "ageGroup": "elder"},
+                ],
+            },
+            1,
+            [],
+        )
+        self.assertEqual(
+            [(item["role"], item["ageGroup"]) for item in parent_family["characters"]],
+            [("girl-baby", "child"), ("boy", "adult"), ("girl", "adult")],
+        )
+
+        grandparent_family = pipeline._normalize_scene_metadata(
+            {
+                "sceneType": "family_trio",
+                "characters": [
+                    {"role": "girl-baby", "purpose": "child", "ageGroup": "child"},
+                    {"role": "girl", "purpose": "grandmother", "ageGroup": "adult"},
+                    {"role": "boy", "purpose": "grandfather", "ageGroup": "adult"},
+                ],
+            },
+            1,
+            [],
+        )
+        self.assertEqual(
+            [(item["role"], item["ageGroup"]) for item in grandparent_family["characters"]],
+            [("girl-baby", "child"), ("boy-old", "elder"), ("girl-old", "elder")],
+        )
+
+    def test_latest_parent_plan_is_normalized_to_adult_gallery_roles(self) -> None:
+        block = pipeline._normalize_scene_metadata(
+            {
+                "sceneType": "family_trio",
+                "character": "girl-baby",
+                "characters": [
+                    {"role": "girl-baby", "purpose": "main", "ageGroup": "child"},
+                    {"role": "girl-old", "purpose": "parent", "ageGroup": "elder"},
+                    {"role": "boy-old", "purpose": "parent", "ageGroup": "elder"},
+                ],
+            },
+            1,
+            [],
+        )
+        roles = pipeline._character_reference_instruction(block)
+        self.assertIn("参考图 1 = boy / adult / parent", roles)
+        self.assertIn("参考图 2 = girl / adult / parent", roles)
+        self.assertIn("参考图 3 = girl-baby / child / main", roles)
+        self.assertNotIn("boy-old / elder / parent", roles)
+        self.assertNotIn("girl-old / elder / parent", roles)
 
     def test_role_reference_order_and_brand_off_behavior(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -681,6 +742,7 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("当前主角角色参考：boy", branded)
         self.assertIn("参考图 1 = boy", branded)
         self.assertIn("参考图 2 = girl", branded)
+        self.assertIn("adult", branded)
         self.assertNotIn("当前主角角色参考", unbranded)
 
     def test_single_character_prompt_does_not_add_extra_people(self) -> None:
@@ -768,11 +830,14 @@ class PipelineTests(unittest.TestCase):
             self.assertIn("character", content[0]["text"])
             self.assertIn("sceneType", content[0]["text"])
             self.assertIn("characters", content[0]["text"])
+            self.assertIn("ageGroup", content[0]["text"])
+            self.assertIn("ageEvidence", content[0]["text"])
             self.assertIn("sceneCharacterCount", content[0]["text"])
             self.assertIn("secondaryCharacterNotes", content[0]["text"])
             self.assertIn("allowIntentionalDuplicate", content[0]["text"])
             self.assertIn("角色参考图只用于识别角色", content[0]["text"])
-            self.assertIn("普通一男一女同框使用男角色+女角色", content[0]["text"])
+            self.assertIn("父母关系优先于白发", content[0]["text"])
+            self.assertIn("只有明确爷爷奶奶辈", content[0]["text"])
             self.assertIn("每张角色参考图只对应一个人物", content[0]["text"])
 
     def test_image_edit_request_is_backed_up_for_postman(self) -> None:

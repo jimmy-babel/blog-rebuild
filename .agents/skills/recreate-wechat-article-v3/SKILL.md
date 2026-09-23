@@ -86,9 +86,9 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 
 ### 5. 重制每张图片
 
-角色参考图只约束对应角色，不代表同一画面中的所有人物。准备每张图片任务时，先记录 `sceneType`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate`。`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`；`characters` 按主角在前、次要人物在后记录角色和用途。明确夫妻/情侣、普通一男一女同框时使用男角色+女角色；夫妻/情侣+孩子补充 baby 角色；年龄按每个人分别判断，年龄不明使用青年角色，孩子性别不明使用 `girl-baby`。其他非男女组合仍判断喜/乐/怒/哀/通用，但品牌参考只使用 `girl`、`girl-baby` 或 `girl-old`，年龄不明固定使用 `girl`。人物数量缺失时按 1 处理；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许重复外貌，其他情况固定为 `false`。
+角色参考图只约束对应角色，不代表同一画面中的所有人物。准备每张图片任务时，先记录 `sceneType`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate`；每个 `characters` 项还要记录 `ageGroup` 与简短的 `ageEvidence`。`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`；`ageGroup` 只能是 `child`、`adult`、`elder` 或 `unknown`。明确夫妻/情侣、普通一男一女同框时使用男角色+女角色；夫妻/情侣+孩子补充 baby 角色。小孩/儿童使用 `girl-baby` 或 `boy-baby`，青年/成年人/父母/夫妻使用 `girl` 或 `boy`，只有明确爷爷奶奶辈、祖父母或老年身份才使用 `girl-old` 或 `boy-old`。父母关系优先于白发、皱纹、服装和坐姿等外观线索，不能仅凭显老外观使用 `elder`；孩子性别不明使用 `girl-baby`。年龄不明的主角使用 `role=girl` 和 `ageGroup=unknown`，多人场景中性别明确但年龄不明的次要人物使用对应青年角色。人物数量缺失时按 1 处理；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许重复外貌，其他情况固定为 `false`。
 
-根据来源图片的画面、可读文案和邻近章节，先判断是否为普通一男一女、夫妻/情侣、夫妻/情侣+孩子或一家三口，再分别判断每个人的年龄并填充 `characters`；普通单主角或其他非男女组合只按主角年龄选择女性角色，无法判断时固定使用 `girl`。`girl`=青年女性；`girl-baby`=女婴/幼女；`girl-old`=老年女性；`boy`=青年男性；`boy-baby`=男婴/男童；`boy-old`=老年男性。`emotion` 仍可独立判断，用于 local 模式的配色与文字排版，不用于选择角色参考图。
+根据来源图片的画面、可读文案和邻近章节，先判断是否为普通一男一女、夫妻/情侣、夫妻/情侣+孩子或一家三口，再为每个人填充 `purpose`、`ageGroup`、`ageEvidence` 和对应 `role`。`parent`、`mother`、`father` 强制使用 `adult`；`grandparent`、`grandmother`、`grandfather` 强制使用 `elder`；`child`、`son`、`daughter` 强制使用 `child`。普通单主角或其他非男女组合只按主角年龄选择女性角色；主角年龄无法判断时固定使用品牌人物 `girl`，不使用 `girl-old`。`emotion` 仍可独立判断，用于 local 模式的配色与文字排版，不用于选择角色参考图。
 
 不确定主角年龄时运行稳定选择器：
 
@@ -104,7 +104,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/choose_character.py --u
 - `copy` 同时传来源图片与 `characters` 中的角色参考图；来源图负责整张的信息结构、人物数量、场景关系、色调与卡片排版，角色图按角色映射分别使用；不得复制水印、署名或像素级布局。
 - `rebuild` 和 `copy` 的品牌参考图按 `characters` 一一对应；来源图只提供人物数量、动作和空间关系，不提供可复制的身份外观。普通单主角场景只传一个女性年龄角色；男女组合传男、女角色；夫妻/情侣+孩子传男、女和 baby 角色。次要人物不得复制其他角色的脸型、发型、发色、体型、年龄、服装、配饰和姿态。除明确的双胞胎、分身或镜像外，普通多人画面禁止出现两个外貌近乎相同的人物。
 - `ai` 让 imagegen 一次生成包含目标中文文案的完整纵向卡片。提示词必须要求接近 1122:1402 的竖向画布、使用 `#F7F6F6` 淡灰白背景，并让插画与文案充分利用画面、避免过量上下留白；不得附加本地模式的情绪底色、分隔线、字体或 20 字规则，也不做 OCR、错字检查或重试。
-- `local` 让 imagegen 只生成无文字的上半部分插画，再执行下方 `compose_card.py` 命令；`brand off` 时省略 `--reference`，只要 AI 插画成功即可排版。`--reference` 使用 `characters[0]` 的主角色图，`--emotion` 仍只控制本地文案配色。
+- `local` 让 imagegen 只生成无文字的上半部分插画，再执行下方 `compose_card.py` 命令；`brand off` 时省略 `--reference`，只要 AI 插画成功即可排版。`--reference` 使用归一化后的 `characters[0]` 主角色图，`--emotion` 仍只控制本地文案配色。
 
 先完成全部图片任务的语义、文案、提示词和参考图路径准备，再在同一个并发编排调用中一次性发出全部 imagegen 请求。使用 `Promise.allSettled` 或等价的独立结算方式；禁止先等待一部分图片完成后再发下一批。`copy/rebuild` 每张来源图片对应一个独立请求；`comic` 每个叙事节点对应一个独立请求；任一失败不得取消其他请求。
 
