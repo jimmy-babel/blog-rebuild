@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 
 WIDTH = 1080
-HEIGHT = 1440
+HEIGHT = 1350
 SCENE_HEIGHT = 900
 DIVIDER_HEIGHT = 10
 MAX_CAPTION_CHARACTERS = 20

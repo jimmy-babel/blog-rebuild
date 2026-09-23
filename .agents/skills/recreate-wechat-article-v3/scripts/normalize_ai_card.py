@@ -13,7 +13,7 @@ from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw, ImageOps
 
 
-TARGET_SIZE = (1122, 1402)
+TARGET_SIZE = (1080, 1350)
 TARGET_BACKGROUND = (247, 246, 246)
 TARGET_BACKGROUND_HEX = "#F7F6F6"
 BACKGROUND_THRESHOLD = 18

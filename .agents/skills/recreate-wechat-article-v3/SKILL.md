@@ -103,7 +103,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/choose_character.py --u
 - `rebuild` 只传所选品牌人物参考图；根据来源图的抽象语义与新文章章节自由重构动作、道具、背景、镜头、构图和卡片设计。
 - `copy` 同时传来源图片与 `characters` 中的角色参考图；来源图负责整张的信息结构、人物数量、场景关系、色调与卡片排版，角色图按角色映射分别使用；不得复制水印、署名或像素级布局。
 - `rebuild` 和 `copy` 的品牌参考图按 `characters` 一一对应；来源图只提供人物数量、动作和空间关系，不提供可复制的身份外观。普通单主角场景只传一个女性年龄角色；男女组合传男、女角色；夫妻/情侣+孩子传男、女和 baby 角色。次要人物不得复制其他角色的脸型、发型、发色、体型、年龄、服装、配饰和姿态。除明确的双胞胎、分身或镜像外，普通多人画面禁止出现两个外貌近乎相同的人物。
-- `ai` 让 imagegen 一次生成包含目标中文文案的完整纵向卡片。提示词必须要求接近 1122:1402 的竖向画布、使用 `#F7F6F6` 淡灰白背景，并让插画与文案充分利用画面、避免过量上下留白；不得附加本地模式的情绪底色、分隔线、字体或 20 字规则，也不做 OCR、错字检查或重试。
+- `ai` 让 imagegen 一次生成包含目标中文文案的完整纵向卡片。提示词必须要求接近 1080:1350 的竖向画布、使用 `#F7F6F6` 淡灰白背景，并让插画与文案充分利用画面、避免过量上下留白；不得附加本地模式的情绪底色、分隔线、字体或 20 字规则，也不做 OCR、错字检查或重试。
 - `local` 让 imagegen 只生成无文字的上半部分插画，再执行下方 `compose_card.py` 命令；`brand off` 时省略 `--reference`，只要 AI 插画成功即可排版。`--reference` 使用归一化后的 `characters[0]` 主角色图，`--emotion` 仍只控制本地文案配色。
 
 先完成全部图片任务的语义、文案、提示词和参考图路径准备，再在同一个并发编排调用中一次性发出全部 imagegen 请求。使用 `Promise.allSettled` 或等价的独立结算方式；禁止先等待一部分图片完成后再发下一批。`copy/rebuild` 每张来源图片对应一个独立请求；`comic` 每个叙事节点对应一个独立请求；任一失败不得取消其他请求。
@@ -114,7 +114,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/choose_character.py --u
 python .agents/skills/recreate-wechat-article-v3/scripts/normalize_ai_card.py --input "<工作目录>/raw-cards/image-001.png" --output "<工作目录>/cards/image-001.png"
 ```
 
-归一脚本会裁除过量外围留白、把与边缘相连的背景统一为示例取样色 `#F7F6F6`，并输出精确的 1122×1402 PNG；不得直接把 `raw-cards/` 图片写入 manifest。
+归一脚本会裁除过量外围留白、把与边缘相连的背景统一为示例取样色 `#F7F6F6`，并输出精确的 1080×1350 PNG；不得直接把 `raw-cards/` 图片写入 manifest。
 
 `local` 模式的 imagegen 结果全部结算后，对成功插画一次性并发执行以下命令；不得逐张串行合成：
 
@@ -124,7 +124,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/compose_card.py --illus
 
 脚本会用情绪浅色铺满整个下半部分，取消内部边框和白色留边，并使用放大为原规格 1.5 倍的轻艺术中文字体，做确定性的逐字轻微旋转与上下错落。
 
-每张请求只尝试一次。`ai` 和 `comic` 成功结果必须是 `cards/` 下可读且尺寸精确为 1122×1402 的 PNG；`local` 成功结果必须是 1080×1440 PNG。不得逐图 OCR、重复视觉复查或重试。imagegen、AI 归一或 `local` 合成任一步失败时，都不调用模板卡片，也不嵌入来源图片；普通模式写入 `sourceImageLink`，comic 写入 `generatedImageLink`，由渲染器输出对应占位。
+每张请求只尝试一次。`ai`、`comic` 和 `local` 成功结果必须是 `cards/` 下可读且尺寸精确为 1080×1350 的 PNG。不得逐图 OCR、重复视觉复查或重试。imagegen、AI 归一或 `local` 合成任一步失败时，都不调用模板卡片，也不嵌入来源图片；普通模式写入 `sourceImageLink`，comic 写入 `generatedImageLink`，由渲染器输出对应占位。
 
 ### 5. 渲染 HTML
 
@@ -145,7 +145,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/render_article.py --man
 脚本会在 `result/` 下创建单篇文章目录，目录内包含同名 HTML、`source.md`、`images/`，并在有可用原图时创建 `source-images/`。`source.md` 按原文图文顺序嵌入本地原图，并在每张图后记录原始 URL；下载失败的原图保留 URL 和失败标记，不阻断成品。脚本输出文章目录、HTML、Markdown、图片目录与归档告警。随后校验：
 
 ```powershell
-python .agents/skills/recreate-wechat-article-v3/scripts/validate_output.py "<最终HTML路径>" --expected-image-size <ai使用1122x1402|local使用1080x1440>
+python .agents/skills/recreate-wechat-article-v3/scripts/validate_output.py "<最终HTML路径>" --expected-image-size 1080x1350
 ```
 
 最后只做一轮结构与资源校验。若当前环境支持本地页面渲染，再视觉检查移动端宽度、标题与段落、图片顺序和中文断行；不得反复尝试已被环境安全策略阻止的 `file://` 浏览器预览。

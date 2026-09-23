@@ -73,7 +73,7 @@ class ArticleParser(HTMLParser):
 def parse_expected_size(value: str) -> tuple[int, int]:
     match = re.fullmatch(r"(\d+)[xX×](\d+)", value.strip())
     if not match:
-        raise argparse.ArgumentTypeError("尺寸必须使用 WIDTHxHEIGHT，例如 1122x1402。")
+        raise argparse.ArgumentTypeError("尺寸必须使用 WIDTHxHEIGHT，例如 1080x1350。")
     width, height = (int(part) for part in match.groups())
     if width <= 0 or height <= 0:
         raise argparse.ArgumentTypeError("图片尺寸必须为正整数。")
