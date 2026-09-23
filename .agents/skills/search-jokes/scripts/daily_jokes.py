@@ -158,6 +158,68 @@ def duplicate_reason(candidate: dict[str, Any], records: list[dict[str, Any]]) -
     return None
 
 
+def load_candidates(path: Path) -> list[dict[str, Any]]:
+    """Load either a records envelope or a bare candidate list."""
+    with path.open("r", encoding="utf-8") as handle:
+        incoming = json.load(handle)
+    candidates = incoming["records"] if isinstance(incoming, dict) else incoming
+    if not isinstance(candidates, list):
+        raise ValueError("输入必须是 records 数组或包含 records 的对象。")
+    if not all(isinstance(candidate, dict) for candidate in candidates):
+        raise ValueError("候选项必须都是对象。")
+    return candidates
+
+
+def prepare_candidate(candidate: dict[str, Any], state: str | None = None) -> dict[str, Any]:
+    """Copy a candidate and calculate metadata whenever its core fields exist."""
+    item = dict(candidate)
+    if state:
+        item["state"] = state
+    item.setdefault("selection_policy", PUSH_POLICY_V2)
+    if isinstance(item.get("text"), str) and isinstance(item.get("semantic_signature"), dict):
+        return enrich(item)
+    return item
+
+
+def screen_candidates(
+    candidates: list[dict[str, Any]],
+    records: list[dict[str, Any]],
+    limit: int | None = None,
+    state: str | None = None,
+) -> tuple[list[dict[str, Any]], list[tuple[str, str]]]:
+    """Return accepted candidates and rejection reasons without changing the registry.
+
+    Accepted items are added to the in-memory comparison set. This makes duplicate
+    checks apply both to archived jokes and to other accepted items in this batch.
+    """
+    if limit is not None and limit < 1:
+        raise ValueError("limit 必须至少为 1。")
+
+    accepted: list[dict[str, Any]] = []
+    rejected: list[tuple[str, str]] = []
+    comparison_records = list(records)
+    seen_ids = {record.get("id") for record in records}
+    for raw_candidate in candidates:
+        candidate = prepare_candidate(raw_candidate, state)
+        item_id = str(candidate.get("id", "<无 id>"))
+        if candidate.get("id") in seen_ids:
+            rejected.append((item_id, "id 重复"))
+            continue
+        seen_ids.add(candidate.get("id"))
+
+        errors = validate_shape(candidate)
+        reason = duplicate_reason(candidate, comparison_records) if not errors else None
+        if errors or reason:
+            rejected.append((item_id, "; ".join(errors) if errors else reason))
+            continue
+        if limit is not None and len(accepted) >= limit:
+            rejected.append((item_id, "已达到本批接纳上限"))
+            continue
+        accepted.append(candidate)
+        comparison_records.append(candidate)
+    return accepted, rejected
+
+
 def validate_registry(registry: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     seen_ids: set[str] = set()
@@ -196,30 +258,33 @@ def command_validate(args: argparse.Namespace) -> int:
 
 def command_add(args: argparse.Namespace) -> int:
     registry = load_registry(args.registry)
-    with args.input.open("r", encoding="utf-8") as handle:
-        incoming = json.load(handle)
-    candidates = incoming["records"] if isinstance(incoming, dict) else incoming
-    if not isinstance(candidates, list):
-        raise ValueError("输入必须是 records 数组或包含 records 的对象。")
-    added, rejected = 0, []
-    for candidate in candidates:
-        if args.state:
-            candidate["state"] = args.state
-        candidate.setdefault("selection_policy", PUSH_POLICY_V2)
-        candidate = enrich(candidate)
-        errors = validate_shape(candidate)
-        reason = duplicate_reason(candidate, registry["records"]) if not errors else None
-        if errors or reason:
-            rejected.append((candidate.get("id", "<无 id>"), "; ".join(errors) if errors else reason))
-            continue
-        registry["records"].append(candidate)
-        added += 1
-    if added:
+    candidates = load_candidates(args.input)
+    accepted, rejected = screen_candidates(candidates, registry["records"], state=args.state)
+    if accepted:
+        registry["records"].extend(accepted)
         save_registry(args.registry, registry)
-    print(f"已入库 {added} 条；拦截 {len(rejected)} 条。")
+    print(f"已入库 {len(accepted)} 条；拦截 {len(rejected)} 条。")
     for item_id, reason in rejected:
         print(f"- {item_id}：{reason}")
     return 1 if rejected else 0
+
+
+def command_screen(args: argparse.Namespace) -> int:
+    """Screen a batch and optionally materialize only the accepted subset."""
+    registry = load_registry(args.registry)
+    candidates = load_candidates(args.input)
+    accepted, rejected = screen_candidates(candidates, registry["records"], args.limit, args.state)
+    if args.accepted_output:
+        args.accepted_output.parent.mkdir(parents=True, exist_ok=True)
+        with args.accepted_output.open("w", encoding="utf-8", newline="\n") as handle:
+            json.dump({"records": accepted}, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+    print(f"筛选完成：接纳 {len(accepted)} 条；拦截 {len(rejected)} 条。")
+    for item_id, reason in rejected:
+        print(f"- {item_id}：{reason}")
+    if args.accepted_output:
+        print(f"已写入待入库候选：{args.accepted_output}")
+    return 0
 
 
 def command_refresh(args: argparse.Namespace) -> int:
@@ -247,6 +312,9 @@ def command_render(args: argparse.Namespace) -> int:
     if not records:
         print("没有可输出的批次。", file=sys.stderr)
         return 1
+    if args.require is not None and len(records) < args.require:
+        print(f"批次仅有 {len(records)} 条，未达到要求的 {args.require} 条。", file=sys.stderr)
+        return 1
     print(f"# 每日一笑｜{batch}\n")
     for index, record in enumerate(records[: args.limit], start=1):
         meta = enrich(record)
@@ -261,12 +329,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY, help="档案 JSON 路径")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate", help="校验字段、安全边界和三层去重")
+    screen = sub.add_parser("screen", help="无副作用筛选候选，可输出通过项供后续入库")
+    screen.add_argument("input", type=Path, help="候选 JSON 文件")
+    screen.add_argument("--limit", type=int, help="本批最多接纳的条数")
+    screen.add_argument("--state", choices=["candidate", "shown", "adopted"], help="覆盖通过项状态")
+    screen.add_argument("--accepted-output", type=Path, help="写入通过候选的临时 JSON 路径")
     add = sub.add_parser("add", help="将联网筛出的候选 JSON 入库")
     add.add_argument("input", type=Path, help="候选 JSON 文件")
     add.add_argument("--state", choices=["candidate", "shown", "adopted"], help="覆盖候选状态")
     render = sub.add_parser("render", help="按批次输出已展示笑话")
     render.add_argument("--batch", help="批次 ID；省略时取最近批次")
     render.add_argument("--limit", type=int, default=10, help="最多输出条数")
+    render.add_argument("--require", type=int, help="要求批次至少包含的条数")
     sub.add_parser("refresh", help="将长度、行数和指纹写回手工导入的档案")
     return parser
 
@@ -280,6 +354,8 @@ def main() -> int:
         return command_add(args)
     if args.command == "refresh":
         return command_refresh(args)
+    if args.command == "screen":
+        return command_screen(args)
     return command_render(args)
 
 

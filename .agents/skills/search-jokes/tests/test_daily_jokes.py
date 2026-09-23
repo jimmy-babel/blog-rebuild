@@ -104,6 +104,84 @@ class DailyJokesTests(unittest.TestCase):
         candidate = daily_jokes.enrich(candidate)
         self.assertTrue(any("不满足推送门槛" in error for error in daily_jokes.validate_shape(candidate)))
 
+    @staticmethod
+    def new_candidate(item_id, text, signature, batch_id="test-collection"):
+        return {
+            "id": item_id,
+            "text": text,
+            "source": {"title": "测试来源", "url": f"https://example.com/{item_id}"},
+            "accessed_at": "2026-09-23",
+            "tags": ["日常", "朋友"],
+            "twist_type": "逻辑反转",
+            "state": "shown",
+            "batch_id": batch_id,
+            "dialogue_turn_count": 8,
+            "semantic_signature": signature,
+        }
+
+    def test_screen_is_non_mutating_and_reports_all_rejection_layers(self):
+        valid = self.new_candidate(
+            "screen-valid",
+            "朋友问我为什么每次开会都带一支铅笔。\n我说：万一会议没有结论，至少还能把它削尖一点。",
+            {"relationship": "friends", "setting": "office", "premise": "meeting-preparation", "punchline": "sharpen-pencil"},
+        )
+        semantic = self.new_candidate(
+            "screen-semantic",
+            "饭桌上大家又问我什么时候结婚。\n我说再问就掀桌子。\n第二年，他们真的换了一张大理石桌继续问。",
+            copy.deepcopy(self.records[2]["semantic_signature"]),
+        )
+        short = self.new_candidate(
+            "screen-short",
+            "朋友说：今天真热。\n我说：是啊。",
+            {"relationship": "friends", "setting": "outdoors", "premise": "hot-weather", "punchline": "agreement"},
+        )
+        short["dialogue_turn_count"] = 2
+        duplicate_in_batch = copy.deepcopy(valid)
+        duplicate_in_batch["id"] = "screen-batch-duplicate"
+
+        original_count = len(self.records)
+        accepted, rejected = daily_jokes.screen_candidates(
+            [valid, semantic, short, duplicate_in_batch], self.records
+        )
+        self.assertEqual([item["id"] for item in accepted], ["screen-valid"])
+        reasons = "\n".join(reason for _, reason in rejected)
+        self.assertIn("核心包袱重复", reasons)
+        self.assertIn("不满足推送门槛", reasons)
+        self.assertIn("原文重复", reasons)
+        self.assertEqual(len(self.records), original_count)
+
+    def test_screen_then_add_only_persists_selected_items_across_batches(self):
+        first = self.new_candidate(
+            "batch-first",
+            "同事问我为什么总是最后一个离开办公室。\n我说：因为我负责确认所有人都已经先走了。",
+            {"relationship": "coworkers", "setting": "office", "premise": "last-to-leave", "punchline": "confirm-departure"},
+        )
+        second = self.new_candidate(
+            "batch-second",
+            "朋友说我做决定太慢。\n我说这件事我已经考虑过了。\n朋友问结果呢。\n我说：我决定再考虑一下。",
+            {"relationship": "friends", "setting": "cafe", "premise": "slow-decisions", "punchline": "consider-again"},
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            registry_path = temporary_path / "registry.json"
+            first_input = temporary_path / "first.json"
+            first_accepted = temporary_path / "first-accepted.json"
+            second_input = temporary_path / "second.json"
+            second_accepted = temporary_path / "second-accepted.json"
+            registry_path.write_text(json.dumps({"schema_version": 1, "records": self.records}, ensure_ascii=False), encoding="utf-8")
+            first_input.write_text(json.dumps([first], ensure_ascii=False), encoding="utf-8")
+            daily_jokes.command_screen(SimpleNamespace(registry=registry_path, input=first_input, limit=1, state="shown", accepted_output=first_accepted))
+            daily_jokes.command_add(SimpleNamespace(registry=registry_path, input=first_accepted, state="shown"))
+
+            second_input.write_text(json.dumps([first, second], ensure_ascii=False), encoding="utf-8")
+            daily_jokes.command_screen(SimpleNamespace(registry=registry_path, input=second_input, limit=1, state="shown", accepted_output=second_accepted))
+            daily_jokes.command_add(SimpleNamespace(registry=registry_path, input=second_accepted, state="shown"))
+
+            stored = daily_jokes.load_registry(registry_path)["records"]
+        added = [item for item in stored if item.get("batch_id") == "test-collection"]
+        self.assertEqual([item["id"] for item in added], ["batch-first", "batch-second"])
+        self.assertTrue(all(item["state"] == "shown" for item in added))
+
 
 if __name__ == "__main__":
     unittest.main()

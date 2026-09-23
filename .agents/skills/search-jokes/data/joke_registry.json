@@ -833,6 +833,626 @@
         "normalized_sha256": "a69d815c8ea48a662e70ad10c5747843b50543f69dd0fb40d915c57e478be2d0",
         "semantic_key": "friends-couple|home|hidden-cooking-skill|pretend-practice"
       }
+    },
+    {
+      "id": "web-2026-09-23-001",
+      "text": "一个人去看医生。\n医生问他: “你哪里不舒服?”\n病人说: “医生, 我的身体到处都疼!”\n医生很惊讶: “到处都疼? 告诉我, 哪里疼?”\n病人用手指碰了碰自己的头: “这里疼!”\n然后他碰了碰自己的肚子: “这里也疼!”\n他又碰了碰自己的腿: “这里也疼!”\n医生想了想, 然后笑了。\n他说: “我知道你的问题了! 你的身体没问题, 是你的手指坏了!”",
+      "source": {
+        "title": "Joke: 医生和病人 – The Doctor and the Patient",
+        "url": "https://chinesereadingpractice.com/2026/03/10/joke-%E5%8C%BB%E7%94%9F%E5%92%8C%E7%97%85%E4%BA%BA-the-doctor-and-the-patient/"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "医疗",
+        "对话",
+        "日常"
+      ],
+      "twist_type": "误解反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "patient-doctor",
+        "setting": "clinic",
+        "premise": "pain-everywhere",
+        "punchline": "broken-finger"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 157,
+      "line_count": 9,
+      "fingerprints": {
+        "normalized_sha256": "19d49b4cb678157aa88fdb202a7e786090520aa1a34f23f0c4d89bceda84ebca",
+        "semantic_key": "patient-doctor|clinic|pain-everywhere|broken-finger"
+      }
+    },
+    {
+      "id": "web-2026-09-23-002",
+      "text": "王奶奶一百岁了。\n一个记者来看她。记者问：”奶奶，您一百岁了，身体还这么好。您的秘密是什么？”\n记者想：她一定每天运动。\n但是王奶奶说：”我不运动。”\n记者又想：那一定是吃得好。\n但是王奶奶说：”我什么都吃。我爱吃肉，也爱吃糖。”\n记者不明白了。”那……您的秘密是什么？”\n王奶奶笑了笑，说：”我不跟人吵架。别人说什么，我都说’对，对,对’。”\n记者说：”就这样？这太简单了！这不可能是真的！”\n王奶奶看着他，笑着说：”好吧，你说得对。”",
+      "source": {
+        "title": "Short story: 长寿的秘密 – The Secret to a Long Life",
+        "url": "https://chinesereadingpractice.com/2026/09/09/short-story-%E9%95%BF%E5%AF%BF%E7%9A%84%E7%A7%98%E5%AF%86-the-secret-to-a-long-life/"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "日常",
+        "对话",
+        "反转"
+      ],
+      "twist_type": "字面化反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 8,
+      "semantic_signature": {
+        "relationship": "reporter-elder",
+        "setting": "home-visit",
+        "premise": "longevity-secret",
+        "punchline": "always-agree"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 210,
+      "line_count": 10,
+      "fingerprints": {
+        "normalized_sha256": "8e4b416077bfd6bb2bb8abd95b1a26a88a2b601843f5d89719bb6623c53e0f73",
+        "semantic_key": "reporter-elder|home-visit|longevity-secret|always-agree"
+      }
+    },
+    {
+      "id": "web-2026-09-23-003",
+      "text": "回宿舍的路上，遇见墙角有一位女生正在哭泣，\n走过去问她怎么了，\n她抽噎着问我：“你。。。愿意借给我用一下。。。你的肩膀么？”\n我说：“只要你不哭！我愿意！”\n女孩停止了哭泣，踩着我的肩膀翻墙出去买好吃的去了。",
+      "source": {
+        "title": "校园笑话 - 你。。。愿意借给我用一下。。。你的肩膀么？",
+        "url": "https://www.xiaohuayoumo.com/xiaoyuanxiaohua/21592.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "校园",
+        "误解",
+        "日常"
+      ],
+      "twist_type": "字面化反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "students",
+        "setting": "campus",
+        "premise": "borrow-shoulder",
+        "punchline": "climb-wall"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 100,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "74a12d3a925a668ffc5b77c885867f2950be5c9cf2ab889cc43f6bf42ad5cf25",
+        "semantic_key": "students|campus|borrow-shoulder|climb-wall"
+      }
+    },
+    {
+      "id": "web-2026-09-23-004",
+      "text": "今天去应聘。到了经理那一关了。\n经理看了我的资料好久。幽幽的说一句，我认识你爸！\n我心里一喜有关系了！\n然后他又说就是以前上学天天打我的那个。\n我心里咯噔一下想扭头走呢。\n他接着谈了一口气说，明天来上班吧！\n你们说我是去还是不去呢？",
+      "source": {
+        "title": "职场笑话 - 你们说我是去还是不去呢？",
+        "url": "https://www.xiaohuayoumo.com/zhichangxiaohua/21530.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "职场",
+        "面试",
+        "反转"
+      ],
+      "twist_type": "身份关联反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "applicant-manager",
+        "setting": "interview",
+        "premise": "knows-father",
+        "punchline": "father-was-bully"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 110,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "3ee6178c591aba1b41b31e8af531d02e51d5ce84c7d09c34a6558c6803dc0efc",
+        "semantic_key": "applicant-manager|interview|knows-father|father-was-bully"
+      }
+    },
+    {
+      "id": "web-2026-09-23-005",
+      "text": "有次回家过中秋节，晚上约了和妈妈的远房亲戚吃饭，\n我当时很累就素颜准备穿鞋出门了，\n我妈一脸惊讶“你不化个妆吗？”\n“不化了，太累了”\n“那算了冰箱里有中午的剩饭你热热吃了吧”\n“为什么？”\n“你不化妆太丑了我就不带你去了吧”",
+      "source": {
+        "title": "其他笑话 - 到底是不是亲生的？",
+        "url": "https://www.xiaohuayoumo.com/qitaxiaohua/21852.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "亲子",
+        "家庭",
+        "反转"
+      ],
+      "twist_type": "直白反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "adult-child-parent",
+        "setting": "home",
+        "premise": "family-dinner-makeup",
+        "punchline": "too-ugly-to-attend"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 107,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "138caa6290a0cde5aa93b005223d824d8d45d9377af809e90515249ac3cdee3a",
+        "semantic_key": "adult-child-parent|home|family-dinner-makeup|too-ugly-to-attend"
+      }
+    },
+    {
+      "id": "web-2026-09-23-006",
+      "text": "某人赴约相亲，两人见面第一感觉甚好，男方见饭点时间到，便问女方： 肚皮饿伐？你想切点撒？\n女方比较害羞 说：随便吧！\n男的于是就说：本帮菜 川菜 湘菜 日料 意大利菜 你自己选吧 ！\n女的想意大利菜没吃过那就意大利菜吧！\n于是男的把女的带去了萨莉亚，女生赶紧说还是吃日料，男的说好呀，去了味千拉面。",
+      "source": {
+        "title": "其他笑话 - 本帮菜 川菜 湘菜 日料 意大利菜 你自己选吧 ！",
+        "url": "https://www.xiaohuayoumo.com/qitaxiaohua/21631.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "相亲",
+        "生活",
+        "反转"
+      ],
+      "twist_type": "预期反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "blind-date-pair",
+        "setting": "restaurant",
+        "premise": "restaurant-choice",
+        "punchline": "cheap-chain-restaurants"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 137,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "eb65b01d91771a7af192a6d0382e0ac03312a7bd3cccafa9b729d19feac5a9d1",
+        "semantic_key": "blind-date-pair|restaurant|restaurant-choice|cheap-chain-restaurants"
+      }
+    },
+    {
+      "id": "web-2026-09-23-007",
+      "text": "今天去买鞋看到老板老板娘脸色不对。\n我：老板，这雪地靴多少钱啊？\n老板：200。\n老板娘：你怎么不卖100呀！\n老板：我愿意！\n老板娘：姑娘，这双鞋我送给你了！拿走吧！\n我拿起鞋飞快的跑了，怕他们和好了再追上我。。。。",
+      "source": {
+        "title": "其他笑话 - 你怎么不卖100呀！",
+        "url": "https://www.xiaohuayoumo.com/qitaxiaohua/21609.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "生活",
+        "购物",
+        "对话"
+      ],
+      "twist_type": "误会反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "customer-shop-owners",
+        "setting": "shoe-store",
+        "premise": "couple-argument-price",
+        "punchline": "free-shoes"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 103,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "d418007b8eddf5c630fedd5c098aa56e3e00f0ab184dd65bf8a212f59cb0651a",
+        "semantic_key": "customer-shop-owners|shoe-store|couple-argument-price|free-shoes"
+      }
+    },
+    {
+      "id": "web-2026-09-23-008",
+      "text": "考驾照，倒桩考试中，考评员从屋里冲出来挥动拳头冲我吼道： “不及格！！撞倒七个，你怎么学的！”\n“我承认我驾驶技术差，可你也不要太夸张好不好！一共六个竿，哪来的撞倒七个？”\n“那不——教练也在那儿躺着么！”",
+      "source": {
+        "title": "交通笑话 - 撞倒七个？",
+        "url": "https://www.xiaohuayoumo.com/jiaotongxiaohua/11654.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "驾校",
+        "误解",
+        "对话"
+      ],
+      "twist_type": "信息反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "student-examiner",
+        "setting": "driving-test",
+        "premise": "hit-seven",
+        "punchline": "instructor-on-ground"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 100,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "5d52d30e3fa0cc54388b07180e558ffba6b9f4f55a9cea90a1cf050e3634b305",
+        "semantic_key": "student-examiner|driving-test|hit-seven|instructor-on-ground"
+      }
+    },
+    {
+      "id": "web-2026-09-23-010",
+      "text": "儿子不肯用功读书，母亲就用古人好学的故事开导他。\n母亲说：“古时有个叫孙康的人，家里很穷，没钱买油点灯，就借着雪映的光读书，后来成了大学问家，你应向古人学习。”\n过了一些日子，母亲来到儿子房间，见儿子瞪着两眼望着窗外，母亲生气地问：“你咋不读书啊？”\n儿子回答说：“我在等下雪呢。”",
+      "source": {
+        "title": "笑话故事100字100篇｜等下雪",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "亲子",
+        "学习",
+        "误解"
+      ],
+      "twist_type": "字面化反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "home",
+        "premise": "study-by-snow",
+        "punchline": "wait-for-snow"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 138,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "b32168a52340008053e75764a70febdfdcba5d4be1263fd87c5522b3bf900ad6",
+        "semantic_key": "child-parent|home|study-by-snow|wait-for-snow"
+      }
+    },
+    {
+      "id": "web-2026-09-23-011",
+      "text": "课堂上，语文老师带着大家学习余光中的《乡愁》，他要求学生们背诵最后一段：“而现在，乡愁是一弯浅浅的海峡，我在这头，大陆在那头。”\n突然，老师发现一个男生在偷偷玩手机，一时气不过，便罚他站到教室外面去。\n正好那天很冷，男生在外面冻得直打颤。老师心疼了，对他说：“如果会背，就让你进来！”\n男生说：“老师，我会了。”\n“背！”\n只见男生表情十分严肃，开始背诵起来：“而现在，痛苦是一股凌厉的寒风，我在外头，老师在里头。”\n全班同学爆笑，老师差点晕倒……",
+      "source": {
+        "title": "笑话故事100字100篇｜课堂背诵",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "校园",
+        "课堂",
+        "反转"
+      ],
+      "twist_type": "改写反转",
+      "state": "shown",
+      "batch_id": "2026-09-23-search-jokes",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "classroom",
+        "premise": "punished-outside",
+        "punchline": "poem-rewritten"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 218,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "9a241a00944c799c9d8e95be529b0060708f14031a967ad39d323e9e9fa1f41d",
+        "semantic_key": "student-teacher|classroom|punished-outside|poem-rewritten"
+      }
+    },
+    {
+      "id": "zol-59490-10",
+      "text": "那年，母亲送我上小学，大盘2000多点;\n后来，母亲送我上中学，大盘2000多点;\n再后来，母亲送我去大学，大盘2000多点;\n大学毕业了，母亲去学校看我，大盘2000多点;\n如今，我已经成位了一个母亲，大盘还是2000多点。\n祝愿天下母亲，像大盘一样，不会老去，永远年轻!",
+      "source": {
+        "title": "母亲送我上小学，大盘2000多点;",
+        "url": "https://xiaohua.zol.com.cn/detail60/59490.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "母亲",
+        "生活",
+        "股市"
+      ],
+      "twist_type": "时间循环",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "mother-child",
+        "setting": "life-stages",
+        "premise": "stock-index-through-years",
+        "punchline": "index-never-ages"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 132,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "c4890a1881fa9732f9af315c4d437f7457cac4e7f4a9bcc2829bd494263ec698",
+        "semantic_key": "mother-child|life-stages|stock-index-through-years|index-never-ages"
+      }
+    },
+    {
+      "id": "zol-59494-4",
+      "text": "一身材尚好的姑娘上公交车刚坐下，一胖妞就站于她身边。\n司机叫：这姑娘，给孕妇让个位子吧。\n姑娘犹豫了一下，没有起身。\n司机终于hold不住了，怒道：现在女孩子长得漂漂亮亮的，怎么这么没有公德心啊!\n姑娘终于也hold不住了，泪奔道：我也怀孕四个月了。\n胖妞也hold不住了，怒吼：我不是孕妇啊!",
+      "source": {
+        "title": "嘿嘿,尬事不断,笑声不停哟",
+        "url": "https://xiaohua.zol.com.cn/detail60/59494.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "生活",
+        "公交",
+        "误会"
+      ],
+      "twist_type": "连续误会",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "passengers-driver",
+        "setting": "bus",
+        "premise": "pregnant-passenger-seat",
+        "punchline": "wrong-person-is-pregnant"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 142,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "e16b325fe58f2d029d8fe62c0a46bc4dd93478fff8e94ef41202c3e95bda539e",
+        "semantic_key": "passengers-driver|bus|pregnant-passenger-seat|wrong-person-is-pregnant"
+      }
+    },
+    {
+      "id": "zol-59494-5",
+      "text": "上街买衣服，看到一件，顺便问问价格，老板说到：“50!”\n我暗自高兴，老板娘此时吼了一句：“50?你怎么不卖30给人家啊!”\n老板：“20我也愿意!”\n敢情他俩吵架了，刚准备走，老板娘又来了一句：“直接送不就行了，来，小伙子，拿走!”\n我怎么办啊，我啥也没说啊，这什么情况啊!",
+      "source": {
+        "title": "嘿嘿,尬事不断,笑声不停哟",
+        "url": "https://xiaohua.zol.com.cn/detail60/59494.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "生活",
+        "买衣服",
+        "误会"
+      ],
+      "twist_type": "意外获利",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "customer-shopkeepers",
+        "setting": "clothing-shop",
+        "premise": "price-negotiation",
+        "punchline": "argument-gives-item-away"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 134,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "3c1f28228f1543c177c9602ef6b4ce20abbe3157b69a40f3d8f892881167fae5",
+        "semantic_key": "customer-shopkeepers|clothing-shop|price-negotiation|argument-gives-item-away"
+      }
+    },
+    {
+      "id": "zol-59494-6",
+      "text": "A：参加聚会，看到一女人在台上唱歌，很难听，遂问身边一男士：“那是谁啊，唱的那么难听!”\nB：“那是我老婆。”\nA：“哦，我不是说她唱得太难听，是写歌词的人写得太烂了。”\nB：“歌词是我写的。”\nA：。。。。。。",
+      "source": {
+        "title": "嘿嘿,尬事不断,笑声不停哟",
+        "url": "https://xiaohua.zol.com.cn/detail60/59494.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "聚会",
+        "夫妻",
+        "尴尬"
+      ],
+      "twist_type": "连续补救失败",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "guest-husband",
+        "setting": "party",
+        "premise": "criticize-singing",
+        "punchline": "criticized-singer-and-lyricist"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 102,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "84cec3eb2f77a64f4003bf2a2042c627f19a88eab7df7433df175f02b1b8d11c",
+        "semantic_key": "guest-husband|party|criticize-singing|criticized-singer-and-lyricist"
+      }
+    },
+    {
+      "id": "zol-59495-5",
+      "text": "周未有事，去找同事小丽，来到她住的小区，却不记得她住几单元几层楼了，叫人抓狂的是手机也没电了。。。\n这时，楼里一中年妇妇走了过来，我就问她，你知道这楼里小丽家住那儿吗?\n她笑道：“你是她什么人!”\n我敢紧道：“我是她同事，找她有事!”\n她不紧不慢道：“你是她同事，都不知道她住那儿，我哪知道!”",
+      "source": {
+        "title": "爆冷,让人刮目相看呐!",
+        "url": "https://xiaohua.zol.com.cn/detail60/59495.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "生活",
+        "邻里",
+        "误会"
+      ],
+      "twist_type": "反问反转",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "coworker-neighbor",
+        "setting": "apartment-building",
+        "premise": "find-coworkers-home",
+        "punchline": "neighbor-questions-relationship"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 143,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "6efba3f81c4a0f860dc20d50827a1b6a7a77c9294fd83210ad897eb38c8a530d",
+        "semantic_key": "coworker-neighbor|apartment-building|find-coworkers-home|neighbor-questions-relationship"
+      }
+    },
+    {
+      "id": "zol-59495-6",
+      "text": "青年跋涉深山，历经险阻，终于找到了隐居山中的禅师，他迫不及待地问道：“我长得丑，我该怎么办?”\n“长得丑就应该像我一样。”\n青年点点头：“心如止水，独善其身?”\n“不，长得丑就要像我一样赶紧找个深山躲起来。”",
+      "source": {
+        "title": "爆冷,让人刮目相看呐!",
+        "url": "https://xiaohua.zol.com.cn/detail60/59495.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "禅师",
+        "外貌",
+        "反转"
+      ],
+      "twist_type": "字面误解",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "seeker-hermit",
+        "setting": "mountain",
+        "premise": "ask-about-ugliness",
+        "punchline": "hide-in-mountains"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 101,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "8d2ed661710fe806ca4ad105e4617fe5959a8e9cef5065b56e2918a515f9c2a8",
+        "semantic_key": "seeker-hermit|mountain|ask-about-ugliness|hide-in-mountains"
+      }
+    },
+    {
+      "id": "zol-59495-7",
+      "text": "我：上大学的时候我是寝室老大。\n女友：真的啊?那他们都听你话?\n我：必须的，说什么做什么!\n女友：不太可能吧，我不信!\n我：敢不听我的，我动动脚趾头就能弄死他们!\n女友：是路由器在你边上还是插座在你边上?\n我：。。。都在!",
+      "source": {
+        "title": "爆冷,让人刮目相看呐!",
+        "url": "https://xiaohua.zol.com.cn/detail60/59495.html"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "校园",
+        "宿舍",
+        "误会"
+      ],
+      "twist_type": "身份反转",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "college-dorm",
+        "premise": "room-leader-bragging",
+        "punchline": "controls-router-and-socket"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 105,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "c1dc5d63d861ac579644a343bf4ad1ac4c0fce1369ad1ccf3ca0bcdd1ee86bd5",
+        "semantic_key": "couple|college-dorm|room-leader-bragging|controls-router-and-socket"
+      }
+    },
+    {
+      "id": "zhilezhi-68103",
+      "text": "大学时，A喜欢早起锻炼，有一次A锻炼完买一屉小笼包，回宿舍往桌子上一放，然后刷牙洗脸去了。回来一看，包子没了！A好生气，于是第二天买回包子就当着宿舍所有人的面儿把包子舔了一遍。刷完牙回来一看，包子还在，但馅儿没了。",
+      "source": {
+        "title": "包子没了",
+        "url": "https://zhilezhi.com/xiaohua/68103"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "校园",
+        "宿舍",
+        "反转"
+      ],
+      "twist_type": "防盗反转",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "roommates",
+        "setting": "college-dorm",
+        "premise": "missing-steamed-buns",
+        "punchline": "filling-stolen-after-licking"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 107,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "d0c7d1494b6781eb58d77b5fdfda52af01e76ea6b260764f078f713cdc1d0836",
+        "semantic_key": "roommates|college-dorm|missing-steamed-buns|filling-stolen-after-licking"
+      }
+    },
+    {
+      "id": "zhilezhi-68102",
+      "text": "儿子放学回来，嘟囔着老师真小气。我问原因，儿子说：“其他学校的老师来我们班听课，我们老师准备了好多可爱的小礼物，说是提问时，谁积极回答就给谁。我和同学们都争着举手！”我说：“回答问题能得小礼物，不错嘛！”儿子又说：“可听课的老师一走，我们老师宣布，把小礼物都交上去，以后听课了还用呢！”",
+      "source": {
+        "title": "老师真小气",
+        "url": "https://zhilezhi.com/xiaohua/68102"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "校园",
+        "老师",
+        "反转"
+      ],
+      "twist_type": "奖励反转",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "parent-child-teacher",
+        "setting": "school",
+        "premise": "teacher-gives-gifts",
+        "punchline": "gifts-reused-for-future-observations"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 143,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "53cb44518e43cee3b0961b7a91c1684b9a9a9ad0c4e9c6a9f5495c00ace29495",
+        "semantic_key": "parent-child-teacher|school|teacher-gives-gifts|gifts-reused-for-future-observations"
+      }
+    },
+    {
+      "id": "zhilezhi-62832",
+      "text": "上午第四节课，小华肚子饿，无心听课，坐在位置上呆呆地想着牛肉，面包，想的直流口水。\n数学老师发现他走神，便提问他：“1.130这个小数向右移动一位，会得到什么样的结果？”\n小华高兴的答到：“将会开午饭！”",
+      "source": {
+        "title": "提问",
+        "url": "https://zhilezhi.com/xiaohua/62832"
+      },
+      "accessed_at": "2026-09-23",
+      "tags": [
+        "校园",
+        "数学",
+        "误解"
+      ],
+      "twist_type": "概念误解",
+      "state": "shown",
+      "batch_id": "20260923-daily-jokes-01",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "teacher-student",
+        "setting": "math-class",
+        "premise": "decimal-point-question",
+        "punchline": "lunch-not-number-result"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 100,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "a0afc49dc65090573bef7a741da7ede93927498e088819397ac292acf12afd6c",
+        "semantic_key": "teacher-student|math-class|decimal-point-question|lunch-not-number-result"
+      }
     }
   ]
 }
