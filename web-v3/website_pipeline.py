@@ -525,7 +525,7 @@ class OpenAICompatible:
             image_instruction = f"只根据清洗后的文字拆分为恰好 {comic_count} 个连续叙事节点；不要读取、引用或输出任何来源图片 sourceIndex。"
             image_schema = '{"type":"image","sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"imagePrompt":"连续叙事画面提示词","alt":"第几幕"}'
         else:
-            image_instruction = "每张未被 removedSourceIndexes 删除的来源图片都必须恰好返回一个 type=image 的生图计划，并按 sourceIndex 递增。sourceImageLink 只由程序在真实生图或合成失败后自动写入，规划阶段不要返回 sourceImageLink。"
+            image_instruction = "每张未被 removedSourceIndexes 删除的来源图片都必须恰好返回一个 type=image 的生图计划，并按 sourceIndex 递增。普通图片（包括与正文主题关系不明确或看起来像装饰图的图片）默认保留，不得仅凭无关性删除。只有整张图片主要用于二维码、广告、关注引导、联系方式或推广时才可加入 removedSourceIndexes；图片角落的二维码、署名或水印视为来源水印，保留图片并在 imagePrompt 中要求生图忽略。sourceImageLink 只由程序在真实生图或合成失败后自动写入，规划阶段不要返回 sourceImageLink。"
             image_schema = '{"type":"image","sourceIndex":1,"sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"emotion":"通用","caption":"图片文案","imagePrompt":"详细生图提示词","alt":"图片说明"}'
         brand_instruction = (
             "使用项目角色参考图判断并返回 character、characters、ageGroup 和 ageEvidence；character/characters[].role 只能是 girl、girl-baby、girl-old、boy、boy-baby、boy-old，"
@@ -541,14 +541,14 @@ JSON 结构：
 {{
   "title": "标题",
   "summary": "可选导语（没有导语时省略，不要返回空字符串）",
-  "removedSourceIndexes": [0],
+  "removedSourceIndexes": [],
   "blocks": [
     {{"type":"heading","level":2,"text":"章节标题"}},
     {{"type":"text","text":"文章正文"}},
     {image_schema}
   ]
 }}
-要求：删除作者、来源、二维码、广告、推广、联系方式和无关装饰；所有图片计划必须包含 sceneType、character、characters、sceneCharacterCount、secondaryCharacterNotes、allowIntentionalDuplicate；每个 characters 项必须包含 role、purpose、ageGroup、ageEvidence；brand on 时普通模式额外必须包含 emotion、caption、imagePrompt、alt，comic 图片必须包含 imagePrompt、alt。sceneType 只能是 single、mixed_pair、romantic_pair、family_trio、other_group；ageGroup 只能是 child、adult、elder、unknown。先判断是否存在孩子、青年/成年人、爷爷奶奶辈，是否为父母、夫妻、情侣或祖孙关系，再判断每个人的 ageGroup。child/son/daughter 使用 child；parent/mother/father 使用 adult；grandparent/grandmother/grandfather 使用 elder。父母关系优先于白发、皱纹、服装或坐姿，不能仅凭显老外观使用 elder；只有明确爷爷奶奶辈、祖父母或老年身份才使用 elder。小孩使用 girl-baby/boy-baby，青年、成年人、父母、夫妻使用 girl/boy，明确老年人使用 girl-old/boy-old。年龄不明的主角必须使用 role=girl、ageGroup=unknown；多人场景中年龄不明但性别明确的角色使用对应青年 role；孩子性别不明使用 girl-baby。characters 缺失时按 character 生成单角色列表；普通非男女组合强制只保留一个女性角色。sceneCharacterCount 缺失时按 1，allowIntentionalDuplicate 默认 false；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许 true。每张角色参考图只对应一个人物，次要人物必须与主角及彼此拥有明显不同的脸型、发型、发色、体型、年龄、服装、配饰或姿态；brand off 时也执行这条规则。不要伪造来源内容。
+要求：删除作者、来源等纯文本署名，以及关注引导、广告、推广、联系方式和无关版权尾注等纯文本内容；普通图片（包括与正文主题关系不明确或看起来像装饰图的图片）默认保留并正常生成，不得仅凭无关性删除。只有整张图片主要用于二维码、广告、关注引导、联系方式或推广时，才将其 sourceIndex 放入 removedSourceIndexes。图片角落的二维码、署名或水印视为来源水印，保留图片，并要求 imagePrompt 明确忽略且不复制这些元素。所有图片计划必须包含 sceneType、character、characters、sceneCharacterCount、secondaryCharacterNotes、allowIntentionalDuplicate；每个 characters 项必须包含 role、purpose、ageGroup、ageEvidence；brand on 时普通模式额外必须包含 emotion、caption、imagePrompt、alt，comic 图片必须包含 imagePrompt、alt。sceneType 只能是 single、mixed_pair、romantic_pair、family_trio、other_group；ageGroup 只能是 child、adult、elder、unknown。先判断是否存在孩子、青年/成年人、爷爷奶奶辈，是否为父母、夫妻、情侣或祖孙关系，再判断每个人的 ageGroup。child/son/daughter 使用 child；parent/mother/father 使用 adult；grandparent/grandmother/grandfather 使用 elder。父母关系优先于白发、皱纹、服装或坐姿，不能仅凭显老外观使用 elder；只有明确爷爷奶奶辈、祖父母或老年身份才使用 elder。小孩使用 girl-baby/boy-baby，青年、成年人、父母、夫妻使用 girl/boy，明确老年人使用 girl-old/boy-old。年龄不明的主角必须使用 role=girl、ageGroup=unknown；多人场景中年龄不明但性别明确的角色使用对应青年 role；孩子性别不明使用 girl-baby。characters 缺失时按 character 生成单角色列表；普通非男女组合强制只保留一个女性角色。sceneCharacterCount 缺失时按 1，allowIntentionalDuplicate 默认 false；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许 true。每张角色参考图只对应一个人物，次要人物必须与主角及彼此拥有明显不同的脸型、发型、发色、体型、年龄、服装、配饰或姿态；brand off 时也执行这条规则。不要伪造来源内容。
 来源正文非空白字符数：{source_count}
 来源内容：
 {source_text}
@@ -989,7 +989,7 @@ def _reference_instruction(image_mode: str, brand: str, comic: bool = False) -> 
     if brand != "on":
         return "只依据允许提供的来源图和文字完成画面，不添加品牌人物参考；同一画面中的多个角色必须拥有明显不同的外观。"
     if image_mode == "copy":
-        return "来源图片负责信息结构、动作、道具、人物数量、空间关系和排版气质；普通单主角时角色参考图只用于主角，组合场景按 prompt 中的角色映射分别使用，不复制水印、署名或像素布局。"
+        return "来源图片负责信息结构、动作、道具、人物数量、空间关系和排版气质；普通单主角时角色参考图只用于主角，组合场景按 prompt 中的角色映射分别使用。忽略并移除来源图角落的二维码、水印、署名和广告角标，不复制这些元素，也不复制像素级布局。"
     return "角色参考图按 prompt 中的角色映射分别使用；根据语义自由重构场景，不复刻来源构图。"
 
 
@@ -1178,7 +1178,8 @@ def _promote_source_image_links_to_jobs(
             alt = str(block.get("alt") or "").strip()
             block["imagePrompt"] = (
                 "根据来源图片的信息结构、动作、道具和空间关系，结合文章语义重新生成纵向插画；"
-                + (f"画面主题：{alt}。" if alt else "不要添加署名、水印、二维码或多余文字。")
+                + (f"画面主题：{alt}。" if alt else "")
+                + "忽略来源图中的二维码、水印、署名和广告角标，不要将其生成到新图中。"
             )
     return article_blocks
 

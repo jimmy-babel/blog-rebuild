@@ -28,20 +28,50 @@ class ArticleParser(HTMLParser):
         self.comic_count: int | None = None
         self.title_depth = 0
         self.title_text: list[str] = []
+        self.forbidden_tags: list[str] = []
+        self.class_tag_count = 0
+        self.external_stylesheet_count = 0
+        self.awaiting_source_image_url = False
+        self.paragraph_style_errors: list[str] = []
+        self.paragraph_span_errors: list[str] = []
+        self.span_style_errors: list[str] = []
+        self.container_style_errors: list[str] = []
+        self._paragraph_span_counts: list[int] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = dict(attrs)
+        if tag in {"style", "figure"}:
+            self.forbidden_tags.append(tag)
+        if "class" in values:
+            self.class_tag_count += 1
+        if tag in {"body", "main"} and "style" in values:
+            self.container_style_errors.append(f"{tag} 标签不允许使用 style 属性")
+        if tag == "p":
+            if values.get("style") != "text-align:center;":
+                self.paragraph_style_errors.append("p 标签只能使用 text-align:center; 样式")
+            self._paragraph_span_counts.append(0)
+        if tag == "span":
+            if not self._paragraph_span_counts:
+                self.span_style_errors.append("span 必须位于 p 标签内")
+            else:
+                self._paragraph_span_counts[-1] += 1
+                if values.get("style") != "text-wrap-mode: wrap;":
+                    self.span_style_errors.append("span 只能使用 text-wrap-mode: wrap; 样式")
+        if tag == "link" and "stylesheet" in (values.get("rel") or "").lower().split():
+            self.external_stylesheet_count += 1
         if tag == "img" and values.get("src"):
             self.images.append(values["src"] or "")
             self.media_sequence.append("image")
-        classes = set((values.get("class") or "").split())
-        if tag == "a" and "source-image-url" in classes:
-            self.source_image_links.append(values.get("href"))
+        if tag == "p" and values.get("data-source-image-link") == "available":
             self.media_sequence.append("sourceImageLink")
-        if tag == "span" and "source-image-unavailable" in classes:
+            self.awaiting_source_image_url = True
+        if tag == "p" and values.get("data-source-image-link") == "unavailable":
             self.source_image_links.append(None)
             self.media_sequence.append("sourceImageLink")
-        if tag == "figure" and "generated-image-link" in classes:
+        if tag == "a" and self.awaiting_source_image_url:
+            self.source_image_links.append(values.get("href"))
+            self.awaiting_source_image_url = False
+        if tag == "p" and values.get("data-generated-image-link") == "true":
             self.generated_image_links += 1
             self.media_sequence.append("generatedImageLink")
         if tag == "meta" and values.get("name") == "source-url":
@@ -62,6 +92,12 @@ class ArticleParser(HTMLParser):
             self.title_depth += 1
 
     def handle_endtag(self, tag: str) -> None:
+        if tag == "p":
+            if not self._paragraph_span_counts:
+                self.paragraph_span_errors.append("p 标签层级不匹配")
+            elif self._paragraph_span_counts.pop() != 1:
+                self.paragraph_span_errors.append("每个 p 标签必须包含一个 span")
+            self.awaiting_source_image_url = False
         if tag == "title" and self.title_depth:
             self.title_depth -= 1
 
@@ -90,6 +126,17 @@ def validate(html_path: Path, expected_image_size: tuple[int, int] | None = None
 
     parser = ArticleParser()
     parser.feed(text)
+    if parser.forbidden_tags:
+        tags = "、".join(sorted(set(parser.forbidden_tags)))
+        errors.append(f"HTML 不允许使用标签：{tags}。")
+    errors.extend(parser.paragraph_style_errors)
+    errors.extend(parser.paragraph_span_errors)
+    errors.extend(parser.span_style_errors)
+    errors.extend(parser.container_style_errors)
+    if parser.class_tag_count:
+        errors.append("HTML 不允许使用 class 属性。")
+    if parser.external_stylesheet_count:
+        errors.append("HTML 不允许引用外部样式表。")
     title = "".join(parser.title_text).strip()
     if not title:
         errors.append("HTML 缺少非空 title。")

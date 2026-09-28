@@ -338,15 +338,19 @@ def split_punctuation_lines(text: str) -> list[str]:
     return lines
 
 
-def sentence_line_markup(text: str) -> str:
-    return "".join(f'<span class="sentence-line">{html.escape(line)}</span>' for line in split_punctuation_lines(text))
+TEXT_WRAP_STYLE = "text-wrap-mode: wrap;"
 
 
-def paragraph_markup(text: str, preserve_line_breaks: bool = False) -> str:
-    if preserve_line_breaks:
-        return f"<p>{sentence_line_markup(text)}</p>"
-    paragraphs = [part.strip() for part in re.split(r"\n+", text) if part.strip()]
-    return "\n".join(f"<p>{sentence_line_markup(part)}</p>" for part in paragraphs)
+def paragraph_markup(text: str) -> str:
+    """Render text lines as plain paragraphs with a minimal wrapping span."""
+    fragments: list[str] = []
+    for index, line in enumerate(split_punctuation_lines(text)):
+        if index:
+            fragments.append(f'<p style="text-align:center;"><span style="{TEXT_WRAP_STYLE}"><br/></span></p>')
+        fragments.append(
+            f'<p style="text-align:center;"><span style="{TEXT_WRAP_STYLE}">{html.escape(line)}</span></p>'
+        )
+    return "\n".join(fragments)
 
 
 def build_html(
@@ -360,22 +364,33 @@ def build_html(
     failed_image_number = 0
     summary = str(data.get("summary") or "").strip()
     if summary:
-        fragments.append(f'<p class="lead">{sentence_line_markup(summary)}</p>')
-    preserve_ori_line_breaks = data.get("articleMode", "trans") == "ori"
+        fragments.append(paragraph_markup(summary))
     for block in data["blocks"]:
         block_type = block["type"]
         if block_type == "text":
-            fragments.append(paragraph_markup(block["text"], preserve_ori_line_breaks))
+            fragments.append(paragraph_markup(block["text"]))
         elif block_type == "heading":
             level = int(block.get("level", 2))
-            fragments.append(f"<h{level}>{html.escape(block['text'].strip())}</h{level}>")
+            heading_style = (
+                "margin:56px 0 20px;font-size:clamp(24px,4vw,27px);line-height:1.45;"
+                "text-align:center;"
+                if level == 2
+                else "margin:40px 0 16px;font-size:clamp(21px,3.5vw,22px);line-height:1.5;text-align:center;"
+            )
+            fragments.append(
+                f'<h{level} style="{heading_style}">{html.escape(block["text"].strip())}</h{level}>'
+            )
         elif block_type == "quote":
-            fragments.append(f"<blockquote>{sentence_line_markup(block['text'].strip())}</blockquote>")
+            fragments.append(paragraph_markup(block["text"].strip()))
         elif block_type == "image":
             image_number += 1
             alt = html.escape(str(block.get("alt") or f"文章配图 {image_number}"), quote=True)
             src = f"{asset_dir_name}/image-{image_number:03d}.png"
-            fragments.append(f'<figure><img src="{src}" alt="{alt}" loading="lazy"></figure>')
+            fragments.append(
+                f'<img src="{src}" alt="{alt}" loading="lazy" '
+                'style="display:block;width:100%;height:auto;margin:38px auto 42px;border-radius:18px;'
+                'box-shadow:0 14px 36px rgba(55,42,28,.14);">'
+            )
         elif block_type == "sourceImageLink":
             failed_image_number += 1
             raw_url = block.get("url")
@@ -383,20 +398,23 @@ def build_html(
                 escaped_url = html.escape(raw_url, quote=True)
                 content = (
                     '原始图片链接：'
-                    f'<a class="source-image-url" href="{escaped_url}" target="_blank" rel="noreferrer">'
+                    f'<a href="{escaped_url}" target="_blank" rel="noreferrer">'
                     f'{html.escape(raw_url)}</a>'
                 )
             else:
-                content = '原始图片链接：<span class="source-image-unavailable">不可用</span>'
+                content = "原始图片链接：不可用"
             source_index = html.escape(str(block.get("sourceIndex")), quote=True)
             fragments.append(
-                f'<figure class="source-image-link" data-source-index="{source_index}"><p>{content}</p></figure>'
+                f'<p style="text-align:center;" data-source-image-link="{"available" if isinstance(raw_url, str) else "unavailable"}" '
+                f'data-source-index="{source_index}" '
+                f'><span style="{TEXT_WRAP_STYLE}">{content}</span></p>'
             )
         elif block_type == "generatedImageLink":
             failed_image_number += 1
             error = html.escape(str(block.get("error") or "生成失败"))
             fragments.append(
-                f'<figure class="source-image-link generated-image-link"><p>漫画图片{failed_image_number}：{error}</p></figure>'
+                f'<p style="text-align:center;" data-generated-image-link="true"><span style="{TEXT_WRAP_STYLE}">'
+                f"漫画图片{failed_image_number}：{error}</span></p>"
             )
 
     title = html.escape(data["title"].strip())
@@ -422,32 +440,11 @@ def build_html(
   <meta name="source-url" content="{source_url}">
   <meta name="generated-at" content="{html.escape(generated_at, quote=True)}">
 {mode_meta}{comic_meta}{source_archive_meta}  <title>{title}</title>
-  <style>
-    :root {{ color-scheme: light; --ink:#26231f; --muted:#746f68; --paper:#fff; --accent:#d87754; }}
-    * {{ box-sizing:border-box; }}
-    body {{ margin:0; color:var(--ink); font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif; line-height:1.92; }}
-    main {{ width:min(100%,760px); min-height:100vh; margin:0 auto; padding:clamp(34px,7vw,72px) clamp(22px,6vw,72px) 90px; background:var(--paper); box-shadow:0 12px 60px rgba(58,48,36,.10); }}
-    header {{ margin-bottom:42px; padding-bottom:30px; border-bottom:1px solid #e9e1d6; }}
-    h1 {{ margin:0; font-size:clamp(30px,6vw,46px); line-height:1.3; letter-spacing:.02em; text-align:center; }}
-    .lead {{ margin:24px 0 0; color:var(--muted); font-size:18px; text-align:center; }}
-    h2 {{ margin:56px 0 20px; font-size:27px; line-height:1.45; text-align:center; }}
-    h3 {{ margin:40px 0 16px; font-size:22px; line-height:1.5; text-align:center; }}
-    p {{ margin:0 0 22px; font-size:18px; text-align:center; overflow-wrap:anywhere; }}
-    .sentence-line {{ display:block; text-align:center; }}
-    blockquote {{ margin:34px 0; padding:20px 24px; border-left:5px solid var(--accent); background:#f8f1e8; border-radius:0 14px 14px 0; font-size:19px; font-weight:600; text-align:center; }}
-    figure {{ margin:38px auto 42px; }}
-    img {{ display:block; width:100%; height:auto; border-radius:18px; box-shadow:0 14px 36px rgba(55,42,28,.14); }}
-    .source-image-link {{ padding:22px; border:1px dashed #d8cbbb; border-radius:14px; background:#faf7f1; overflow-wrap:anywhere; }}
-    .source-image-link p {{ margin:0; color:var(--muted); font-size:15px; }}
-    .source-image-link a {{ color:#9a553d; }}
-    @media (max-width:600px) {{ main {{ padding-left:20px; padding-right:20px; box-shadow:none; }} p {{ font-size:17px; text-align:center; }} figure {{ margin-left:-4px; margin-right:-4px; }} }}
-    @media print {{ main {{ width:100%; box-shadow:none; }} }}
-  </style>
 </head>
 <body>
   <main>
     <article>
-      <header><h1>{title}</h1></header>
+      <header style="margin-bottom:42px;padding-bottom:30px;border-bottom:1px solid #e9e1d6;"><h1 style="margin:0;font-size:clamp(30px,6vw,46px);line-height:1.3;letter-spacing:.02em;text-align:center;">{title}</h1></header>
       {body}
     </article>
   </main>
@@ -470,7 +467,7 @@ def build_source_markdown(source_url: str, archive: dict, generated_at: str) -> 
         "",
         f"- 原文链接：<{source_url}>",
         f"- 归档时间：`{generated_at}`",
-        "- 归档范围：已清理署名、二维码、广告、推广和无关装饰后的原文正文。",
+        "- 归档范围：已清理署名、关注引导、广告、推广、联系方式和版权尾注等文本内容；普通图片默认保留，图片角落的二维码或水印仅在重制时忽略。",
         "",
         "## 原文正文",
         "",

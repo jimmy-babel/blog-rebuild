@@ -16,6 +16,45 @@ import render_article  # noqa: E402
 
 
 class RenderArticleTests(unittest.TestCase):
+    def test_build_html_uses_flat_inline_markup(self) -> None:
+        data = {
+            "title": "测试文章",
+            "sourceUrl": "https://mp.weixin.qq.com/s/test",
+            "articleMode": "ori",
+            "imageMode": "copy",
+            "summary": "导语，结束。",
+            "blocks": [
+                {"type": "text", "text": "甲，乙\n丙。"},
+                {"type": "quote", "text": "引用。"},
+                {"type": "image", "alt": "配图"},
+                {"type": "sourceImageLink", "sourceIndex": 1},
+                {"type": "generatedImageLink", "error": "失败"},
+            ],
+        }
+
+        document, image_count, failed_count = render_article.build_html(
+            data, "images", "2026-09-24T12:00:00+08:00"
+        )
+
+        self.assertEqual((image_count, failed_count), (1, 2))
+        for forbidden in ("<style", "class=", "<figure"):
+            self.assertNotIn(forbidden, document)
+        for line in ("导语，", "结束。", "甲，", "乙", "丙。", "引用。"):
+            self.assertIn(
+                f'<p style="text-align:center;"><span style="text-wrap-mode: wrap;">{line}</span></p>',
+                document,
+            )
+        self.assertIn('<p style="text-align:center;"><span style="text-wrap-mode: wrap;"><br/></span></p>', document)
+        self.assertIn('style="text-align:center;"', document)
+        self.assertNotIn('<p style="margin:', document)
+        self.assertIn("<body>", document)
+        self.assertIn("<main>", document)
+        self.assertNotIn("<body style=", document)
+        self.assertNotIn("<main style=", document)
+        self.assertIn('<img src="images/image-001.png"', document)
+        self.assertIn('data-source-image-link="unavailable"', document)
+        self.assertIn('data-generated-image-link="true"', document)
+
     def make_manifest(
         self, directory: Path, title: str = "测试文章", with_image: bool = False
     ) -> Path:

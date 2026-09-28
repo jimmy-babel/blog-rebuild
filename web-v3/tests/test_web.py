@@ -755,6 +755,34 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("画面只安排 1 个主要人物", prompt)
         self.assertIn("不要额外添加第二个人物", prompt)
 
+    def test_copy_prompt_ignores_corner_watermarks_without_dropping_image(self) -> None:
+        prompt = pipeline._build_image_prompt(
+            {
+                "sceneCharacterCount": 1,
+                "imagePrompt": "一张普通的节日装饰插画，角落带二维码水印",
+                "caption": "保留画面的温度",
+            },
+            "copy",
+            "on",
+            "ai",
+        )
+        self.assertIn("忽略并移除来源图角落的二维码、水印、署名和广告角标", prompt)
+        self.assertIn("不复制这些元素", prompt)
+
+    def test_image_prompt_does_not_treat_unrelated_art_as_removal_reason(self) -> None:
+        prompt = pipeline._build_image_prompt(
+            {
+                "sceneCharacterCount": 1,
+                "imagePrompt": "与正文主题关系不明确的装饰图，但需要保留其构图功能",
+                "caption": "一张新的叙事卡片",
+            },
+            "copy",
+            "on",
+            "ai",
+        )
+        self.assertIn("来源图片负责信息结构", prompt)
+        self.assertNotIn("删除该图片", prompt)
+
     def test_intentional_duplicate_instruction_is_limited_to_explicit_exception(self) -> None:
         prompt = pipeline._build_image_prompt(
             {"sceneCharacterCount": 2, "allowIntentionalDuplicate": True, "imagePrompt": "双胞胎并肩站立"},
