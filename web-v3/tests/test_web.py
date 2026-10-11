@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import importlib.util
 import json
 import os
@@ -7,17 +8,20 @@ import sqlite3
 import sys
 import tempfile
 import unittest
+from io import BytesIO
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 import app as app_module  # noqa: E402
 import build_manifest  # noqa: E402
+import compose_card  # noqa: E402
 import normalize_ai_card  # noqa: E402
 import website_pipeline as pipeline  # noqa: E402
 
@@ -31,6 +35,12 @@ def load_fetch_module():
 
 
 fetch_article = load_fetch_module()
+
+
+def png_bytes(size: tuple[int, int] = (8, 8)) -> bytes:
+    output = BytesIO()
+    Image.new("RGB", size, (247, 246, 246)).save(output, format="PNG")
+    return output.getvalue()
 
 
 class WebApiTests(unittest.TestCase):
@@ -197,7 +207,7 @@ class PipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             source_path, article_path = self._write_manifest_inputs(root, {
-                "title": "测试",
+                "title": "改写标题",
                 "articleMode": "ori",
                 "imageMode": "copy",
                 "blocks": [
@@ -210,6 +220,7 @@ class PipelineTests(unittest.TestCase):
 
             self.assertEqual(manifest["blocks"][-1]["type"], "sourceImageLink")
             self.assertEqual(manifest["blocks"][-1]["url"], "https://img.example/1.jpg")
+            self.assertEqual(manifest["title"], "来源标题")
             self.assertTrue(any("降级为原图链接" in warning for warning in warnings))
 
     def test_pipeline_plan_normalization_falls_back_to_source_title(self) -> None:
@@ -223,7 +234,7 @@ class PipelineTests(unittest.TestCase):
         messages: list[str] = []
         normalized = pipeline._normalize_article_plan(
             source,
-            {"title": "", "summary": None, "removedSourceIndexes": None, "blocks": [
+            {"title": "改写标题", "summary": None, "removedSourceIndexes": None, "blocks": [
                 {"type": "text", "text": ""},
                 {"type": "sourceImageLink", "sourceIndex": 1},
             ]},
@@ -250,6 +261,19 @@ class PipelineTests(unittest.TestCase):
                 with normalize_ai_card.Image.open(output) as checked:
                     self.assertEqual(checked.size, normalize_ai_card.TARGET_SIZE)
                     self.assertEqual(checked.format, "PNG")
+
+    def test_local_compose_outputs_final_target_size(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            illustration = root / "illustration.png"
+            output = root / "card.png"
+            compose_card.Image.new("RGB", (1024, 1280), (247, 246, 246)).save(illustration, format="PNG")
+
+            compose_card.compose(illustration, None, "把账说清楚", "通用", output)
+
+            with compose_card.Image.open(output) as checked:
+                self.assertEqual(checked.size, compose_card.TARGET_SIZE)
+                self.assertEqual(checked.format, "PNG")
 
     def test_soft_rewrite_limit_is_a_warning(self) -> None:
         with tempfile.TemporaryDirectory() as raw:
@@ -421,7 +445,7 @@ class PipelineTests(unittest.TestCase):
                     )
                 return pipeline.httpx.Response(
                     200,
-                    json={"data": [{"b64_json": "aW1hZ2U="}]},
+                    json={"data": [{"b64_json": base64.b64encode(png_bytes()).decode("ascii")}]},
                     request=pipeline.httpx.Request("POST", args[0]),
                 )
 
@@ -531,6 +555,7 @@ class PipelineTests(unittest.TestCase):
         block = pipeline._normalize_scene_metadata(
             {
                 "sceneCharacterCount": "invalid",
+                "containsHuman": False,
                 "secondaryCharacterNotes": None,
                 "allowIntentionalDuplicate": "yes",
             },
@@ -545,6 +570,7 @@ class PipelineTests(unittest.TestCase):
         valid = pipeline._normalize_scene_metadata(
             {
                 "sceneCharacterCount": 2,
+                "containsHuman": False,
                 "secondaryCharacterNotes": "不同发型和夹克",
                 "allowIntentionalDuplicate": True,
             },
@@ -819,6 +845,100 @@ class PipelineTests(unittest.TestCase):
                     [(photos / "girl-baby.png").resolve()],
                 )
 
+    def test_human_scene_forces_girl_brand_anchor_without_breaking_brand_off(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            photos = root / "photos"
+            photos.mkdir()
+            for filename in pipeline.CHARACTER_REFERENCES.values():
+                (photos / filename).write_bytes(filename.encode())
+            source_image = root / "source.jpg"
+            source_image.write_bytes(b"source")
+            source_block = {"localPath": "source.jpg"}
+            roles = [{"role": "boy", "purpose": "main", "ageGroup": "adult"}]
+            with patch.object(pipeline, "PHOTOS", photos):
+                refs = pipeline._reference_paths("copy", "on", source_block, roles, root, True)
+                self.assertEqual(
+                    refs,
+                    [
+                        source_image.resolve(),
+                        (photos / "boy.png").resolve(),
+                        (photos / "girl.png").resolve(),
+                    ],
+                )
+                self.assertEqual(
+                    pipeline._reference_paths("copy", "on", source_block, roles, root, False),
+                    [source_image.resolve(), (photos / "boy.png").resolve()],
+                )
+                self.assertEqual(
+                    pipeline._reference_paths(
+                        "copy",
+                        "on",
+                        source_block,
+                        [{"role": "girl", "purpose": "main"}],
+                        root,
+                        True,
+                    ),
+                    [source_image.resolve(), (photos / "girl.png").resolve()],
+                )
+                self.assertEqual(
+                    pipeline._reference_paths("copy", "off", source_block, roles, root, True),
+                    [source_image.resolve()],
+                )
+
+    def test_human_prompt_requires_visible_girl_brand_anchor(self) -> None:
+        prompt = pipeline._build_image_prompt(
+            {
+                "containsHuman": True,
+                "character": "boy",
+                "sceneType": "mixed_pair",
+                "characters": [{"role": "boy", "purpose": "main", "ageGroup": "adult"}],
+                "sceneCharacterCount": 2,
+                "imagePrompt": "一个人在办公室谈判",
+                "caption": "把账说清楚",
+            },
+            "rebuild",
+            "on",
+            "ai",
+        )
+        self.assertIn("girl.png", prompt)
+        self.assertIn("实际出现在画面中", prompt)
+        self.assertIn("参考图 2 = girl", prompt)
+
+    def test_non_human_prompt_does_not_force_people(self) -> None:
+        prompt = pipeline._build_image_prompt(
+            {
+                "containsHuman": False,
+                "sceneCharacterCount": 1,
+                "imagePrompt": "一盏桌灯和一本打开的书",
+                "caption": "留一盏灯",
+            },
+            "rebuild",
+            "on",
+            "ai",
+        )
+        self.assertIn("不得添加任何人类角色", prompt)
+        self.assertNotIn("实际出现在画面中", prompt)
+
+    def test_missing_contains_human_fails_safe(self) -> None:
+        source = {
+            "title": "原文标题",
+            "blocks": [{"type": "image", "sourceIndex": 1, "url": "https://img.example/1.jpg"}],
+        }
+        messages: list[str] = []
+        normalized = pipeline._normalize_article_plan(
+            source,
+            {
+                "title": "标题",
+                "blocks": [{"type": "image", "sourceIndex": 1, "character": "boy"}],
+            },
+            "trans",
+            "copy",
+            messages.append,
+        )
+        self.assertTrue(normalized["blocks"][0]["containsHuman"])
+        self.assertTrue(any("containsHuman" in message for message in messages))
+
     def test_comic_planner_includes_role_references_when_brand_is_on(self) -> None:
         class FakeResponse:
             def raise_for_status(self):
@@ -895,7 +1015,7 @@ class PipelineTests(unittest.TestCase):
             output = raw_dir / "image-001.png"
             response = pipeline.httpx.Response(
                 200,
-                json={"data": [{"b64_json": "aW1hZ2U="}]},
+                json={"data": [{"b64_json": base64.b64encode(png_bytes()).decode("ascii")}]},
                 headers={"x-request-id": "req-test"},
                 request=pipeline.httpx.Request("POST", "http://127.0.0.1:8317/v1/images/edits"),
             )
@@ -921,6 +1041,7 @@ class PipelineTests(unittest.TestCase):
             sent = fake.calls[0][1]
 
             self.assertEqual(sent["data"]["model"], "gpt-image-2")
+            self.assertEqual(sent["data"]["size"], pipeline.IMAGE_API_SIZE)
             self.assertEqual(sent["data"]["prompt"], "画面提示\n包含中文文案：彼此麻烦。")
             self.assertEqual([item[0] for item in sent["files"]], ["image[]", "image[]"])
             self.assertEqual(request["response_status"], 200)
@@ -934,6 +1055,39 @@ class PipelineTests(unittest.TestCase):
                 ["model", "prompt", "size", "quality", "image[]", "image[]"],
             )
             self.assertNotIn("secret-key-that-must-not-be-saved", request_path.read_text(encoding="utf-8"))
+
+    def test_image_url_response_is_downloaded_and_validated(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output = Path(temp_dir) / "raw-cards" / "image-001.png"
+            output.parent.mkdir()
+            response = pipeline.httpx.Response(
+                200,
+                json={"data": [{"url": "https://img.example/generated.png"}]},
+                request=pipeline.httpx.Request("POST", "http://127.0.0.1:8317/v1/images/generations"),
+            )
+
+            class FakeClient:
+                def get(self, url):
+                    self.url = url
+                    return pipeline.httpx.Response(
+                        200,
+                        content=png_bytes(),
+                        request=pipeline.httpx.Request("GET", url),
+                    )
+
+            pipeline._save_image_response({"data": [{"url": "https://img.example/generated.png"}]}, output, FakeClient())
+            self.assertEqual(output.read_bytes(), png_bytes())
+
+    def test_successful_api_response_with_invalid_file_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output = Path(temp_dir) / "raw-cards" / "image-001.png"
+            output.parent.mkdir()
+            with self.assertRaisesRegex(pipeline.PipelineError, "不是可读图片"):
+                pipeline._save_image_response(
+                    {"data": [{"b64_json": base64.b64encode(b"not-an-image").decode("ascii")}]},
+                    output,
+                    object(),
+                )
 
     def test_image_api_error_saves_response_body_and_reports_paths(self) -> None:
         class FakeClient:

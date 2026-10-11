@@ -16,6 +16,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 WIDTH = 1080
 HEIGHT = 1350
+TARGET_SIZE = (864, 1080)
 SCENE_HEIGHT = 900
 DIVIDER_HEIGHT = 10
 MAX_CAPTION_CHARACTERS = 20
@@ -221,7 +222,7 @@ def compose(illustration: Path | None, reference: Path | None, caption: str, emo
         y += layer.height + line_gap
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    card.save(output, "PNG", optimize=True)
+    card.resize(TARGET_SIZE, Image.Resampling.LANCZOS).save(output, "PNG", optimize=True)
     return used_fallback
 
 

@@ -179,10 +179,13 @@ def build(source_path: Path, article_path: Path) -> tuple[dict, list[str]]:
     # Image-only articles are valid: the model can inspect the archived images
     # directly when rewriting, so the textual source count is intentionally 0.
 
-    title = article.get("title")
-    if not isinstance(title, str) or not title.strip():
+    if article_mode == "ori":
         title = source_title
-        warnings.append("文章标题缺失，已回退使用原文标题。")
+    else:
+        title = article.get("title")
+        if not isinstance(title, str) or not title.strip():
+            title = source_title
+            warnings.append("文章标题缺失，已回退使用原文标题。")
     summary = article.get("summary")
     if summary is not None and not isinstance(summary, str):
         warnings.append("summary 不是字符串，已忽略。")

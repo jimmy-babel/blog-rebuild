@@ -151,9 +151,12 @@ def build(source_path: Path, article_path: Path) -> tuple[dict, list[str]]:
     # Image-only articles are valid: the model can inspect the archived images
     # directly when rewriting, so the textual source count is intentionally 0.
 
-    title = article.get("title")
-    if not isinstance(title, str) or not title.strip():
-        raise BuildError("article-plan.json.title 不能为空。")
+    if article_mode == "ori":
+        title = source_title
+    else:
+        title = article.get("title")
+        if not isinstance(title, str) or not title.strip():
+            raise BuildError("article-plan.json.title 不能为空。")
     summary = article.get("summary")
     if summary is not None and (not isinstance(summary, str) or not summary.strip()):
         raise BuildError("article-plan.json.summary 必须是非空字符串或省略。")

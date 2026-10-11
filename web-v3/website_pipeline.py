@@ -13,12 +13,16 @@ from pathlib import Path
 from typing import Callable
 
 import httpx
+from PIL import Image
 
 Progress = Callable[[str], None]
 
 IMAGE_START_INTERVAL_SECONDS = 30.0
 IMAGE_EOF_RETRY_COUNT = 1
 IMAGE_EOF_RETRY_DELAY_SECONDS = 10.0
+IMAGE_API_SIZE = "1024x1536"
+FINAL_IMAGE_SIZE = (864, 1080)
+FINAL_IMAGE_SIZE_LABEL = f"{FINAL_IMAGE_SIZE[0]}x{FINAL_IMAGE_SIZE[1]}"
 
 
 class PipelineError(RuntimeError):
@@ -381,10 +385,16 @@ def _normalize_article_plan(
         if item.get("type") == "image" and isinstance(item.get("sourceIndex"), int)
     }
 
-    title = plan.get("title")
-    if not isinstance(title, str) or not title.strip():
-        title = source.get("title")
-        warnings.append("文章标题缺失，已回退使用原文标题。")
+    source_title = source.get("title")
+    if article_mode == "ori":
+        if not isinstance(source_title, str) or not source_title.strip():
+            raise PipelineError("ori 模式的来源标题不能为空。")
+        title = source_title
+    else:
+        title = plan.get("title")
+        if not isinstance(title, str) or not title.strip():
+            title = source_title
+            warnings.append("文章标题缺失，已回退使用原文标题。")
 
     summary = plan.get("summary")
     if summary is None:
@@ -519,27 +529,33 @@ class OpenAICompatible:
         source_count = sum(_non_whitespace_count(str(block.get("text", ""))) for block in blocks if block.get("type") == "text")
         mode_instruction = {
             "trans": "深度原创重构标题、结构、论证顺序和表达；正文不设置字符数硬上限，不要因长度截断必要内容。",
-            "ori": "只做二次语义清洗，正文按清洗后的原文顺序输出，不压缩、不改写、不执行原创字符数限制；必须保留来源正文中的显式换行，原文连续行要在 text 中使用 \\n 表示，不得合并成一段。",
+            "ori": "只做二次语义清洗，正文按清洗后的原文顺序输出，不压缩、不改写、不执行原创字符数限制；标题必须原样使用来源标题，不得改写；必须保留来源正文中的显式换行，原文连续行要在 text 中使用 \\n 表示，不得合并成一段。",
         }[article_mode]
         if image_mode == "comic":
             image_instruction = f"只根据清洗后的文字拆分为恰好 {comic_count} 个连续叙事节点；不要读取、引用或输出任何来源图片 sourceIndex。"
-            image_schema = '{"type":"image","sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"imagePrompt":"连续叙事画面提示词","alt":"第几幕"}'
+            image_schema = '{"type":"image","sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"containsHuman":true,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"imagePrompt":"连续叙事画面提示词","alt":"第几幕"}'
         else:
             image_instruction = "每张未被 removedSourceIndexes 删除的来源图片都必须恰好返回一个 type=image 的生图计划，并按 sourceIndex 递增。普通图片（包括与正文主题关系不明确或看起来像装饰图的图片）默认保留，不得仅凭无关性删除。只有整张图片主要用于二维码、广告、关注引导、联系方式或推广时才可加入 removedSourceIndexes；图片角落的二维码、署名或水印视为来源水印，保留图片并在 imagePrompt 中要求生图忽略。sourceImageLink 只由程序在真实生图或合成失败后自动写入，规划阶段不要返回 sourceImageLink。"
-            image_schema = '{"type":"image","sourceIndex":1,"sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"emotion":"通用","caption":"图片文案","imagePrompt":"详细生图提示词","alt":"图片说明"}'
+            image_schema = '{"type":"image","sourceIndex":1,"sceneType":"single","character":"girl","characters":[{"role":"girl","purpose":"main","ageGroup":"unknown","ageEvidence":"年龄不明"}],"sceneCharacterCount":1,"containsHuman":true,"secondaryCharacterNotes":"次要人物的差异化描述；单人物时为空","allowIntentionalDuplicate":false,"emotion":"通用","caption":"图片文案","imagePrompt":"详细生图提示词","alt":"图片说明"}'
         brand_instruction = (
             "使用项目角色参考图判断并返回 character、characters、ageGroup 和 ageEvidence；character/characters[].role 只能是 girl、girl-baby、girl-old、boy、boy-baby、boy-old，"
             "角色参考图输入顺序为 girl、girl-baby、girl-old、boy、boy-baby、boy-old；角色参考图只用于识别角色，不是最终图片的统一人物模板；"
             "ageGroup 只能是 child、adult、elder、unknown；无法判断主角年龄时使用 role=girl、ageGroup=unknown。emotion 只用于 local 模式配色。"
             if brand == "on" else "不使用任何品牌人物参考图；仍须根据画面语义判断并返回 sceneType、character、characters、ageGroup 和 ageEvidence，供生图 prompt 约束。"
         )
+        human_instruction = (
+            "每个图片计划必须返回 containsHuman 布尔值；只要最终画面包含主体、配角、背景人物、局部人体、剪影或人形角色，就必须为 true。"
+            "brand on 且 containsHuman=true 时，最终生图必须实际出现 girl.png 对应的品牌女孩；containsHuman 缺失或非法时由程序按 true 处理。"
+            if brand == "on" else
+            "每个图片计划必须返回 containsHuman 布尔值；只要最终画面包含主体、配角、背景人物、局部人体、剪影或人形角色，就必须为 true。brand off 时不使用任何品牌人物参考图。"
+        )
         prompt = f"""
 你是 Blog Article Studio 的文章重构规划器。只返回 JSON，不要 Markdown 或解释。
 文章模式：{article_mode}。图片模式：{image_mode}。文案模式：{caption_mode}。{mode_instruction}
-{image_instruction}{brand_instruction}
+{image_instruction}{brand_instruction}{human_instruction}
 JSON 结构：
 {{
-  "title": "标题",
+  "title": "标题（ori 模式必须原样填写来源标题）",
   "summary": "可选导语（没有导语时省略，不要返回空字符串）",
   "removedSourceIndexes": [],
   "blocks": [
@@ -601,7 +617,7 @@ JSON 结构：
                     fields = {
                         "model": self.image_model,
                         "prompt": prompt,
-                        "size": "1024x1536",
+                        "size": IMAGE_API_SIZE,
                         "quality": "medium",
                     }
                     file_specs = [
@@ -624,7 +640,7 @@ JSON 结构：
                     ]
                     response = client.post(endpoint, headers=_headers(), data=fields, files=files)
                 else:
-                    payload = {"model": self.image_model, "prompt": prompt, "size": "1024x1536", "quality": "medium"}
+                    payload = {"model": self.image_model, "prompt": prompt, "size": IMAGE_API_SIZE, "quality": "medium"}
                     artifacts = _save_image_api_request(
                         output, endpoint, self.image_model, prompt, {}, [],
                         request_dir=debug_dir, json_body=payload, attempt=attempt,
@@ -655,13 +671,39 @@ def _save_image_response(payload: dict, output: Path, client: httpx.Client) -> N
         raise PipelineError("图片 API 没有返回图片数据。")
     item = data[0]
     if item.get("b64_json"):
-        output.write_bytes(base64.b64decode(item["b64_json"]))
+        try:
+            encoded = re.sub(r"\s+", "", str(item["b64_json"]))
+            output.write_bytes(base64.b64decode(encoded, validate=True))
+        except (ValueError, TypeError) as exc:
+            raise PipelineError(f"图片 API 返回的 base64 图片无效：{exc}") from exc
     elif item.get("url"):
         downloaded = client.get(item["url"])
         downloaded.raise_for_status()
         output.write_bytes(downloaded.content)
     else:
         raise PipelineError("图片 API 返回中缺少 b64_json 或 url。")
+    _validate_image_file(output, "图片 API 输出")
+
+
+def _validate_image_file(path: Path, label: str, *, expected_size: tuple[int, int] | None = None) -> None:
+    if not path.is_file():
+        raise PipelineError(f"{label}未生成本地文件：{path}")
+    if path.stat().st_size <= 0:
+        raise PipelineError(f"{label}生成了空文件：{path}")
+    try:
+        with Image.open(path) as image:
+            image.verify()
+            actual_size = image.size
+            actual_format = image.format
+    except Exception as exc:
+        raise PipelineError(f"{label}不是可读图片：{path}；{exc}") from exc
+    if expected_size is not None and actual_size != expected_size:
+        raise PipelineError(
+            f"{label}尺寸不符合要求：实际 {actual_size[0]}x{actual_size[1]}，"
+            f"期望 {expected_size[0]}x{expected_size[1]}：{path}"
+        )
+    if expected_size is not None and actual_format != "PNG":
+        raise PipelineError(f"{label}格式不符合要求：实际 {actual_format}，期望 PNG：{path}")
 
 
 def _run_command(args: list[str], cwd: Path) -> dict | None:
@@ -702,6 +744,15 @@ def _normalize_scene_character_count(value: object) -> int:
     except (TypeError, ValueError):
         return DEFAULT_SCENE_CHARACTER_COUNT
     return count if count > 0 else DEFAULT_SCENE_CHARACTER_COUNT
+
+
+def _normalize_contains_human(value: object, position: int, warnings: list[str]) -> bool:
+    if isinstance(value, bool):
+        return value
+    warnings.append(
+        f"article-plan.json.blocks[{position}].containsHuman 缺失或无效，已按 true 处理并启用 girl.png 安全策略。"
+    )
+    return True
 
 
 def _normalize_scene_type(value: object) -> str:
@@ -956,9 +1007,11 @@ def _normalize_scene_metadata(block: dict, position: int, warnings: list[str]) -
         )
         allow_duplicate = False
     roles = _normalize_character_roles(block, scene_type)
+    contains_human = _normalize_contains_human(block.get("containsHuman"), position, warnings)
     block["sceneCharacterCount"] = count
     block["secondaryCharacterNotes"] = notes.strip()
     block["allowIntentionalDuplicate"] = allow_duplicate
+    block["containsHuman"] = contains_human
     block["sceneType"] = scene_type
     block["characters"] = roles
     block["character"] = roles[0]["role"]
@@ -969,15 +1022,37 @@ def _character_reference(character: object) -> Path:
     return PHOTOS / CHARACTER_REFERENCES[_normalize_character(character)]
 
 
-def _reference_paths(image_mode: str, brand: str, source_block: dict, characters: object, work_dir: Path) -> list[Path]:
+def _effective_reference_roles(
+    characters: object,
+    contains_human: object = False,
+) -> list[dict]:
+    if isinstance(characters, list):
+        roles = _dedupe_roles([item if isinstance(item, dict) else {"role": item} for item in characters])
+    else:
+        roles = [{"role": _normalize_character(characters), "purpose": "main"}]
+    if contains_human is True and not any(item["role"] == DEFAULT_CHARACTER for item in roles):
+        roles.append({
+            "role": DEFAULT_CHARACTER,
+            "purpose": "brand-anchor",
+            "ageGroup": "adult",
+            "ageEvidence": "人类画面的强制品牌人物",
+        })
+    return _dedupe_roles(roles)
+
+
+def _reference_paths(
+    image_mode: str,
+    brand: str,
+    source_block: dict,
+    characters: object,
+    work_dir: Path,
+    contains_human: object = False,
+) -> list[Path]:
     references: list[Path] = []
     if image_mode == "copy" and source_block.get("localPath"):
         references.append((work_dir / source_block["localPath"]).resolve())
     if brand == "on":
-        if isinstance(characters, list):
-            roles = _dedupe_roles([item if isinstance(item, dict) else {"role": item} for item in characters])
-        else:
-            roles = [{"role": _normalize_character(characters), "purpose": "main"}]
+        roles = _effective_reference_roles(characters, contains_human)
         for role in _reference_role_order(roles):
             references.append(_character_reference(role))
     return [reference for reference in references if reference.is_file()]
@@ -991,6 +1066,11 @@ def _reference_instruction(image_mode: str, brand: str, comic: bool = False) -> 
     if image_mode == "copy":
         return "来源图片负责信息结构、动作、道具、人物数量、空间关系和排版气质；普通单主角时角色参考图只用于主角，组合场景按 prompt 中的角色映射分别使用。忽略并移除来源图角落的二维码、水印、署名和广告角标，不复制这些元素，也不复制像素级布局。"
     return "角色参考图按 prompt 中的角色映射分别使用；根据语义自由重构场景，不复刻来源构图。"
+
+
+def _contains_human(block: dict) -> bool:
+    value = block.get("containsHuman")
+    return value if isinstance(value, bool) else True
 
 
 def _scene_character_instruction(block: dict) -> str:
@@ -1020,12 +1100,16 @@ def _scene_character_instruction(block: dict) -> str:
 
 
 def _character_reference_instruction(block: dict) -> str:
-    roles = _reference_role_order(_normalize_character_roles(block, _normalize_scene_type(block.get("sceneType"))))
+    role_entries = _effective_reference_roles(
+        _normalize_character_roles(block, _normalize_scene_type(block.get("sceneType"))),
+        _contains_human(block),
+    )
+    roles = _reference_role_order(role_entries)
     if not roles:
         return "角色参考图映射：参考图 1 = girl。"
     role_lookup = {
         item["role"]: item
-        for item in _normalize_character_roles(block, _normalize_scene_type(block.get("sceneType")))
+        for item in role_entries
     }
     mapping = "；".join(
         f"参考图 {index} = {role} / {role_lookup.get(role, {}).get('ageGroup', 'unknown')} / {role_lookup.get(role, {}).get('purpose', 'support')}"
@@ -1039,16 +1123,23 @@ def _build_image_prompt(block: dict, image_mode: str, brand: str, caption_mode: 
     prompt += "\n" + _reference_instruction(image_mode, brand, image_mode == "comic")
     if brand == "on":
         prompt += "\n" + _character_reference_instruction(block)
+        if _contains_human(block):
+            prompt += (
+                "\n最终画面包含人类角色：必须让 girl.png 对应的品牌女孩实际出现在画面中并承担可见的叙事作用；"
+                "girl.png 不能只作为风格参考、隐藏在背景或被其他人物替代。"
+            )
+        else:
+            prompt += "\n最终画面不得添加任何人类角色。"
     prompt += "\n" + _scene_character_instruction(block)
     if brand == "on":
         main_role = _normalize_character_roles(block, _normalize_scene_type(block.get("sceneType")))[0]["role"]
         prompt += f"\n当前主角角色参考：{main_role}；普通非男女组合使用女性年龄角色，男女组合按角色映射分别使用。"
     if image_mode == "comic":
-        prompt += "\n生成完整 1122×1402 竖向叙事卡片，包含少量中文标题、旁白或对白；只生成当前连续叙事节点。"
+        prompt += "\n生成完整 4:5 竖向叙事卡片；主体、人物和文字必须处于安全区域，包含少量中文标题、旁白或对白；只生成当前连续叙事节点。原始 API 尺寸由程序请求，最终会归一化为 864×1080。"
     elif caption_mode == "ai":
-        prompt += f"\n生成完整纵向卡片，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：{block.get('caption', '')}。"
+        prompt += f"\n生成完整 4:5 纵向卡片，主体和文案位于安全区域，使用 #F7F6F6 淡灰白背景，并准确包含中文文案：{block.get('caption', '')}。原始 API 尺寸由程序请求，最终会归一化为 864×1080。"
     else:
-        prompt += "\n只生成无文字的上半部分插画，不要生成汉字、字母、水印或 Logo。"
+        prompt += "\n只生成无文字的上半部分插画，按 4:5 竖向卡片安全区域构图，不要生成汉字、字母、水印或 Logo；最终会由本地合成器输出 864×1080。"
     return prompt
 
 
@@ -1243,19 +1334,30 @@ def run_pipeline(task_id: str, url: str, article_mode: str, image_mode: str, com
                 f"期望为 {len(expected)} 张来源图片创建生图任务，但实际没有可执行的图片任务。"
             )
         jobs = [(block, source_images[block["sourceIndex"]], raw_dir / f"image-{n:03d}.png", cards_dir / f"image-{n:03d}.png") for n, block in enumerate(requested, 1)]
-    progress(f"正在生成 {len(jobs)} 张配图")
+    progress(
+        f"正在生成 {len(jobs)} 张配图（请求尺寸 {IMAGE_API_SIZE}，"
+        f"最终归一化尺寸 {FINAL_IMAGE_SIZE_LABEL}）"
+    )
     ai = OpenAICompatible()
 
     def generate_one(job_index: int, job, schedule_anchor: float):
         block, source_block, raw, final = job
         character = _normalize_character(block.get("character"))
         characters = block.get("characters") or [{"role": character, "purpose": "main"}]
-        refs = _reference_paths(image_mode, brand, source_block or {}, characters, work_dir)
+        refs = _reference_paths(
+            image_mode,
+            brand,
+            source_block or {},
+            characters,
+            work_dir,
+            block.get("containsHuman"),
+        )
         prompt = _build_image_prompt(block, image_mode, brand, caption_mode)
         try:
             _generate_image_with_retry(
                 ai, prompt, refs, raw, work_dir / "api-debug", job_index + 1, schedule_anchor, progress
             )
+            _validate_image_file(raw, f"第 {job_index + 1} 张原始图片")
             return block, raw, final, None
         except Exception as exc:
             return block, raw, final, exc
@@ -1278,14 +1380,21 @@ def run_pipeline(task_id: str, url: str, article_mode: str, image_mode: str, com
             return block, error
         try:
             if image_mode == "comic" or caption_mode == "ai":
-                _run_command([sys.executable, str(SCRIPTS / "normalize_ai_card.py"), "--input", str(raw), "--output", str(final)], BLOG_ROOT)
+                try:
+                    _run_command([sys.executable, str(SCRIPTS / "normalize_ai_card.py"), "--input", str(raw), "--output", str(final)], BLOG_ROOT)
+                except Exception as exc:
+                    raise PipelineError(f"本地归一化失败：{exc}") from exc
             else:
                 args = [sys.executable, str(SCRIPTS / "compose_card.py"), "--illustration", str(raw), "--caption", str(block.get("caption") or ""), "--emotion", str(block.get("emotion") or "通用"), "--output", str(final)]
                 if brand == "on":
                     pos = args.index("--caption")
                     main_role = _raw_character_roles(block)[0]["role"]
                     args[pos:pos] = ["--reference", str(_character_reference(main_role))]
-                _run_command(args, BLOG_ROOT)
+                try:
+                    _run_command(args, BLOG_ROOT)
+                except Exception as exc:
+                    raise PipelineError(f"本地卡片合成失败：{exc}") from exc
+            _validate_image_file(final, f"第 {block.get('sourceIndex', job_index + 1)} 张成品图片", expected_size=FINAL_IMAGE_SIZE)
             block["path"] = str(final)
             for key in ("imagePrompt", "caption", "emotion"):
                 block.pop(key, None)
@@ -1318,7 +1427,7 @@ def run_pipeline(task_id: str, url: str, article_mode: str, image_mode: str, com
     if not rendered or not rendered.get("packageDir") or not rendered.get("html"):
         raise PipelineError("渲染完成但没有返回 result 输出目录。")
     package, html_file = Path(rendered["packageDir"]), Path(rendered["html"])
-    expected_size = "1122x1402" if image_mode == "comic" or caption_mode == "ai" else "1080x1440"
+    expected_size = FINAL_IMAGE_SIZE_LABEL
     _run_command([sys.executable, str(SCRIPTS / "validate_output.py"), str(html_file), "--expected-image-size", expected_size], BLOG_ROOT)
     return {
         "title": plan["title"],
@@ -1326,5 +1435,7 @@ def run_pipeline(task_id: str, url: str, article_mode: str, image_mode: str, com
         "html_file": str(html_file.resolve()),
         "image_failures": len(errors),
         "image_failure_log": str(image_failure_log.resolve()) if image_failure_log else None,
+        "requestedGenerationSize": IMAGE_API_SIZE,
+        "finalImageSize": FINAL_IMAGE_SIZE_LABEL,
         "fetch_summary": fetch,
     }

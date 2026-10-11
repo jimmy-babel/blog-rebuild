@@ -1453,6 +1453,502 @@
         "normalized_sha256": "a0afc49dc65090573bef7a741da7ede93927498e088819397ac292acf12afd6c",
         "semantic_key": "teacher-student|math-class|decimal-point-question|lunch-not-number-result"
       }
+    },
+    {
+      "id": "zol-29-20261010",
+      "text": "一对夫妇坐夜车到外地访友。先生打算坐普通车，随便凑合度过一夜，可省下些费用。可太太却撒娇地说：“亲爱的，我希望能有一张卧铺，舒舒服服睡一夜。不然，在硬铺座我会睡不着的。”\n\n先生便应允着去买票了，但回来时却举着两张普通票，得意地对太太说：“仔细想了又想，还是普通车票便宜。”\n\n太太哭丧着脸说：“可我要失眠的呀！ ”\n\n“不要紧，我另外还买了两粒安眠药。”先生安慰她说。",
+      "source": {
+        "title": "不必担心",
+        "url": "https://xiaohua.zol.com.cn/detail1/29.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "夫妻",
+        "旅行",
+        "抠门"
+      ],
+      "twist_type": "解决方案反转",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "train",
+        "premise": "wife-wants-sleeper",
+        "punchline": "husband-buys-sleeping-pills"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 178,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "9e88230d5a10bbdcbf21df27b6c11af986dffb728304fbeddffd41d688e4dbff",
+        "semantic_key": "couple|train|wife-wants-sleeper|husband-buys-sleeping-pills"
+      }
+    },
+    {
+      "id": "zol-104-20261010",
+      "text": "百万富翁的夫人突然接到一封恐吓信，说三天之内不送5万\n美元到指定地点，将暗杀她的丈夫。\n\n夫人迅速将一个信封送到那个地方，强盗打开信一看，没有\n钱，只有一张便条：\n\n“希望你们信守诺言，我以后会给你10万美元报酬。”",
+      "source": {
+        "title": "想不到的帮凶",
+        "url": "https://xiaohua.zol.com.cn/detail1/104.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "夫妻",
+        "恐吓信",
+        "反转"
+      ],
+      "twist_type": "动机反转",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "wife-bandits",
+        "setting": "extortion",
+        "premise": "ransom-threat",
+        "punchline": "wife-offers-more-for-husband-death"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 102,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "bbe1cdf267debdf530e6835ff5679e5c4339ed5be0e4858edad2cc4d052cc47b",
+        "semantic_key": "wife-bandits|extortion|ransom-threat|wife-offers-more-for-husband-death"
+      }
+    },
+    {
+      "id": "zol-241-20261010",
+      "text": "一对年轻恋人决定结婚，当大日子接近时，两个人都有一点害怕，每一个人都有一件秘密没有告诉对方。准新郎终于决定找他父亲寻求建议。他对父亲说：“我很担心我的婚姻会有问题，会失败。”他老爸问：“怎么了，你不爱这位女孩吗？”准新郎说：“爱，非常爱，但是我的脚很臭，我怕结婚后，她会厌恶我的脚臭，连带的厌恶我。”老爸说：“这简单，你只要常常洗脚，随时都穿袜子，即使睡觉都穿袜子。”准新郎想了一想，觉得是可行的解决方案。\n\n准新娘则把问题告诉她母亲：“妈，当我每天早上醒来时，我的嘴里的气味很臭，我怕会把我老公吓跑。”母亲说：“亲爱的，这不是问题，每个人起床时都有口臭的。”女儿说：“不是，你不了解，早上起来我的口臭很严重，我怕我的老公不愿意跟我睡同一间房间。”母亲说：“这样子，早上起来不要开口，先去浴室刷牙漱口。重点是，在刷牙漱口前绝不开口。”女儿问：“早上醒来也不要说早安？”母亲说：“一个字都不要说。”准新娘想，值得一试。\n\n于是这对情侣结婚了，各自记得他们收到的建议，他从不在人前脱袜子，她早上在刷牙漱口前绝不开口，两口子倒是相安无事。几个月后，一天早上，丈夫醒来，发现一只袜子脱落不见了，他吓死了，马上在床上到处找袜子，把妻子吵醒。\n\n妻子突然的被吵醒，想都没想，就开口问：“你在干什么？”\n\n丈夫说：“老天！！你把我的袜子吃进去了。”",
+      "source": {
+        "title": "新婚夫妇",
+        "url": "https://xiaohua.zol.com.cn/detail1/241.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "夫妻",
+        "婚姻",
+        "误会"
+      ],
+      "twist_type": "误会反转",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 12,
+      "semantic_signature": {
+        "relationship": "newlyweds",
+        "setting": "bedroom",
+        "premise": "concealing-odor-problems",
+        "punchline": "missing-sock-eaten"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 559,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "d0c471ef582f7e430aa598f0b10c6be243b921021f85c9e6fd4a50595ebc8b94",
+        "semantic_key": "newlyweds|bedroom|concealing-odor-problems|missing-sock-eaten"
+      }
+    },
+    {
+      "id": "zol-59034-3-20261010",
+      "text": "舍友掏了一个月的生活费，买了一大堆蜡烛在女生宿舍楼下摆个心型，还摆了那个女生的名字，开始喊楼！\n\n无奈那个女生残忍拒绝了他。。。\n\n他在无助的痛苦了几十秒之后，迅速用蜡烛重摆了另一个女生的名字，又开始喊楼，这次居然成功了。\n\n我问他女友为什么答应他？\n\n她说：“我就是怕浪费了那些蜡烛，看他也是个会过日子的人。。。”",
+      "source": {
+        "title": "搞笑才子都在学校呢",
+        "url": "https://xiaohua.zol.com.cn/detail60/59034.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "校园",
+        "恋爱",
+        "节俭"
+      ],
+      "twist_type": "动机反转",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "college-couple",
+        "setting": "dormitory",
+        "premise": "public-love-confession-rejected",
+        "punchline": "accepted-to-avoid-waste"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 150,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "9dc4a1cb2859d02e15efd8c982172f4b2b095842b63ab8c821b23196e1c296bf",
+        "semantic_key": "college-couple|dormitory|public-love-confession-rejected|accepted-to-avoid-waste"
+      }
+    },
+    {
+      "id": "zol-ertong15-father-20261010",
+      "text": "两个念小学的同班同学，也是住在隔壁的邻居。一天他们争论着一件事情，其中一个说：\n\n“我爸爸比你爸爸好，他现在当经理，你爸爸没有。”\n\n“当经理有什么好的？”\n\n“我哥哥也比你哥哥好，他现在已经上高中了，你哥哥没有。”\n\n“上高中有什么好的？”\n\n“还有还有我妈妈也比你妈妈好。”\n\n经过片刻的沉默，另外的那个学生说道：\n\n“你赢了，我爸爸也是这么说的！ ”",
+      "source": {
+        "title": "儿童笑话 第15页",
+        "url": "https://xiaohua.zol.com.cn/ertong/15.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "同学",
+        "家庭"
+      ],
+      "twist_type": "家庭反转",
+      "batch_id": "20261010-daily-jokes-02",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "schoolchildren",
+        "setting": "neighborhood",
+        "premise": "children-compare-families",
+        "punchline": "father-agrees-with-rival"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 163,
+      "line_count": 8,
+      "fingerprints": {
+        "normalized_sha256": "afac46e65c967686f59f0b9ea37dbeebfd128ed4d438a4c445ae4456a740f472",
+        "semantic_key": "schoolchildren|neighborhood|children-compare-families|father-agrees-with-rival"
+      }
+    },
+    {
+      "id": "zol-ertong15-friend-wife-20261010",
+      "text": "昨天下午，我先生带八岁的宇儿到一朋友家玩。\n\n朋友妻正在辅导她上小学一年级的女儿做作业。因为刚上一年级，做作业不知如何做，朋友妻教了几遍，可是她女儿怎么也不晓得做。然后发火并对著女儿大声叫嚷。\n\n宇儿走过去，教那小女孩如何去书本找答案。朋友妻表扬宇儿聪明。可是仍不忘大声批评了小女孩一顿。\n\n宇儿走向朋友妻，对她说：“阿姨，你当著这么多人面前批评你女儿是不对的，别人不会说是你女儿笨，而是说你没教养的。”\n\n朋友妻惊讶得哑口无言。",
+      "source": {
+        "title": "儿童笑话 第15页",
+        "url": "https://xiaohua.zol.com.cn/ertong/15.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "家庭",
+        "教育"
+      ],
+      "twist_type": "童言反击",
+      "batch_id": "20261010-daily-jokes-02",
+      "dialogue_turn_count": 1,
+      "semantic_signature": {
+        "relationship": "child-adult",
+        "setting": "homework-help",
+        "premise": "adult-scolds-child",
+        "punchline": "child-calls-out-adult"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 207,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "657dfacd5b7e3e64d7e086053158731bbe48f58715cb22412fabbf367dc39c1e",
+        "semantic_key": "child-adult|homework-help|adult-scolds-child|child-calls-out-adult"
+      }
+    },
+    {
+      "id": "zol-ertong15-cat-sign-20261010",
+      "text": "猫勿靠近,哈哈,小朋友写出来的警示语。\n\n岳父退休后，在楼下的一个角落里用竹竿搭了个小棚子，然后，用网子罩起来，在里面养了几个鸽子。一个星期天，他发现网子被撕开了一个小洞，附近有一只大黑猫在徘徊，并死死地盯着鸽子，“喵…喵”地直叫。岳父想去拿些绳子修一下，又怕离开后，大黑猫咬鸽子，就让正和小朋友们在楼下玩得高兴的女儿去看一会儿。她姥爷离开后，女儿看着小朋友们玩，自己有些眼馋，她灵机一动，拿起不知是哪个小朋友扔在地上的粉笔头，在附近的水泥墙上写了四个醒目的大字：“猫勿靠近”。",
+      "source": {
+        "title": "儿童笑话 第15页",
+        "url": "https://xiaohua.zol.com.cn/ertong/15.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "动物",
+        "误会"
+      ],
+      "twist_type": "字面误导",
+      "batch_id": "20261010-daily-jokes-02",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "child-grandfather",
+        "setting": "pigeon-shelter",
+        "premise": "guarding-pigeons-from-cat",
+        "punchline": "child-writes-warning-to-avoid-playing"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 237,
+      "line_count": 2,
+      "fingerprints": {
+        "normalized_sha256": "01c1196469c934547d889e19dcbd424e27eee0419f1f1442df44a23e43cb4dd9",
+        "semantic_key": "child-grandfather|pigeon-shelter|guarding-pigeons-from-cat|child-writes-warning-to-avoid-playing"
+      }
+    },
+    {
+      "id": "zol-ertong15-teacher-20261010",
+      "text": "父亲：“老师在家长会上跟我说，你上课总爱讲话，以后要改正。”\n\n儿子：“为什么要改正？在课堂上老师讲的话比我要多好几倍呢！”\n\n父亲：“那是老师在讲课，不说话怎么讲？”\n\n儿子：“您不是经常讲‘凡事要从小时候做起’吗？我长大也要当老师．现在不练怎么行？”",
+      "source": {
+        "title": "儿童笑话 第15页",
+        "url": "https://xiaohua.zol.com.cn/ertong/15.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "亲子",
+        "校园"
+      ],
+      "twist_type": "歪理反转",
+      "batch_id": "20261010-daily-jokes-02",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "parent-child",
+        "setting": "school",
+        "premise": "child-talks-in-class",
+        "punchline": "practicing-to-be-teacher"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 121,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "19b1274f52eff6cd2b5c5c234a9f8e5fd273ed63d88596d5db9b8a1f596da8fd",
+        "semantic_key": "parent-child|school|child-talks-in-class|practicing-to-be-teacher"
+      }
+    },
+    {
+      "id": "zol-ertong15-matchgirl-20261010",
+      "text": "一天去姐姐家玩，听到姐姐在给四岁的外甥讲《卖火柴小女孩》的故事，只听见姐姐讲的一脸真切，言辞动容，连我也沉浸到里头去了。可惜小外甥一点也不动容，听到最后气愤的说，“妈妈你真笨，火柴当然没人买啦，怎么不让她卖打火机呢？”",
+      "source": {
+        "title": "儿童笑话 第15页",
+        "url": "https://xiaohua.zol.com.cn/ertong/15.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "故事",
+        "童言"
+      ],
+      "twist_type": "常识错位",
+      "batch_id": "20261010-daily-jokes-02",
+      "dialogue_turn_count": 1,
+      "semantic_signature": {
+        "relationship": "child-aunt",
+        "setting": "storytelling",
+        "premise": "child-hears-tragic-tale",
+        "punchline": "suggests-better-product"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 109,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "702ee0db587d4e1a2e41e21be05c7728b042a0826a71b9e05c0bec2a1635c474",
+        "semantic_key": "child-aunt|storytelling|child-hears-tragic-tale|suggests-better-product"
+      }
+    },
+    {
+      "id": "zol-ertong15-head-tail-20261010",
+      "text": "小强才学会查字典，有一天，他想查一个“由”字，结果查了半天，只查出个“田”字，小强火了：\n\n“为什么缩个头不敢出来！ ”\n\n又过了会儿，小强翻到一个“甲”字，这下小强乐了：“原来你怕我，不敢露头，把尾巴伸出来了！ ”\n\n一会，聪明的小强又看到一个“申”字，拍手大笑道：“哈哈，现在头和尾巴都伸出来了！ ”",
+      "source": {
+        "title": "儿童笑话 第15页",
+        "url": "https://xiaohua.zol.com.cn/ertong/15.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "汉字",
+        "误解"
+      ],
+      "twist_type": "字形联想",
+      "batch_id": "20261010-daily-jokes-02",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "child",
+        "setting": "dictionary",
+        "premise": "learning-character-structure",
+        "punchline": "treats-strokes-as-head-and-tail"
+      },
+      "state": "shown",
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 143,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "a1b028dab781d67de64536b34b62a497fbbf97e0b961daefa90d2a302d377b85",
+        "semantic_key": "child|dictionary|learning-character-structure|treats-strokes-as-head-and-tail"
+      }
+    },
+    {
+      "id": "zhilezhi-68130",
+      "text": "4岁的哥哥从床上摔下地来，头磕在地上起了个大包，痛得哇哇大哭。我心疼地说：“啊，长了个鹅蛋。”\n双胞胎弟弟一听，不甘示弱地说：“我也会。”我还来不及阻止，他已从床上跳下来，把头磕在地上，然后龇牙咧嘴地说：“下鹅蛋好痛啊，下次我不要了！”",
+      "source": {
+        "title": "我也会",
+        "url": "https://zhilezhi.com/xiaohua/68130"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "双胞胎",
+        "误解"
+      ],
+      "twist_type": "字面误解",
+      "state": "shown",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "siblings",
+        "setting": "bedroom",
+        "premise": "egg-shaped-bump",
+        "punchline": "thinks-bump-is-laying-egg"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 117,
+      "line_count": 2,
+      "fingerprints": {
+        "normalized_sha256": "01c61b3e03cd55fe5913e3603d7c615c75573fbb6d6863b0f03934e07fdc1d42",
+        "semantic_key": "siblings|bedroom|egg-shaped-bump|thinks-bump-is-laying-egg"
+      }
+    },
+    {
+      "id": "zhilezhi-68122",
+      "text": "一个小男孩在商店里和他妈妈走散了。商店的保安人员正在帮助男孩寻找妈妈。\n保安：你为什么不拉着妈妈的手呢？\n男孩：妈妈手里拎着刚买的东西，没办法拉着我。\n保安：那你为什么不拉着你妈妈的裙子呢？\n男孩：我够不着。",
+      "source": {
+        "title": "小男孩找妈妈",
+        "url": "https://zhilezhi.com/xiaohua/68122"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "商店",
+        "对话"
+      ],
+      "twist_type": "童言反转",
+      "state": "shown",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "child-security",
+        "setting": "store",
+        "premise": "lost-mother",
+        "punchline": "cannot-reach-skirt"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 100,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "64ec0e9ece642a3841f5a8d94efaf3afed4f2e40ff0b3f97ffb89f9cfd64e38e",
+        "semantic_key": "child-security|store|lost-mother|cannot-reach-skirt"
+      }
+    },
+    {
+      "id": "zhilezhi-68109",
+      "text": "陪着四岁的小侄女玩，她忽然问我：“姑姑，你什么时候找男朋友？”我汗，正含糊着不知道怎么回答！小侄女又问：“姑姑，你是不是没人要？”......我更无语了。然后小侄女语不惊人誓不休的又说了一句：“姑姑，你还是去做尼姑吧！”我泪奔……",
+      "source": {
+        "title": "陪着四岁的小侄女玩",
+        "url": "https://zhilezhi.com/xiaohua/68109"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "亲戚",
+        "童言"
+      ],
+      "twist_type": "童言直击",
+      "state": "shown",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "aunt-niece",
+        "setting": "home",
+        "premise": "asked-about-boyfriend",
+        "punchline": "suggests-becoming-nun"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 115,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "1a6894f519d56d94df3f57d219327a18a0b4278617a25edb12ce4b5b0518ca95",
+        "semantic_key": "aunt-niece|home|asked-about-boyfriend|suggests-becoming-nun"
+      }
+    },
+    {
+      "id": "jokedw-4982",
+      "text": "老师布置家庭作业，让记录下自己每天做的好人好事。\n那天，我看见儿子的日记本上写着：“昨天我捡了一个大大的金元宝，足有二十斤重，我把它交给警察叔叔了。”\n下面老师批语写着：请务必写清是“做梦捡的”，那样让人读起来就更加真实些。",
+      "source": {
+        "title": "雷人的日记",
+        "url": "https://www.jokedw.com/xiaoyuanxiaohua/4982.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "校园",
+        "作业",
+        "反转"
+      ],
+      "twist_type": "现实反转",
+      "state": "shown",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "teacher-student",
+        "setting": "homework",
+        "premise": "good-deed-diary",
+        "punchline": "dream-disclaimer"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 110,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "170db23d6c196b8ce9709ece0739f41f33a5e53c63a5f2ae6a09247712f93478",
+        "semantic_key": "teacher-student|homework|good-deed-diary|dream-disclaimer"
+      }
+    },
+    {
+      "id": "jokedw-9093",
+      "text": "老师问：你约了心仪的女孩子吃晚餐，当你要上厕所时，该怎麼礼貌地说？ 同学A：我去撇个尿！ 老师：这一点都不礼貌。 同学B：我去上个厕所，等等回来。 老师：嗯，这个不错，但还有更礼貌的。 同学C：容我离开一下。我去跟一个好朋友见个面。如果可以的话，我更希望今天晚上有机会介绍他给你认识。。。",
+      "source": {
+        "title": "吃晚餐",
+        "url": "https://www.jokedw.com/xiaoyuanxiaohua/9093.html"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "校园",
+        "课堂",
+        "幽默"
+      ],
+      "twist_type": "委婉表达",
+      "state": "shown",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "teacher-students",
+        "setting": "classroom",
+        "premise": "polite-bathroom-request",
+        "punchline": "friend-introduction-euphemism"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 139,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "0ef1735647456edb453adb166a255d3256fa90d96a4870a71b3e40b53109d5e4",
+        "semantic_key": "teacher-students|classroom|polite-bathroom-request|friend-introduction-euphemism"
+      }
+    },
+    {
+      "id": "zhilezhi-63977",
+      "text": "家有幼儿，芳龄四岁半。平素胆小，不好与生人交谈。但不鸣则已，一鸣惊人。\n过年了，有不常来的叔叔阿姨来串门，她一人正趴在桌上涂鸦画画，煞有模样。阿姨在旁问：“囡囡，画什么呢？”\n女儿不语。\n“嗯，画得真不错，长大了想当画家？”\n仍不语。\n“哦，阿姨猜错了，给阿姨说说，长大想当什么？”\n生疏感渐渐远去，抬起小头，稚嫩地说：“想当老师！”\n“哦，不错，那再给阿姨说说，想当什么老师？”\n女儿一脸诧异：“我姓王，当然当王老师了，这么简单还不知道？”",
+      "source": {
+        "title": "长大想当什么",
+        "url": "https://zhilezhi.com/xiaohua/63977"
+      },
+      "accessed_at": "2026-10-10",
+      "tags": [
+        "儿童",
+        "家庭",
+        "误解"
+      ],
+      "twist_type": "身份误解",
+      "state": "shown",
+      "batch_id": "20261010-daily-jokes-01",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "child-aunt",
+        "setting": "family-visit",
+        "premise": "asks-future-career",
+        "punchline": "surname-is-job-title"
+      },
+      "selection_policy": "v2-min-100-chars-or-8-dialogue-turns",
+      "character_count": 213,
+      "line_count": 9,
+      "fingerprints": {
+        "normalized_sha256": "c9f6f822b7f52e53c5d35c7aadbafbb9752487222b1b499fe59ee0b540f3988d",
+        "semantic_key": "child-aunt|family-visit|asks-future-career|surname-is-job-title"
+      }
     }
   ]
 }

@@ -274,6 +274,18 @@ class RenderArticleTests(unittest.TestCase):
                 self.assertTrue((package_dir / "images" / "image-001.png").is_file())
                 self.assertEqual(Path(item["html"]).name, package_dir.name + ".html")
 
+    def test_render_creates_images_directory_without_successful_images(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            result = render_article.render(
+                self.make_manifest(root),
+                root / "result",
+                now=datetime(2026, 9, 11, 15, 40, 0),
+            )
+            images = Path(result["images"])
+            self.assertTrue(images.is_dir())
+            self.assertEqual(list(images.iterdir()), [])
+
 
 if __name__ == "__main__":
     unittest.main()

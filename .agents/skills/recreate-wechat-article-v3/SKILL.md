@@ -70,7 +70,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 
 ### 3. 文章处理
 
-`article-mode=ori`：在二次清洗后按原文顺序输出正文，不进行压缩、转义或重写；保留来源 HTML 中由 `<br>` 和块级节点形成的显式换行，计划中的 `text` 块必须保留这些 `\n`，不得把连续原文行合并成一段；标题仍可根据成品需要重新命名。`article-mode=trans`：执行下述深度原创重构。
+`article-mode=ori`：在二次清洗后按原文顺序输出正文，不进行压缩、转义或重写；保留来源 HTML 中由 `<br>` 和块级节点形成的显式换行，计划中的 `text` 块必须保留这些 `\n`，不得把连续原文行合并成一段；标题直接使用来源原文标题，不得重新命名或改写。`article-mode=trans`：执行下述深度原创重构。
 
 完整理解文章后再写，不按来源段落逐句处理。遵循 [references/rewriting-standard.md](references/rewriting-standard.md)：
 
@@ -87,6 +87,8 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 
 ### 5. 重制每张图片
 
+图片计划必须额外记录 `containsHuman`。只要最终画面包含主体、配角、背景人物、局部人体、剪影或人形角色，就标记为 `true`；缺失或非法时按 `true` 处理。`brand on` 且 `containsHuman=true` 时，必须额外传入 `photos/girl.png`，并要求品牌女孩实际出现在画面中并承担可见的叙事作用；`brand off` 时仍不传任何品牌人物参考图。
+
 角色参考图只约束对应角色，不代表同一画面中的所有人物。准备每张图片任务时，先记录 `sceneType`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate`；每个 `characters` 项还要记录 `ageGroup` 与简短的 `ageEvidence`。`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`；`ageGroup` 只能是 `child`、`adult`、`elder` 或 `unknown`。明确夫妻/情侣、普通一男一女同框时使用男角色+女角色；夫妻/情侣+孩子补充 baby 角色。小孩/儿童使用 `girl-baby` 或 `boy-baby`，青年/成年人/父母/夫妻使用 `girl` 或 `boy`，只有明确爷爷奶奶辈、祖父母或老年身份才使用 `girl-old` 或 `boy-old`。父母关系优先于白发、皱纹、服装和坐姿等外观线索，不能仅凭显老外观使用 `elder`；孩子性别不明使用 `girl-baby`。年龄不明的主角使用 `role=girl` 和 `ageGroup=unknown`，多人场景中性别明确但年龄不明的次要人物使用对应青年角色。人物数量缺失时按 1 处理；只有来源文字或画面明确表达双胞胎、分身或镜像时才允许重复外貌，其他情况固定为 `false`。
 
 根据来源图片的画面、可读文案和邻近章节，先判断是否为普通一男一女、夫妻/情侣、夫妻/情侣+孩子或一家三口，再为每个人填充 `purpose`、`ageGroup`、`ageEvidence` 和对应 `role`。`parent`、`mother`、`father` 强制使用 `adult`；`grandparent`、`grandmother`、`grandfather` 强制使用 `elder`；`child`、`son`、`daughter` 强制使用 `child`。普通单主角或其他非男女组合只按主角年龄选择女性角色；主角年龄无法判断时固定使用品牌人物 `girl`，不使用 `girl-old`。`emotion` 仍可独立判断，用于 local 模式的配色与文字排版，不用于选择角色参考图。
@@ -97,17 +99,19 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 python .agents/skills/recreate-wechat-article-v3/scripts/choose_character.py --url "<微信链接>" --index <从1开始的图片序号>
 ```
 
-当 `brand on` 时，按 `characters` 选择 `photos/girl.png`、`photos/girl-baby.png`、`photos/girl-old.png`、`photos/boy.png`、`photos/boy-baby.png` 或 `photos/boy-old.png`；普通单主角场景只选一个女性年龄角色，男女组合按男角色+女角色，夫妻/情侣+孩子再追加 baby 角色；关闭时不准备或传入品牌人物参考图，但仍保留角色计划供 prompt 约束。为每张图片先确定一条准确且不复刻原文的目标文案。只有 `local` 模式要求去除空白后最多 20 个可见字符，标点也计入；`ai` 不做字符数限制、截断或超长拦截。
+当 `brand on` 时，按 `characters` 选择 `photos/girl.png`、`photos/girl-baby.png`、`photos/girl-old.png`、`photos/boy.png`、`photos/boy-baby.png` 或 `photos/boy-old.png`；只要 `containsHuman=true`，无论主角性别和年龄，都必须额外包含 `photos/girl.png`，并在提示词中要求品牌女孩实际可见；普通单主角场景只选一个女性年龄角色，男女组合按男角色+女角色，夫妻/情侣+孩子再追加 baby 角色；关闭时不准备或传入品牌人物参考图，但仍保留角色计划供 prompt 约束。为每张图片先确定一条准确且不复刻原文的目标文案。只有 `local` 模式要求去除空白后最多 20 个可见字符，标点也计入；`ai` 不做字符数限制、截断或超长拦截。
 
 根据调用参数和 [图片生成模式规范](references/image-generation-modes.md) 构造每次独立的 imagegen 请求：
 
 - `rebuild` 只传所选品牌人物参考图；根据来源图的抽象语义与新文章章节自由重构动作、道具、背景、镜头、构图和卡片设计。
 - `copy` 同时传来源图片与 `characters` 中的角色参考图；来源图负责整张的信息结构、人物数量、场景关系、色调与卡片排版，角色图按角色映射分别使用；不得复制水印、署名或像素级布局。
 - `rebuild` 和 `copy` 的品牌参考图按 `characters` 一一对应；来源图只提供人物数量、动作和空间关系，不提供可复制的身份外观。普通单主角场景只传一个女性年龄角色；男女组合传男、女角色；夫妻/情侣+孩子传男、女和 baby 角色。次要人物不得复制其他角色的脸型、发型、发色、体型、年龄、服装、配饰和姿态。除明确的双胞胎、分身或镜像外，普通多人画面禁止出现两个外貌近乎相同的人物。
-- `ai` 让 imagegen 一次生成包含目标中文文案的完整纵向卡片。提示词必须要求接近 1080:1350 的竖向画布、使用 `#F7F6F6` 淡灰白背景，并让插画与文案充分利用画面、避免过量上下留白；不得附加本地模式的情绪底色、分隔线、字体或 20 字规则，也不做 OCR、错字检查或重试。
+- `ai` 让 imagegen 一次生成包含目标中文文案的完整纵向卡片。生成阶段的原始尺寸不保证为 864×1080；提示词必须要求 4:5 竖向构图、主体和文案处于安全区域，并使用 `#F7F6F6` 淡灰白背景。最终只有归一化后的 864×1080 PNG 有效；不得附加本地模式的情绪底色、分隔线、字体或 20 字规则，也不做 OCR、错字检查或重试。
 - `local` 让 imagegen 只生成无文字的上半部分插画，再执行下方 `compose_card.py` 命令；`brand off` 时省略 `--reference`，只要 AI 插画成功即可排版。`--reference` 使用归一化后的 `characters[0]` 主角色图，`--emotion` 仍只控制本地文案配色。
 
 先完成全部图片任务的语义、文案、提示词和参考图路径准备，再在同一个并发编排调用中一次性发出全部 imagegen 请求。使用 `Promise.allSettled` 或等价的独立结算方式；禁止先等待一部分图片完成后再发下一批。`copy/rebuild` 每张来源图片对应一个独立请求；`comic` 每个叙事节点对应一个独立请求；任一失败不得取消其他请求。
+
+图片结果必须按稳定的任务序号落盘：不要仅检查工具返回对象的 `content` 数组来判断是否成功。应接收 imagegen 返回的图片 artifact；如果运行环境将 artifact 保存到会话级 `generated_images` 目录，必须使用该 artifact 的实际本地路径，把第 N 个任务复制为 `<工作目录>/raw-cards/image-NNN.png`，再继续归一化或本地合成。并发任务按提交顺序绑定序号，不得按完成时间重新编号。只有 artifact 不存在、文件为空、Pillow 无法读取，或后续归一化/合成失败时，才记录图片失败并生成链接占位。
 
 `ai` 模式把首次成功返回的原始 PNG 保存为 `<工作目录>/raw-cards/image-001.png`。全部 imagegen 结果结算后，一次性并发归一所有成功图片：
 
@@ -115,7 +119,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/choose_character.py --u
 python .agents/skills/recreate-wechat-article-v3/scripts/normalize_ai_card.py --input "<工作目录>/raw-cards/image-001.png" --output "<工作目录>/cards/image-001.png"
 ```
 
-归一脚本会裁除过量外围留白、把与边缘相连的背景统一为示例取样色 `#F7F6F6`，并输出精确的 1080×1350 PNG；不得直接把 `raw-cards/` 图片写入 manifest。
+Imagegen 返回的原始尺寸可能与提示词尺寸不同；归一脚本会裁除过量外围留白、把与边缘相连的背景统一为示例取样色 `#F7F6F6`，并输出精确的 864×1080 PNG。只有归一后的 `cards/` 图片可写入 manifest，不得直接引用 `raw-cards/`；原始预览尺寸不代表成品尺寸。
 
 `local` 模式的 imagegen 结果全部结算后，对成功插画一次性并发执行以下命令；不得逐张串行合成：
 
@@ -125,7 +129,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/compose_card.py --illus
 
 脚本会用情绪浅色铺满整个下半部分，取消内部边框和白色留边，并使用放大为原规格 1.5 倍的轻艺术中文字体，做确定性的逐字轻微旋转与上下错落。
 
-每张请求只尝试一次。`ai`、`comic` 和 `local` 成功结果必须是 `cards/` 下可读且尺寸精确为 1080×1350 的 PNG。不得逐图 OCR、重复视觉复查或重试。imagegen、AI 归一或 `local` 合成任一步失败时，都不调用模板卡片，也不嵌入来源图片；普通模式写入 `sourceImageLink`，comic 写入 `generatedImageLink`，由渲染器输出对应占位。
+每张请求只尝试一次。`ai`、`comic` 和 `local` 成功结果必须是 `cards/` 下可读且尺寸精确为 864×1080 的 PNG。不得逐图 OCR、重复视觉复查或重试。imagegen、AI 归一或 `local` 合成任一步失败时，都不调用模板卡片，也不嵌入来源图片；普通模式写入 `sourceImageLink`，comic 写入 `generatedImageLink`，由渲染器输出对应占位。
 
 ### 5. 渲染 HTML
 
@@ -143,10 +147,10 @@ python .agents/skills/recreate-wechat-article-v3/scripts/build_manifest.py --sou
 python .agents/skills/recreate-wechat-article-v3/scripts/render_article.py --manifest "<工作目录>/manifest.json" --result-dir result
 ```
 
-脚本会在 `result/` 下创建单篇文章目录，目录内包含同名 HTML、`source.md`、`images/`，并在有可用原图时创建 `source-images/`。`source.md` 按原文图文顺序嵌入本地原图，并在每张图后记录原始 URL；下载失败的原图保留 URL 和失败标记，不阻断成品。脚本输出文章目录、HTML、Markdown、图片目录与归档告警。随后校验：
+脚本会在 `result/` 下创建单篇文章目录，目录内包含同名 HTML、`source.md` 和 `images/`；即使没有成功新图，也必须创建空的 `images/` 目录；在有可用原图时再创建 `source-images/`。`source.md` 按原文图文顺序嵌入本地原图，并在每张图后记录原始 URL；下载失败的原图保留 URL 和失败标记，不阻断成品。脚本输出文章目录、HTML、Markdown、图片目录与归档告警。随后校验：
 
 ```powershell
-python .agents/skills/recreate-wechat-article-v3/scripts/validate_output.py "<最终HTML路径>" --expected-image-size 1080x1350
+python .agents/skills/recreate-wechat-article-v3/scripts/validate_output.py "<最终HTML路径>" --expected-image-size 864x1080
 ```
 
 最后只做一轮结构与资源校验。若当前环境支持本地页面渲染，再视觉检查移动端宽度、标题与段落、图片顺序和中文断行；不得反复尝试已被环境安全策略阻止的 `file://` 浏览器预览。

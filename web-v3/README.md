@@ -17,7 +17,9 @@ python -m pip install -r requirements.txt
 
 打开 http://127.0.0.1:8000 。
 
-`IMAGE_API_MODE=edits` 会把允许的来源图片和角色参考图发送给 `/images/edits`；如果第三方只实现 `/images/generations`，改为 `generations`，但不会保留参考图输入。每张角色参考图只约束计划中的对应人物；年龄计划区分 child、adult、elder、unknown，父母按 adult、明确爷爷奶奶辈按 elder；多人画面中的其他人物会被要求使用明显不同的外观，默认不允许无意复制同一人物。
+`IMAGE_API_MODE=edits` 会把允许的来源图片和角色参考图发送给 `/images/edits`；如果第三方只实现 `/images/generations`，改为 `generations`，但不会保留参考图输入。每张角色参考图只约束计划中的对应人物；只要最终画面包含人类且 `brand=on`，系统还会强制加入并要求实际展示 `photos/girl.png` 品牌女孩；`brand=off` 仍完全不传品牌人物。年龄计划区分 child、adult、elder、unknown，父母按 adult、明确爷爷奶奶辈按 elder；多人画面中的其他人物会被要求使用明显不同的外观，默认不允许无意复制同一人物。
+
+生成 API 请求使用支持的竖向原生尺寸 `1024x1536`；生成完成后统一归一化为最终成品 `864x1080`，只有归一化图片会进入 HTML，原始预览尺寸不代表成品尺寸。
 
 每张图片请求都会在 `.recreate-work/<任务ID>/api-debug/` 保存调试副本：`image-XXX.postman.json` 可直接导入 Postman，`image-XXX.curl.txt` 可复制或导入为 cURL，`image-XXX.request.json` 保存实际字段和本地文件路径，`image-XXX.response.body` 保存接口返回的原始 body。请求副本中的 API Key 使用 `{{OPENAI_API_KEY}}` 占位符，不保存真实密钥；multipart 请求不要手动设置 `Content-Type`。
 

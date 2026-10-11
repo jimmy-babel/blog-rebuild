@@ -4,6 +4,8 @@
 
 Codex 只创建精简文章计划，不手工复制原文 blocks：
 
+当 `articleMode` 为 `ori` 时，`title` 必须使用 `source.json.title` 的原文标题；构建器会以该来源标题作为最终值。
+
 ```json
 {
   "articleMode": "trans",
@@ -14,7 +16,7 @@ Codex 只创建精简文章计划，不手工复制原文 blocks：
   "blocks": [
     {"type": "heading", "level": 2, "text": "新章节标题"},
     {"type": "text", "text": "原创段落。"},
-    {"type": "image", "sourceIndex": 12, "path": "cards/image-001.png", "alt": "新场景说明", "sceneType": "mixed_pair", "character": "boy", "characters": [{"role": "boy", "purpose": "main", "ageGroup": "adult", "ageEvidence": "青年男性"}, {"role": "girl", "purpose": "partner", "ageGroup": "adult", "ageEvidence": "青年女性"}], "sceneCharacterCount": 2, "secondaryCharacterNotes": "女性角色使用不同发型和服装", "allowIntentionalDuplicate": false},
+    {"type": "image", "sourceIndex": 12, "path": "cards/image-001.png", "alt": "新场景说明", "sceneType": "mixed_pair", "character": "boy", "characters": [{"role": "boy", "purpose": "main", "ageGroup": "adult", "ageEvidence": "青年男性"}, {"role": "girl", "purpose": "partner", "ageGroup": "adult", "ageEvidence": "青年女性"}], "sceneCharacterCount": 2, "containsHuman": true, "secondaryCharacterNotes": "女性角色使用不同发型和服装", "allowIntentionalDuplicate": false},
     {"type": "sourceImageLink", "sourceIndex": 25, "alt": "生成失败的配图"}
   ]
 }
@@ -30,13 +32,14 @@ comic 示例：
   "title": "文章标题",
   "blocks": [
     {"type": "text", "text": "清洗后的原文正文"},
-    {"type": "image", "path": "cards/comic-001.png", "alt": "第一幕", "sceneType": "single", "character": "girl", "characters": [{"role": "girl", "purpose": "main", "ageGroup": "unknown", "ageEvidence": "年龄不明"}], "sceneCharacterCount": 1, "secondaryCharacterNotes": "", "allowIntentionalDuplicate": false},
+    {"type": "image", "path": "cards/comic-001.png", "alt": "第一幕", "sceneType": "single", "character": "girl", "characters": [{"role": "girl", "purpose": "main", "ageGroup": "unknown", "ageEvidence": "年龄不明"}], "sceneCharacterCount": 1, "containsHuman": true, "secondaryCharacterNotes": "", "allowIntentionalDuplicate": false},
     {"type": "generatedImageLink", "alt": "第二幕", "error": "生成失败"}
   ]
 }
 ```
 
 - `removedSourceIndexes` 只写二次语义审查从 `source.json.blocks` 删除的索引；省略时视为空数组。
+- `containsHuman` 是图片计划字段：只要最终画面包含主体、配角、背景人物、局部人体、剪影或人形角色就必须为 `true`；缺失或非法时按 `true` 处理。`brand on` 且为 `true` 时必须追加 `girl.png` 品牌人物参考，`brand off` 时不传任何品牌人物参考图。
 - 图片计划可附带 `sceneType`、`character`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate` 供生图提示词使用；每个 `characters` 项包含 `role`、`purpose`、`ageGroup` 和 `ageEvidence`。`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`，`characters[].role` 只能是 `girl`、`girl-baby`、`girl-old`、`boy`、`boy-baby` 或 `boy-old`，`ageGroup` 只能是 `child`、`adult`、`elder` 或 `unknown`。关系用途优先于外观：`parent` 使用 `adult`，`grandparent` 使用 `elder`，`child` 使用 `child`；缺失 `characters` 时从 `character` 回退为单角色，非法角色回退为 `girl`，非法 `sceneType` 按 `single`，缺失人物数量按 1，缺失或非法的 `allowIntentionalDuplicate` 按 `false` 处理。构建完整 manifest 时这些规划字段不进入最终文章块。
 - `articleMode=trans` 时，`text`、`heading`、`quote` 是重新创作后的文章内容；`articleMode=ori` 时正文必须是二次清洗后保留的原文内容，并保留原文显式换行（`text` 中使用 `\n`，不得合并连续原文行）。
 - 每张二次清洗后保留的来源图片必须按 `sourceIndex` 顺序出现一次且仅一次。
@@ -125,7 +128,7 @@ result/
         └── image-001.jpg
 ```
 
-- 仅成功生成的图片复制到 `images/` 并连续编号；失败结果在 HTML 对应位置显示原图链接，不创建空图片文件。
+- 仅成功生成的图片复制到 `images/` 并连续编号；失败结果在 HTML 对应位置显示原图链接。无论成功图片数量是否为 0，都创建 `images/` 目录；不得把来源图片复制为新图。
 - 同名文章目录存在时追加 `-HHmmss`，内部 HTML 与最终目录同名，禁止覆盖旧结果。
 - `source.md` 按归档 blocks 顺序保存原始图文；本地原图后紧接对应 HTTPS URL。
 - 仅在存在成功保存的本地原图时创建 `source-images/`；原图本地归档失败时保留 URL 和告警。

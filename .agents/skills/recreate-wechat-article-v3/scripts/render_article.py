@@ -458,8 +458,8 @@ def render(manifest_path: Path, result_dir: Path, now: datetime | None = None) -
     source_image_number = 0
     source_images_created = False
     try:
+        assets_dir.mkdir()
         if image_paths:
-            assets_dir.mkdir()
             for index, source in enumerate(image_paths, start=1):
                 shutil.copyfile(source, assets_dir / f"image-{index:03d}.png")
 

@@ -17,7 +17,9 @@ from typing import Any
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY = SKILL_ROOT / "data" / "joke_registry.json"
+DEFAULT_EMOJI_FILE = SKILL_ROOT / "data" / "emoji.txt"
 WHITESPACE = re.compile(r"\s+")
+EMOJI_CODEPOINT = re.compile(r"[\U0001F300-\U0001FAFF]|[\u2600-\u27BF]|[©®™]")
 FORBIDDEN = (
     "色情", "裸聊", "强奸", "自杀", "种族", "歧视", "纳粹", "政治笑话",
 )
@@ -26,6 +28,88 @@ REQUIRED = {
     "id", "text", "source", "accessed_at", "tags", "twist_type", "state",
     "semantic_signature", "batch_id", "character_count", "line_count", "fingerprints",
 }
+
+
+def load_emojis(path: Path = DEFAULT_EMOJI_FILE) -> list[str]:
+    """Load the display-only emoji palette from one emoji-per-line text."""
+    if not path.exists():
+        raise FileNotFoundError(f"Emoji 资源不存在：{path}")
+    with path.open("r", encoding="utf-8") as handle:
+        emojis = [line.strip() for line in handle if line.strip() and not line.lstrip().startswith("#")]
+    if not emojis:
+        raise ValueError(f"Emoji 资源为空：{path}")
+    return list(dict.fromkeys(emojis))
+
+
+def has_emoji(text: str) -> bool:
+    """Return whether a line already contains an emoji-like code point."""
+    return bool(EMOJI_CODEPOINT.search(text))
+
+
+def choose_emoji(line: str, line_index: int, emojis: list[str], previous: str | None = None) -> str:
+    """Choose a stable, context-aware emoji without using Python's random hash."""
+    semantic_choices = (
+        (("?", "？"), ("🤔", "🧐")),
+        (("差点", "晕倒", "没想到", "原来", "居然", "竟然", "发现", "不是"), ("🤯", "🙃")),
+        (("哭", "伤心", "难过", "眼泪"), ("😭", "☹️")),
+        (("生气", "小气", "吼", "怒", "杀气"), ("😤", "😠")),
+        (("笑", "哈哈", "满意", "不错", "鼓掌", "成功"), ("🤣", "😄", "👍", "👏")),
+    )
+    for cues, choices in semantic_choices:
+        if any(cue in line for cue in cues):
+            for candidate in choices:
+                if candidate in emojis and candidate != previous:
+                    return candidate
+
+    digest = hashlib.sha256(f"{line_index}:{line}".encode("utf-8")).digest()
+    start = int.from_bytes(digest[:4], "big") % len(emojis)
+    for offset in range(len(emojis)):
+        candidate = emojis[(start + offset) % len(emojis)]
+        if candidate != previous:
+            return candidate
+    return emojis[start]
+
+
+def decorate_text(text: str, emoji_path: Path = DEFAULT_EMOJI_FILE) -> str:
+    """Add display-only emoji while preserving the stored joke text unchanged.
+
+    The first and last non-empty lines always have an emoji. Between them, every
+    third non-empty line is decorated, producing a stable 2–3 line cadence.
+    Existing emoji are kept and never duplicated.
+    """
+    emojis = load_emojis(emoji_path)
+    lines = text.strip().splitlines()
+    if not lines:
+        return text
+
+    non_empty_indices = [index for index, line in enumerate(lines) if line.strip()]
+    first_non_empty = non_empty_indices[0]
+    last_non_empty = non_empty_indices[-1]
+    decorated: list[str] = []
+    previous_emoji: str | None = None
+
+    for index, line in enumerate(lines):
+        should_decorate = (
+            index == first_non_empty
+            or index == last_non_empty
+            or (index > first_non_empty and (index - first_non_empty) % 3 == 0)
+        )
+        current = line
+        if line.strip() and should_decorate and not has_emoji(line):
+            chosen = choose_emoji(line, index, emojis, previous_emoji)
+            current = f"{line.rstrip()}{chosen}"
+            previous_emoji = chosen
+        elif line.strip() and has_emoji(line):
+            previous_emoji = next((emoji for emoji in emojis if emoji in line), previous_emoji)
+        decorated.append(current)
+    return "\n".join(decorated)
+
+
+def ensure_utf8_stdout() -> None:
+    """Allow Windows console and redirected output to carry the emoji palette."""
+    reconfigure = getattr(sys.stdout, "reconfigure", None)
+    if reconfigure is not None and (getattr(sys.stdout, "encoding", "") or "").lower() not in {"utf-8", "utf8"}:
+        reconfigure(encoding="utf-8")
 
 
 def normalized(text: str) -> str:
@@ -315,11 +399,16 @@ def command_render(args: argparse.Namespace) -> int:
     if args.require is not None and len(records) < args.require:
         print(f"批次仅有 {len(records)} 条，未达到要求的 {args.require} 条。", file=sys.stderr)
         return 1
+    if not getattr(args, "no_emoji", False):
+        ensure_utf8_stdout()
     print(f"# 每日一笑｜{batch}\n")
     for index, record in enumerate(records[: args.limit], start=1):
         meta = enrich(record)
         print(f"## {index}. {record['twist_type']}｜{'、'.join(record['tags'])}")
-        print(record["text"].strip())
+        rendered_text = record["text"].strip()
+        if not getattr(args, "no_emoji", False):
+            rendered_text = decorate_text(rendered_text)
+        print(rendered_text)
         print(f"\n{source_markdown(record)} · {meta['character_count']} 字\n")
     return 0
 
@@ -341,6 +430,7 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument("--batch", help="批次 ID；省略时取最近批次")
     render.add_argument("--limit", type=int, default=10, help="最多输出条数")
     render.add_argument("--require", type=int, help="要求批次至少包含的条数")
+    render.add_argument("--no-emoji", action="store_true", help="严格输出档案原文，不添加展示层 Emoji")
     sub.add_parser("refresh", help="将长度、行数和指纹写回手工导入的档案")
     return parser
 

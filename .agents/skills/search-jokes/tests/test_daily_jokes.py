@@ -3,6 +3,8 @@ import json
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -103,6 +105,55 @@ class DailyJokesTests(unittest.TestCase):
         })
         candidate = daily_jokes.enrich(candidate)
         self.assertTrue(any("不满足推送门槛" in error for error in daily_jokes.validate_shape(candidate)))
+
+    def test_decorate_text_adds_first_last_and_three_line_cadence(self):
+        text = "第一行\n第二行\n第三行\n第四行\n第五行\n第六行"
+        rendered = daily_jokes.decorate_text(text)
+        lines = rendered.splitlines()
+        self.assertTrue(daily_jokes.has_emoji(lines[0]))
+        self.assertTrue(daily_jokes.has_emoji(lines[3]))
+        self.assertTrue(daily_jokes.has_emoji(lines[-1]))
+        self.assertFalse(daily_jokes.has_emoji(lines[1]))
+        self.assertFalse(daily_jokes.has_emoji(lines[2]))
+
+    def test_decorate_text_handles_short_and_existing_emoji_lines(self):
+        rendered = daily_jokes.decorate_text("只有第一句\n只有最后一句")
+        self.assertEqual(2, len(rendered.splitlines()))
+        existing = daily_jokes.decorate_text("开头🙂\n中间\n结尾🤣")
+        self.assertEqual("开头🙂", existing.splitlines()[0])
+        self.assertEqual("结尾🤣", existing.splitlines()[-1])
+
+    def test_missing_or_empty_emoji_resource_fails_loudly(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "emoji.txt"
+            with self.assertRaises(FileNotFoundError):
+                daily_jokes.load_emojis(path)
+            path.write_text("\n# only comments\n", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                daily_jokes.load_emojis(path)
+
+    def test_render_emoji_does_not_mutate_text_or_metadata_and_no_emoji_is_exact(self):
+        record = copy.deepcopy(self.records[0])
+        record["state"] = "shown"
+        record["text"] = "第一句原文\n第二句原文\n最后一句原文"
+        record = daily_jokes.enrich(record)
+        with tempfile.TemporaryDirectory() as temporary:
+            registry_path = Path(temporary) / "registry.json"
+            registry_path.write_text(json.dumps({"schema_version": 1, "records": [record]}, ensure_ascii=False), encoding="utf-8")
+            emoji_output = StringIO()
+            with redirect_stdout(emoji_output):
+                self.assertEqual(0, daily_jokes.command_render(SimpleNamespace(registry=registry_path, batch=record["batch_id"], limit=10, require=None, no_emoji=False)))
+            self.assertIn("第一句原文", emoji_output.getvalue())
+            self.assertTrue(any(daily_jokes.has_emoji(line) for line in emoji_output.getvalue().splitlines()))
+
+            plain_output = StringIO()
+            with redirect_stdout(plain_output):
+                self.assertEqual(0, daily_jokes.command_render(SimpleNamespace(registry=registry_path, batch=record["batch_id"], limit=10, require=None, no_emoji=True)))
+            self.assertIn("第一句原文\n第二句原文\n最后一句原文", plain_output.getvalue())
+            stored = daily_jokes.load_registry(registry_path)["records"][0]
+            self.assertEqual(record["text"], stored["text"])
+            self.assertEqual(record["character_count"], stored["character_count"])
+            self.assertEqual(record["fingerprints"], stored["fingerprints"])
 
     @staticmethod
     def new_candidate(item_id, text, signature, batch_id="test-collection"):
