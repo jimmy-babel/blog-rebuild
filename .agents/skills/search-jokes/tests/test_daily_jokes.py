@@ -1,5 +1,5 @@
-import copy
 import json
+import copy
 import sys
 import tempfile
 import unittest
@@ -105,6 +105,31 @@ class DailyJokesTests(unittest.TestCase):
         })
         candidate = daily_jokes.enrich(candidate)
         self.assertTrue(any("不满足推送门槛" in error for error in daily_jokes.validate_shape(candidate)))
+
+    def test_v3_defaults_support_character_or_dialogue_threshold_and_limit(self):
+        policy = daily_jokes.make_selection_policy(90, 6, 120)
+        self.assertEqual(policy, "v3-min-90-chars-or-6-dialogue-turns-max-120-chars")
+        self.assertEqual(daily_jokes.selection_limits(policy), (90, 6, 120))
+
+        by_length = copy.deepcopy(self.records[0])
+        by_length.update({"id": "v3-by-length", "text": "字" * 90, "selection_policy": policy, "dialogue_turn_count": 0})
+        self.assertEqual(daily_jokes.validate_shape(daily_jokes.enrich(by_length)), [])
+
+        by_dialogue = copy.deepcopy(self.records[0])
+        by_dialogue.update({"id": "v3-by-dialogue", "text": "短笑话", "selection_policy": policy, "dialogue_turn_count": 6})
+        self.assertEqual(daily_jokes.validate_shape(daily_jokes.enrich(by_dialogue)), [])
+
+        over_limit = copy.deepcopy(by_dialogue)
+        over_limit.update({"id": "v3-over-limit", "text": "字" * 121})
+        errors = daily_jokes.validate_shape(daily_jokes.enrich(over_limit))
+        self.assertTrue(any("超过字数上限" in error for error in errors))
+
+    def test_screen_parser_accepts_short_and_long_option_aliases(self):
+        parser = daily_jokes.build_parser()
+        defaults = parser.parse_args(["screen", "candidates.json"])
+        self.assertEqual((defaults.min_count, defaults.min_dialogue, defaults.count_limit), (90, 6, 120))
+        args = parser.parse_args(["screen", "candidates.json", "-count", "100", "-topic", "8", "-countLimit", "150"])
+        self.assertEqual((args.min_count, args.min_dialogue, args.count_limit), (100, 8, 150))
 
     def test_decorate_text_adds_first_last_and_three_line_cadence(self):
         text = "第一行\n第二行\n第三行\n第四行\n第五行\n第六行"

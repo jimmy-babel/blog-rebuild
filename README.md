@@ -8,6 +8,7 @@ recreate-wechat-article-v3
 各参数支持的值如下：
 - -a / --article-mode
   - trans：压缩并原创重写
+  - nearby：使用原标题逐段近义改写，保留正文块顺序和换行，约 80% 长度仅作参考
   - ori：二次语义清洗后保留原文，不压缩、不改写
 - -m / --image-mode
   - rebuild：根据语义重新设计配图

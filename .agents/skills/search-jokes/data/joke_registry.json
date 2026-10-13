@@ -1949,6 +1949,316 @@
         "normalized_sha256": "c9f6f822b7f52e53c5d35c7aadbafbb9752487222b1b499fe59ee0b540f3988d",
         "semantic_key": "child-aunt|family-visit|asks-future-career|surname-is-job-title"
       }
+    },
+    {
+      "id": "zol-59495-03-20261013",
+      "text": "朋友对我说：“找女友，一定不可太挑剔，不然会被剩下的!”\n我问：“那你的标准是什么?”\n他说到：“标准不高，只要我走在路上，不管男女老少看到我们都会由衷的感叹一句：‘这女的怎么会看上他啊!’”",
+      "source": {
+        "title": "爆冷,让人刮目相看呐!",
+        "url": "https://xiaohua.zol.com.cn/detail60/59495.html"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "恋爱",
+        "择偶",
+        "反转"
+      ],
+      "twist_type": "标准反转",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "friends",
+        "setting": "conversation",
+        "premise": "dating-standard",
+        "punchline": "universal-surprise-at-couple"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 94,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "03e6d2e26ab4fcd743786be8bd93e1f83d6b82de598f4f05fec6f52cd75ca856",
+        "semantic_key": "friends|conversation|dating-standard|universal-surprise-at-couple"
+      }
+    },
+    {
+      "id": "zol-59164-04-20261013",
+      "text": "一客户欠款很长时间，打电话催款，他家宝宝接的电话！\n宝宝：阿姨，你好！\n我：宝宝你好，你爸爸妈妈在吗？\n宝宝：我爸妈不在家。\n我：那你看看你身后是不是有个喜羊羊。\n宝宝：没有，我身后是爸爸。。。",
+      "source": {
+        "title": "孩子真幽默,让你哈哈笑",
+        "url": "https://xiaohua.zol.com.cn/detail60/59164.html"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "亲子",
+        "电话",
+        "童言"
+      ],
+      "twist_type": "童言揭穿",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-01",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "caller-child-parent",
+        "setting": "phone-call",
+        "premise": "debt-collection",
+        "punchline": "child-exposes-hidden-parent"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 92,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "84973081cbe1c1c60d2a4aeb3448bc63a02ab24f2c0492eab0522026f6b9b42a",
+        "semantic_key": "caller-child-parent|phone-call|debt-collection|child-exposes-hidden-parent"
+      }
+    },
+    {
+      "id": "zhilezhi-68148-20261013",
+      "text": "还记得去年去迪士尼看烟花秀，拿手机拍摄烟花秀，手都举酸了，旁边有个女生时不时地转过头看我，终于拍完整个烟花秀过程，刚放下手机，旁边的女生就加我微信，我以为她喜欢我，结果问我能不能烟花秀的视频能不能发她一份。",
+      "source": {
+        "title": "以为她喜欢我",
+        "url": "https://zhilezhi.com/xiaohua/68148"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "生活",
+        "误会",
+        "反转"
+      ],
+      "twist_type": "动机反转",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-02",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "strangers",
+        "setting": "fireworks-show",
+        "premise": "mistaken-romantic-interest",
+        "punchline": "asks-for-video"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 103,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "246941c59f2f786baaab623749e92e9ff3741ad8816ab6f7288af7d684d2ac33",
+        "semantic_key": "strangers|fireworks-show|mistaken-romantic-interest|asks-for-video"
+      }
+    },
+    {
+      "id": "zhilezhi-67676-20261013",
+      "text": "“你的脸色不太好。”\n“是啊，我老婆夜里根本不让我睡觉。稍有动静，她就惊叫起来，以为是贼来了。”\n“小偷行窃是不会出声的。”\n“我也是这么对她说的，可那更糟了。”\n“怎么了？”\n“从此，她夜里听不到声音，就把我叫醒。”",
+      "source": {
+        "title": "你的脸色不太好",
+        "url": "https://zhilezhi.com/xiaohua/67676"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "夫妻",
+        "睡眠",
+        "生活"
+      ],
+      "twist_type": "建议反噬",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-02",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "couple-friends",
+        "setting": "bedroom",
+        "premise": "nighttime-alarm",
+        "punchline": "silence-causes-wakeup"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 104,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "412ab0cd148f263fcfff1d3e4add3232ae842333c5085b3a43487d1cbfd3a099",
+        "semantic_key": "couple-friends|bedroom|nighttime-alarm|silence-causes-wakeup"
+      }
+    },
+    {
+      "id": "zhilezhi-63381-20261013",
+      "text": "女友羞答答地对男友说：“班尼，婚后我可以分担你的烦恼和忧虑，还可以减轻你的工作负担。”\n“亲爱的，放心吧．我并没有任何烦恼、忧虑和负担。”\n“那你是说不肯跟我结婚了？”\n“这是什么意思？”\n“因为婚后，这一切你都会有的。”",
+      "source": {
+        "title": "远见",
+        "url": "https://zhilezhi.com/xiaohua/63381"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "情侣",
+        "婚姻",
+        "反转"
+      ],
+      "twist_type": "婚后反转",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-02",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "conversation",
+        "premise": "marriage-benefits",
+        "punchline": "future-burdens"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 107,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "d4940a170891dc6fe6df1c4f9527ae54885fb686474df96cbd035fc7c9255e90",
+        "semantic_key": "couple|conversation|marriage-benefits|future-burdens"
+      }
+    },
+    {
+      "id": "zhilezhi-65203-20261013",
+      "text": "七夕那天，女生对男生说：“追我这么久，你最喜欢我的什么地方？”\n男生一本正经地回答：“喜欢你的眼睛，因为里面有我映着的影子。”\n女生感动得要哭，结果男生接着说：“或者更确切地说，我喜欢你的眼睫毛，因为它们总是很努力地把我挡在外面。”",
+      "source": {
+        "title": "你最喜欢我的什么地方",
+        "url": "https://zhilezhi.com/xiaohua/65203"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "情侣",
+        "七夕",
+        "反转"
+      ],
+      "twist_type": "情话反转",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-02",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "couple",
+        "setting": "date",
+        "premise": "romantic-question",
+        "punchline": "eyelashes-block-lover"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 114,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "8c96adf355282fc18d422d916eec923beb8fa172ea3f1e0ed840832f9628d3e4",
+        "semantic_key": "couple|date|romantic-question|eyelashes-block-lover"
+      }
+    },
+    {
+      "id": "zhilezhi-68146-20261013",
+      "text": "同事出差，上火车发现别人坐了他的位，然后同事走过去故意拿票给坐座位上的人看，接着说：“大哥，我不认识字，麻烦你帮我看一下我的票在哪个位置。”那位大哥看了一眼说：“兄弟，你这是站票，站哪都行。”",
+      "source": {
+        "title": "帮我看一下我的票在哪个位置",
+        "url": "https://zhilezhi.com/xiaohua/68146"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "出差",
+        "火车",
+        "机智"
+      ],
+      "twist_type": "身份反转",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-02",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "travelers",
+        "setting": "train",
+        "premise": "occupied-seat",
+        "punchline": "standing-ticket-counterattack"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 96,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "af75180b936dfb060dac208512b71c659d01727532edf81c7451d6c9047bd23a",
+        "semantic_key": "travelers|train|occupied-seat|standing-ticket-counterattack"
+      }
+    },
+    {
+      "id": "zhilezhi-68021-20261013",
+      "text": "初中刚上化学课的时候，老师提问：你们知道怎么区别面粉和淀粉吗？只见同桌抢答道：看哪个能包饺子！老师狠狠地瞪了他一眼，没有搭理他。接着，老师又开始提问：你们知道怎么区别酒精和醋吗？我同桌再一次抢答了，站起来，大声喊道：用饺子蘸一下！",
+      "source": {
+        "title": "知道怎么区别面粉和淀粉吗",
+        "url": "https://zhilezhi.com/xiaohua/68021"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "校园",
+        "化学",
+        "答非所问"
+      ],
+      "twist_type": "经验错位",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-03",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "chemistry-class",
+        "premise": "material-identification",
+        "punchline": "dumpling-test-method"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 115,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "47cf4cd2723fac292fc96641e708f08058b67965c751f926bac713fe99a34134",
+        "semantic_key": "student-teacher|chemistry-class|material-identification|dumpling-test-method"
+      }
+    },
+    {
+      "id": "zhilezhi-68017-20261013",
+      "text": "上课时，老师在讲台上讲课，下面小华用耳机听歌。不小心耳机插头松脱了，声音响了起来，老师问：“谁在唱歌？”小华回答：“耳机。”“我说的是人！”老师愤怒地吼道。小华怯怯地回答：“张信哲”。",
+      "source": {
+        "title": "谁在唱歌",
+        "url": "https://zhilezhi.com/xiaohua/68017"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "校园",
+        "课堂",
+        "误会"
+      ],
+      "twist_type": "对象误解",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-03",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "classroom",
+        "premise": "music-leaks-from-earphones",
+        "punchline": "names-singer-as-person"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 92,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "c78052939c64b4fc6ea14aca8966c8ea13dc0c0f152f3cebb85b9e83cfd817df",
+        "semantic_key": "student-teacher|classroom|music-leaks-from-earphones|names-singer-as-person"
+      }
+    },
+    {
+      "id": "zhilezhi-68136-20261013",
+      "text": "思想课，老师：“古时候，出家人慈悲为本，善念为怀，扫地不伤蝼蚁命，爱惜飞蛾纱照灯。同学们，你们说出家人必备的是什么？”\n一位学生抢答：“老师，我知道！是圆规！”\n老师问：“为何？”\n该生说：“因为出家人经常化缘。”",
+      "source": {
+        "title": "出家人必备的是什么",
+        "url": "https://zhilezhi.com/xiaohua/68136"
+      },
+      "accessed_at": "2026-10-13",
+      "tags": [
+        "校园",
+        "课堂",
+        "谐音"
+      ],
+      "twist_type": "词语误解",
+      "state": "shown",
+      "batch_id": "20261013-daily-jokes-03",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "classroom",
+        "premise": "monk-necessity",
+        "punchline": "compass-for-alms"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 104,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "6b9bb5507e40e0be0944c9c459c1a88b124961f238ab09b9360b707939cb6fd8",
+        "semantic_key": "student-teacher|classroom|monk-necessity|compass-for-alms"
+      }
     }
   ]
 }

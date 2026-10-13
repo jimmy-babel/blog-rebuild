@@ -4,7 +4,7 @@
 
 Codex 只创建精简文章计划，不手工复制原文 blocks：
 
-当 `articleMode` 为 `ori` 时，`title` 必须使用 `source.json.title` 的原文标题；构建器会以该来源标题作为最终值。
+当 `articleMode` 为 `ori` 或 `nearby` 时，`title` 必须使用 `source.json.title` 的原文标题；构建器会以该来源标题作为最终值。
 
 ```json
 {
@@ -41,7 +41,7 @@ comic 示例：
 - `removedSourceIndexes` 只写二次语义审查从 `source.json.blocks` 删除的索引；省略时视为空数组。
 - `containsHuman` 是图片计划字段：只要最终画面包含主体、配角、背景人物、局部人体、剪影或人形角色就必须为 `true`；缺失或非法时按 `true` 处理。`brand on` 且为 `true` 时必须追加 `girl.png` 品牌人物参考，`brand off` 时不传任何品牌人物参考图。
 - 图片计划可附带 `sceneType`、`character`、`characters`、`sceneCharacterCount`、`secondaryCharacterNotes` 和 `allowIntentionalDuplicate` 供生图提示词使用；每个 `characters` 项包含 `role`、`purpose`、`ageGroup` 和 `ageEvidence`。`sceneType` 只能是 `single`、`mixed_pair`、`romantic_pair`、`family_trio` 或 `other_group`，`characters[].role` 只能是 `girl`、`girl-baby`、`girl-old`、`boy`、`boy-baby` 或 `boy-old`，`ageGroup` 只能是 `child`、`adult`、`elder` 或 `unknown`。关系用途优先于外观：`parent` 使用 `adult`，`grandparent` 使用 `elder`，`child` 使用 `child`；缺失 `characters` 时从 `character` 回退为单角色，非法角色回退为 `girl`，非法 `sceneType` 按 `single`，缺失人物数量按 1，缺失或非法的 `allowIntentionalDuplicate` 按 `false` 处理。构建完整 manifest 时这些规划字段不进入最终文章块。
-- `articleMode=trans` 时，`text`、`heading`、`quote` 是重新创作后的文章内容；`articleMode=ori` 时正文必须是二次清洗后保留的原文内容，并保留原文显式换行（`text` 中使用 `\n`，不得合并连续原文行）。
+- `articleMode=trans` 时，`text`、`heading`、`quote` 是重新创作后的文章内容；`articleMode=nearby` 时标题使用来源标题、不得有 `summary`，且必须保持清洗后来源正文块的数量和顺序，每个正文块使用 `text` 并保留显式换行；`articleMode=ori` 时正文必须是二次清洗后保留的原文内容，并保留原文显式换行（`text` 中使用 `\n`，不得合并连续原文行）。
 - 每张二次清洗后保留的来源图片必须按 `sourceIndex` 顺序出现一次且仅一次。
 - 生图成功使用 `image` 并提供本地 `path`；普通模式生图失败使用 `sourceImageLink`，无需手抄 URL。
 - `imageMode=comic` 时，生成图片使用不带 `sourceIndex` 的 `image`；失败使用 `generatedImageLink`。图片结果总数必须等于 `comicCount`。
@@ -112,7 +112,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/build_manifest.py `
 - 旧 manifest 缺少 `sourceCharacterCount`、`sourceArchive` 或图片 `sourceIndex` 时仍兼容渲染。
 - 新文章 `heading.level` 仅允许 2 或 3；`text`、`heading`、`quote` 均不得为空。
 - `image.path` 必须指向本地重制 PNG；`sourceImageLink.url` 必须为 HTTPS 或省略。
-- `articleMode=trans` 时，`summary`、`text`、`heading` 和 `quote` 的非空白字符总数不得超过 `min(800, ceil(sourceCharacterCount × 0.7))`；`ori` 不执行该限制。
+- `articleMode=trans` 时，`summary`、`text`、`heading` 和 `quote` 的非空白字符总数不得超过 `min(800, ceil(sourceCharacterCount × 0.7))`；`nearby` 的约 80% 仅作为参考，不执行字符数限制；`ori` 不执行该限制。
 - 正文、导语和引用按 `，。！？；,.!;?` 分行并居中；`ori` 正文同时优先保留已有的显式 `\n` 行边界；数字中的小数点和千位逗号不拆分。
 
 ## 输出

@@ -146,7 +146,7 @@ def validate(html_path: Path, expected_image_size: tuple[int, int] | None = None
     if parsed_source.scheme != "https" or parsed_source.hostname != "mp.weixin.qq.com":
         errors.append("HTML 缺少有效的微信 source-url 元数据。")
 
-    if parser.article_mode not in {"trans", "ori"}:
+    if parser.article_mode not in {"trans", "nearby", "ori"}:
         errors.append("HTML 缺少有效的 article-mode 元数据。")
     if parser.image_mode not in {"copy", "rebuild", "comic"}:
         errors.append("HTML 缺少有效的 image-mode 元数据。")

@@ -68,6 +68,24 @@ class WebApiTests(unittest.TestCase):
         response = self.client.post("/api/tasks", json={"url": "https://mp.weixin.qq.com/s/x", "image_mode": "comic"})
         self.assertEqual(response.status_code, 422)
 
+    def test_nearby_mode_is_accepted_but_cannot_use_comic(self) -> None:
+        with patch.object(app_module, "schedule"):
+            response = self.client.post("/api/tasks", json={
+                "url": "https://mp.weixin.qq.com/s/nearby",
+                "article_mode": "nearby",
+                "image_mode": "copy",
+            })
+        self.assertEqual(response.status_code, 202)
+        self.assertEqual(response.json()["article_mode"], "nearby")
+        app_module.DB.delete(response.json()["id"])
+
+        rejected = self.client.post("/api/tasks", json={
+            "url": "https://mp.weixin.qq.com/s/nearby-comic",
+            "article_mode": "nearby",
+            "image_mode": "comic",
+        })
+        self.assertEqual(rejected.status_code, 422)
+
     def test_non_comic_ignores_invalid_irrelevant_comic_count(self) -> None:
         with patch.object(app_module, "schedule"):
             response = self.client.post("/api/tasks", json={

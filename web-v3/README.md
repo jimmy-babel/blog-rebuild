@@ -25,4 +25,4 @@ python -m pip install -r requirements.txt
 
 图片生成失败时，任务工作目录还会写入 `image-failures.json`，记录每张图的错误和对应调试文件；任务仍可降级完成时，界面进度会显示失败图片数量。结果目录提交遇到 Windows `WinError 5` 时会进行有限退避重试，重试耗尽后才标记任务失败。
 
-创建任务时可使用 `article_mode: "trans"|"ori"`、`image_mode: "copy"|"rebuild"|"comic"`、`comic_count`、`caption_mode: "ai"|"local"` 和 `brand: "on"|"off"`。`ori` 会保留来源正文的显式换行；`comic` 自动要求 `ori`，只依据文字生成连续叙事图，不读取来源图片；旧字段 `brand_reference` 仍兼容。启用品牌人物时必须使用 `IMAGE_API_MODE=edits`。明确夫妻/情侣或普通一男一女同框时使用男、女角色组合，夫妻/情侣+孩子追加 baby；父母使用基础 `girl/boy`，只有明确爷爷奶奶辈才使用 old；其他场景按主角年龄使用 `girl`、`girl-baby` 或 `girl-old`，无法判断时回退到 `girl`。`emotion` 只控制 local 模式配色。
+创建任务时可使用 `article_mode: "trans"|"nearby"|"ori"`、`image_mode: "copy"|"rebuild"|"comic"`、`comic_count`、`caption_mode: "ai"|"local"` 和 `brand: "on"|"off"`。`nearby` 使用原标题并逐段近义改写，保留来源正文块数量、顺序和显式换行，约 80% 长度仅作参考；`ori` 会保留来源正文的显式换行；`comic` 自动要求 `ori`，只依据文字生成连续叙事图，不读取来源图片；旧字段 `brand_reference` 仍兼容。启用品牌人物时必须使用 `IMAGE_API_MODE=edits`。明确夫妻/情侣或普通一男一女同框时使用男、女角色组合，夫妻/情侣+孩子追加 baby；父母使用基础 `girl/boy`，只有明确爷爷奶奶辈才使用 old；其他场景按主角年龄使用 `girl`、`girl-baby` 或 `girl-old`，无法判断时回退到 `girl`。`emotion` 只控制 local 模式配色。

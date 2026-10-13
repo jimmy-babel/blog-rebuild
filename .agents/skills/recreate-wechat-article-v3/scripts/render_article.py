@@ -157,8 +157,10 @@ def validate_manifest(data: dict, manifest_path: Path) -> tuple[list[Path], dict
         raise ManifestError("blocks 必须是非空数组。")
     article_mode = data.get("articleMode", "trans")
     image_mode = data.get("imageMode", "copy")
-    if article_mode not in {"trans", "ori"}:
-        raise ManifestError("articleMode 必须是 trans 或 ori。")
+    if article_mode not in {"trans", "nearby", "ori"}:
+        raise ManifestError("articleMode 必须是 trans、nearby 或 ori。")
+    if article_mode == "nearby" and data.get("summary") is not None:
+        raise ManifestError("nearby 模式不允许 summary。")
     if image_mode not in {"copy", "rebuild", "comic"}:
         raise ManifestError("imageMode 必须是 copy、rebuild 或 comic。")
     comic_count = data.get("comicCount", 5)

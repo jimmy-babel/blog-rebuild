@@ -357,6 +357,27 @@ def _non_whitespace_count(value: str) -> int:
     return len(re.sub(r"\s+", "", value))
 
 
+def _validate_nearby_structure(source_blocks: list[dict], removed: set[int], blocks: list[dict]) -> None:
+    expected = [
+        (block.get("sourceIndex") if block.get("type") == "image" else None, block.get("type"))
+        for block in source_blocks
+        if block.get("sourceIndex") not in removed and block.get("type") in {"text", "image"}
+    ]
+    actual: list[tuple[int | None, str]] = []
+    for position, block in enumerate(blocks):
+        block_type = block.get("type")
+        if block_type == "text":
+            actual.append((None, "text"))
+        elif block_type in {"image", "sourceImageLink"}:
+            actual.append((block.get("sourceIndex"), "image"))
+        else:
+            raise PipelineError(
+                f"nearby 模式不允许新增 {block_type!r} 块（article-plan.json.blocks[{position}]）。"
+            )
+    if actual != expected:
+        raise PipelineError("nearby 模式必须保持清洗后原文的正文块数量、顺序和图片 sourceIndex。")
+
+
 def _normalize_article_plan(
     source: dict,
     plan: dict,
@@ -386,9 +407,9 @@ def _normalize_article_plan(
     }
 
     source_title = source.get("title")
-    if article_mode == "ori":
+    if article_mode in {"ori", "nearby"}:
         if not isinstance(source_title, str) or not source_title.strip():
-            raise PipelineError("ori 模式的来源标题不能为空。")
+            raise PipelineError(f"{article_mode} 模式的来源标题不能为空。")
         title = source_title
     else:
         title = plan.get("title")
@@ -397,6 +418,10 @@ def _normalize_article_plan(
             warnings.append("文章标题缺失，已回退使用原文标题。")
 
     summary = plan.get("summary")
+    if article_mode == "nearby" and summary is not None:
+        warnings.append("nearby 模式不允许 summary，已移除。")
+        plan.pop("summary", None)
+        summary = None
     if summary is None:
         plan.pop("summary", None)
     elif not isinstance(summary, str):
@@ -498,6 +523,8 @@ def _normalize_article_plan(
 
         warnings.append(f"article-plan.json.blocks[{position}] 类型 {block_type!r} 不受支持，已跳过。")
 
+    if article_mode == "nearby":
+        _validate_nearby_structure(source_blocks, set(removed), normalized)
     plan["title"] = title.strip() if isinstance(title, str) else ""
     plan["removedSourceIndexes"] = removed
     plan["blocks"] = normalized
@@ -529,6 +556,7 @@ class OpenAICompatible:
         source_count = sum(_non_whitespace_count(str(block.get("text", ""))) for block in blocks if block.get("type") == "text")
         mode_instruction = {
             "trans": "深度原创重构标题、结构、论证顺序和表达；正文不设置字符数硬上限，不要因长度截断必要内容。",
+            "nearby": "使用来源原标题，不生成 summary。严格保留清洗后来源正文块的数量、顺序和显式换行，每个来源 text block 只对应一个改写后的 text block；不得新增 heading、quote、章节结构、观点、案例、比喻或事实。只做逐段近义词替换、语序微调、冗余修饰删减和语病修正，必须保持事实、数字、人物、结论和因果关系不变。来源正文非空白字符数的约 80% 仅作为参考，不做比例或 800 字硬限制。",
             "ori": "只做二次语义清洗，正文按清洗后的原文顺序输出，不压缩、不改写、不执行原创字符数限制；标题必须原样使用来源标题，不得改写；必须保留来源正文中的显式换行，原文连续行要在 text 中使用 \\n 表示，不得合并成一段。",
         }[article_mode]
         if image_mode == "comic":
@@ -555,8 +583,8 @@ class OpenAICompatible:
 {image_instruction}{brand_instruction}{human_instruction}
 JSON 结构：
 {{
-  "title": "标题（ori 模式必须原样填写来源标题）",
-  "summary": "可选导语（没有导语时省略，不要返回空字符串）",
+  "title": "标题（ori/nearby 模式必须原样填写来源标题）",
+  "summary": "可选导语（nearby 模式禁止返回；其他模式没有导语时省略）",
   "removedSourceIndexes": [],
   "blocks": [
     {{"type":"heading","level":2,"text":"章节标题"}},

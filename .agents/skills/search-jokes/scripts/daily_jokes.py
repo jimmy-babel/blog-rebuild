@@ -24,6 +24,10 @@ FORBIDDEN = (
     "色情", "裸聊", "强奸", "自杀", "种族", "歧视", "纳粹", "政治笑话",
 )
 PUSH_POLICY_V2 = "v2-min-100-chars-or-8-dialogue-turns"
+DEFAULT_MIN_COUNT = 90
+DEFAULT_MIN_DIALOGUE = 6
+DEFAULT_COUNT_LIMIT = 120
+PUSH_POLICY_V3_PREFIX = "v3-min-"
 REQUIRED = {
     "id", "text", "source", "accessed_at", "tags", "twist_type", "state",
     "semantic_signature", "batch_id", "character_count", "line_count", "fingerprints",
@@ -130,9 +134,41 @@ def line_count(text: str) -> int:
     return sum(bool(line.strip()) for line in text.splitlines())
 
 
+def make_selection_policy(min_count: int, min_dialogue: int, count_limit: int) -> str:
+    return f"{PUSH_POLICY_V3_PREFIX}{min_count}-chars-or-{min_dialogue}-dialogue-turns-max-{count_limit}-chars"
+
+
+def selection_limits(policy: str | None) -> tuple[int, int, int | None] | None:
+    """Return (minimum chars, minimum dialogue turns, maximum chars) for a policy."""
+    if policy == PUSH_POLICY_V2:
+        return 100, 8, None
+    if not isinstance(policy, str) or not policy.startswith(PUSH_POLICY_V3_PREFIX):
+        return None
+    match = re.fullmatch(r"v3-min-(\d+)-chars-or-(\d+)-dialogue-turns-max-(\d+)-chars", policy)
+    if not match:
+        return None
+    return tuple(int(value) for value in match.groups())  # type: ignore[return-value]
+
+
+def validate_policy_limits(min_count: int, min_dialogue: int, count_limit: int) -> None:
+    if min_count < 0 or min_dialogue < 0:
+        raise ValueError("count 和 topic 必须是非负整数。")
+    if count_limit < 1:
+        raise ValueError("countLimit 必须是正整数。")
+    if count_limit < min_count:
+        raise ValueError("countLimit 必须大于或等于 count。")
+
+
 def meets_push_threshold(record: dict[str, Any]) -> bool:
-    """New delivery gate: original text ≥100 chars, or ≥8 dialogue turns."""
-    return character_count(record["text"]) >= 100 or record.get("dialogue_turn_count", 0) >= 8
+    """Return whether a record satisfies its stored delivery policy."""
+    limits = selection_limits(record.get("selection_policy"))
+    if limits is None:
+        return True
+    min_count, min_dialogue, count_limit = limits
+    count = character_count(record["text"])
+    if count_limit is not None and count > count_limit:
+        return False
+    return count >= min_count or record.get("dialogue_turn_count", 0) >= min_dialogue
 
 
 def enrich(record: dict[str, Any]) -> dict[str, Any]:
@@ -217,12 +253,21 @@ def validate_shape(record: dict[str, Any]) -> list[str]:
             errors.append("line_count 与原文不一致")
         if record.get("fingerprints") != expected["fingerprints"]:
             errors.append("fingerprints 与原文或语义签名不一致")
-    if record.get("selection_policy") == PUSH_POLICY_V2:
+    policy = record.get("selection_policy")
+    if isinstance(policy, str) and policy.startswith(PUSH_POLICY_V3_PREFIX) and selection_limits(policy) is None:
+        errors.append("selection_policy 格式不正确")
+    if selection_limits(policy) is not None:
         turns = record.get("dialogue_turn_count")
         if not isinstance(turns, int) or turns < 0:
             errors.append("dialogue_turn_count 必须是非负整数")
         elif not meets_push_threshold(record):
-            errors.append("不满足推送门槛：原文字数需≥100，或对话轮数需≥8")
+            limits = selection_limits(policy)
+            assert limits is not None
+            min_count, min_dialogue, count_limit = limits
+            if count_limit is not None and character_count(record["text"]) > count_limit:
+                errors.append(f"超过字数上限：原文字数需≤{count_limit}")
+            else:
+                errors.append(f"不满足推送门槛：原文字数需≥{min_count}，或对话轮数需≥{min_dialogue}")
     issues = safety_issues(record.get("text", ""))
     if issues:
         errors.append(f"命中内容边界词：{', '.join(issues)}")
@@ -254,12 +299,18 @@ def load_candidates(path: Path) -> list[dict[str, Any]]:
     return candidates
 
 
-def prepare_candidate(candidate: dict[str, Any], state: str | None = None) -> dict[str, Any]:
+def prepare_candidate(
+    candidate: dict[str, Any],
+    state: str | None = None,
+    min_count: int = DEFAULT_MIN_COUNT,
+    min_dialogue: int = DEFAULT_MIN_DIALOGUE,
+    count_limit: int = DEFAULT_COUNT_LIMIT,
+) -> dict[str, Any]:
     """Copy a candidate and calculate metadata whenever its core fields exist."""
     item = dict(candidate)
     if state:
         item["state"] = state
-    item.setdefault("selection_policy", PUSH_POLICY_V2)
+    item.setdefault("selection_policy", make_selection_policy(min_count, min_dialogue, count_limit))
     if isinstance(item.get("text"), str) and isinstance(item.get("semantic_signature"), dict):
         return enrich(item)
     return item
@@ -270,6 +321,9 @@ def screen_candidates(
     records: list[dict[str, Any]],
     limit: int | None = None,
     state: str | None = None,
+    min_count: int = DEFAULT_MIN_COUNT,
+    min_dialogue: int = DEFAULT_MIN_DIALOGUE,
+    count_limit: int = DEFAULT_COUNT_LIMIT,
 ) -> tuple[list[dict[str, Any]], list[tuple[str, str]]]:
     """Return accepted candidates and rejection reasons without changing the registry.
 
@@ -278,13 +332,14 @@ def screen_candidates(
     """
     if limit is not None and limit < 1:
         raise ValueError("limit 必须至少为 1。")
+    validate_policy_limits(min_count, min_dialogue, count_limit)
 
     accepted: list[dict[str, Any]] = []
     rejected: list[tuple[str, str]] = []
     comparison_records = list(records)
     seen_ids = {record.get("id") for record in records}
     for raw_candidate in candidates:
-        candidate = prepare_candidate(raw_candidate, state)
+        candidate = prepare_candidate(raw_candidate, state, min_count, min_dialogue, count_limit)
         item_id = str(candidate.get("id", "<无 id>"))
         if candidate.get("id") in seen_ids:
             rejected.append((item_id, "id 重复"))
@@ -332,18 +387,25 @@ def command_validate(args: argparse.Namespace) -> int:
     records = [enrich(item) for item in registry["records"]]
     states = Counter(item["state"] for item in records)
     lengths = [item["character_count"] for item in records]
-    qualified = sum(
-        record.get("selection_policy") == PUSH_POLICY_V2 and meets_push_threshold(record)
-        for record in records
-    )
-    print(f"校验通过：{len(records)} 条；状态 {dict(states)}；长度 {min(lengths)}–{max(lengths)} 字；新规则合格 {qualified} 条。")
+    qualified = sum(selection_limits(record.get("selection_policy")) is not None and meets_push_threshold(record) for record in records)
+    print(f"校验通过：{len(records)} 条；状态 {dict(states)}；长度 {min(lengths)}–{max(lengths)} 字；推送规则合格 {qualified} 条。")
     return 0
 
 
 def command_add(args: argparse.Namespace) -> int:
     registry = load_registry(args.registry)
     candidates = load_candidates(args.input)
-    accepted, rejected = screen_candidates(candidates, registry["records"], state=args.state)
+    min_count = getattr(args, "min_count", DEFAULT_MIN_COUNT)
+    min_dialogue = getattr(args, "min_dialogue", DEFAULT_MIN_DIALOGUE)
+    count_limit = getattr(args, "count_limit", DEFAULT_COUNT_LIMIT)
+    accepted, rejected = screen_candidates(
+        candidates,
+        registry["records"],
+        state=args.state,
+        min_count=min_count,
+        min_dialogue=min_dialogue,
+        count_limit=count_limit,
+    )
     if accepted:
         registry["records"].extend(accepted)
         save_registry(args.registry, registry)
@@ -357,7 +419,18 @@ def command_screen(args: argparse.Namespace) -> int:
     """Screen a batch and optionally materialize only the accepted subset."""
     registry = load_registry(args.registry)
     candidates = load_candidates(args.input)
-    accepted, rejected = screen_candidates(candidates, registry["records"], args.limit, args.state)
+    min_count = getattr(args, "min_count", DEFAULT_MIN_COUNT)
+    min_dialogue = getattr(args, "min_dialogue", DEFAULT_MIN_DIALOGUE)
+    count_limit = getattr(args, "count_limit", DEFAULT_COUNT_LIMIT)
+    accepted, rejected = screen_candidates(
+        candidates,
+        registry["records"],
+        args.limit,
+        args.state,
+        min_count,
+        min_dialogue,
+        count_limit,
+    )
     if args.accepted_output:
         args.accepted_output.parent.mkdir(parents=True, exist_ok=True)
         with args.accepted_output.open("w", encoding="utf-8", newline="\n") as handle:
@@ -423,9 +496,11 @@ def build_parser() -> argparse.ArgumentParser:
     screen.add_argument("--limit", type=int, help="本批最多接纳的条数")
     screen.add_argument("--state", choices=["candidate", "shown", "adopted"], help="覆盖通过项状态")
     screen.add_argument("--accepted-output", type=Path, help="写入通过候选的临时 JSON 路径")
+    add_screen_policy_arguments(screen)
     add = sub.add_parser("add", help="将联网筛出的候选 JSON 入库")
     add.add_argument("input", type=Path, help="候选 JSON 文件")
     add.add_argument("--state", choices=["candidate", "shown", "adopted"], help="覆盖候选状态")
+    add_screen_policy_arguments(add)
     render = sub.add_parser("render", help="按批次输出已展示笑话")
     render.add_argument("--batch", help="批次 ID；省略时取最近批次")
     render.add_argument("--limit", type=int, default=10, help="最多输出条数")
@@ -435,9 +510,34 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def add_screen_policy_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--count", "-count", dest="min_count", type=non_negative_int, default=DEFAULT_MIN_COUNT, help=f"最低非空白字符数，默认 {DEFAULT_MIN_COUNT}")
+    parser.add_argument("--topic", "-topic", dest="min_dialogue", type=non_negative_int, default=DEFAULT_MIN_DIALOGUE, help=f"最低对话轮数，默认 {DEFAULT_MIN_DIALOGUE}")
+    parser.add_argument("--countLimit", "-countLimit", dest="count_limit", type=positive_int, default=DEFAULT_COUNT_LIMIT, help=f"最大非空白字符数，默认 {DEFAULT_COUNT_LIMIT}")
+
+
+def non_negative_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 0:
+        raise argparse.ArgumentTypeError("必须是非负整数")
+    return parsed
+
+
+def positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("必须是正整数")
+    return parsed
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
+    if args.command in {"screen", "add"}:
+        try:
+            validate_policy_limits(args.min_count, args.min_dialogue, args.count_limit)
+        except ValueError as error:
+            parser.error(str(error))
     if args.command == "validate":
         return command_validate(args)
     if args.command == "add":

@@ -38,7 +38,7 @@ def resolve_project_path(value: str | None) -> Path | None:
 
 class TaskCreate(BaseModel):
     url: str
-    article_mode: Literal["trans", "ori"] = "trans"
+    article_mode: Literal["trans", "nearby", "ori"] = "trans"
     image_mode: Literal["copy", "rebuild", "comic"] = "copy"
     # comic_count is relevant only to comic mode.  Validate it after the mode
     # combination is known so an irrelevant client value cannot reject copy/

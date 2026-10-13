@@ -71,7 +71,7 @@ def build(source_path: Path, article_path: Path) -> tuple[dict, list[str]]:
     source = load_json(source_path, "source.json")
     article = load_json(article_path, "article-plan.json")
 
-    article_mode = mode_value(article, "articleMode", {"trans", "ori"}, "trans")
+    article_mode = mode_value(article, "articleMode", {"trans", "nearby", "ori"}, "trans")
     image_mode = mode_value(article, "imageMode", {"copy", "rebuild", "comic"}, "copy")
     comic_count = comic_count_value(article, image_mode)
     if image_mode == "comic" and article_mode != "ori":
@@ -151,13 +151,15 @@ def build(source_path: Path, article_path: Path) -> tuple[dict, list[str]]:
     # Image-only articles are valid: the model can inspect the archived images
     # directly when rewriting, so the textual source count is intentionally 0.
 
-    if article_mode == "ori":
+    if article_mode in {"ori", "nearby"}:
         title = source_title
     else:
         title = article.get("title")
         if not isinstance(title, str) or not title.strip():
             raise BuildError("article-plan.json.title 不能为空。")
     summary = article.get("summary")
+    if article_mode == "nearby" and summary is not None:
+        raise BuildError("nearby 模式不允许 summary。")
     if summary is not None and (not isinstance(summary, str) or not summary.strip()):
         raise BuildError("article-plan.json.summary 必须是非空字符串或省略。")
     raw_article_blocks = article.get("blocks")
@@ -240,6 +242,26 @@ def build(source_path: Path, article_path: Path) -> tuple[dict, list[str]]:
         missing = sorted(set(retained_image_indexes) - set(handled_images))
         extra = sorted(set(handled_images) - set(retained_image_indexes))
         raise BuildError(f"每张保留原图必须有且仅有一个结果；缺少={missing}，多余={extra}。")
+
+    if article_mode == "nearby":
+        expected = [
+            (index, block["type"])
+            for index, block in ordered_source
+            if index not in removed
+        ]
+        actual = []
+        for position, block in enumerate(article_blocks):
+            if block["type"] == "text":
+                actual.append((None, "text"))
+            elif block["type"] in {"image", "sourceImageLink"}:
+                actual.append((block.get("sourceIndex"), "image"))
+            else:
+                raise BuildError(
+                    f"nearby 模式不允许新增 {block['type']} 块（article blocks[{position}]）。"
+                )
+        expected_shape = [(index if kind == "image" else None, kind) for index, kind in expected]
+        if actual != expected_shape:
+            raise BuildError("nearby 模式必须保持清洗后原文的正文块数量、顺序和图片 sourceIndex。")
 
     manifest = {
         "title": title.strip(),

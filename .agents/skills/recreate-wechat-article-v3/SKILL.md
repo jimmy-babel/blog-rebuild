@@ -32,14 +32,14 @@ description: "Run the v3 isolated WeChat Official Account article reconstruction
 支持以下等价长短参数；参数可放在文章链接前后：
 
 ```text
---article-mode trans|ori    -a trans|ori
+--article-mode trans|nearby|ori    -a trans|nearby|ori
 --image-mode rebuild|copy|comic    -m rebuild|copy|comic
 --comic-count N             -n N
 --caption-mode ai|local   -c ai|local
 --brand on|off  -b on|off
 ```
 
-未提供参数时使用 `trans + copy + ai + brand on`。`ori` 仍做二次语义清洗，但清洗后的正文原文直出，不压缩、不改写；`trans` 使用现有深度原创重构规则。`comic` 等价于 `ori`，默认生成 5 张图，不使用 `-c`，且不读取或参考来源图片；`brand on` 时每个 comic 叙事节点按文字判断角色并传入对应角色图，无法判断时使用 `photos/girl.png`。遇到未知取值、缺少取值，或同一参数被赋予互相冲突的值时，停止执行并提示有效选项，不自行猜测。图片生成规则见 [references/image-generation-modes.md](references/image-generation-modes.md)，开始处理图片前必须读取该文件。
+未提供参数时使用 `trans + copy + ai + brand on`。`ori` 仍做二次语义清洗，但清洗后的正文原文直出，不压缩、不改写；`nearby` 保留清洗后原文的正文块数量、顺序和显式换行，逐段进行近义改写和通顺调整，标题使用原标题，不生成 `summary`，不新增章节、观点、案例或比喻；长度约为原文 80% 仅作为提示参考，不做比例或 800 字硬限制；`trans` 使用现有深度原创重构规则。`comic` 等价于 `ori`，默认生成 5 张图，不使用 `-c`，且不读取或参考来源图片；`brand on` 时每个 comic 叙事节点按文字判断角色并传入对应角色图，无法判断时使用 `photos/girl.png`。遇到未知取值、缺少取值，或同一参数被赋予互相冲突的值时，停止执行并提示有效选项，不自行猜测。图片生成规则见 [references/image-generation-modes.md](references/image-generation-modes.md)，开始处理图片前必须读取该文件。
 
 ## 执行流程
 
@@ -70,7 +70,11 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 
 ### 3. 文章处理
 
-`article-mode=ori`：在二次清洗后按原文顺序输出正文，不进行压缩、转义或重写；保留来源 HTML 中由 `<br>` 和块级节点形成的显式换行，计划中的 `text` 块必须保留这些 `\n`，不得把连续原文行合并成一段；标题直接使用来源原文标题，不得重新命名或改写。`article-mode=trans`：执行下述深度原创重构。
+`article-mode=ori`：在二次清洗后按原文顺序输出正文，不进行压缩、转义或重写；保留来源 HTML 中由 `<br>` 和块级节点形成的显式换行，计划中的 `text` 块必须保留这些 `\n`，不得把连续原文行合并成一段；标题直接使用来源原文标题，不得重新命名或改写。
+
+`article-mode=nearby`：保留二次清洗后的原文正文块数量、顺序和显式换行；每个正文块只做近义词替换、语序微调、冗余修饰删减和语病修正，不新增或删除事实、数字、结论、因果、案例、比喻或观点。计划中的正文块必须全部是与来源顺序一一对应的 `text` 块，图片仍按原 `sourceIndex` 插入；不得返回 `summary`、`heading` 或 `quote`。标题直接使用来源标题。约 80% 的长度只作为写作参考，不做硬性校验。
+
+`article-mode=trans`：执行下述深度原创重构。
 
 完整理解文章后再写，不按来源段落逐句处理。遵循 [references/rewriting-standard.md](references/rewriting-standard.md)：
 
