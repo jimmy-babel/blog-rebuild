@@ -29,7 +29,7 @@ description: "Run the v3 isolated WeChat Official Account article reconstruction
 
 ## 调用参数
 
-支持以下等价长短参数；参数可放在文章链接前后：
+支持一次输入一个或多个微信公众号文章链接；支持以下等价长短参数，参数可放在链接前后：
 
 ```text
 --article-mode trans|nearby|ori    -a trans|nearby|ori
@@ -39,13 +39,23 @@ description: "Run the v3 isolated WeChat Official Account article reconstruction
 --brand on|off  -b on|off
 ```
 
+一批中的所有链接共用同一组参数。按用户提供的链接顺序处理并分别输出，每个链接使用独立的工作目录与成品目录。多链接调度规则见下文；单链接调用保持原有流程。
+
 未提供参数时使用 `trans + copy + ai + brand on`。`ori` 仍做二次语义清洗，但清洗后的正文原文直出，不压缩、不改写；`nearby` 保留清洗后原文的正文块数量、顺序和显式换行，逐段进行近义改写和通顺调整，标题使用原标题，不生成 `summary`，不新增章节、观点、案例或比喻；长度约为原文 80% 仅作为提示参考，不做比例或 800 字硬限制；`trans` 使用现有深度原创重构规则。`comic` 等价于 `ori`，默认生成 5 张图，不使用 `-c`，且不读取或参考来源图片；`brand on` 时每个 comic 叙事节点按文字判断角色并传入对应角色图，无法判断时使用 `photos/girl.png`。遇到未知取值、缺少取值，或同一参数被赋予互相冲突的值时，停止执行并提示有效选项，不自行猜测。图片生成规则见 [references/image-generation-modes.md](references/image-generation-modes.md)，开始处理图片前必须读取该文件。
 
 ## 执行流程
 
-### 1. 直接获取与规则清洗
+### 1. 多链接调度与直接获取
 
-创建唯一工作目录，例如 `.recreate-work/0818-143000-文章短名/`，然后执行：
+先按出现顺序提取并校验全部文章 URL，确认参数有效；为每个链接分配独立且唯一的 `.recreate-work/` 子目录。准备阶段可并行执行各链接的抓取、正文审查、文章改写和图片任务整理；所有图片任务必须在进入生图阶段前准备完毕。参数对整批链接生效。
+
+图片阶段使用最多 2 个文章级生图槽位，并按链接输入顺序调度：先启动前两篇；任一篇的全部图片请求结算、artifact 落盘及该篇所需的归一化或本地合成完成后，立即启动队列中的下一篇。直到全部可处理文章完成。每个槽位处理一篇文章的完整图片批次；单篇全部图片仍按现有规则在同一个并发批次中提交，不得拆分单篇批次，跨文章同时生图的篇数不得超过 2。渲染、校验和最终交付可按篇继续，必须保持输出与链接的对应关系。
+
+多链接中的抓取或单篇处理失败只影响对应文章：记录链接、失败阶段和原因，跳过该篇无法继续的步骤，并继续处理后续链接。生图单项失败仍按单篇现有链接占位规则处理。结束时汇总每篇的成品路径或失败信息及告警。单链接执行时，抓取失败仍按原规则停止并请用户提供导出的 HTML/PDF。
+
+### 2. 直接获取与规则清洗
+
+为当前链接使用已分配的唯一工作目录，例如 `.recreate-work/0818-143000-文章短名/`，然后执行：
 
 ```powershell
 python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微信链接>" --work-dir "<工作目录>" --download-images
@@ -57,7 +67,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 
 不要在上述失败场景改用浏览器直接抓取。只有用户提供导出的 HTML/PDF 后，才能以该文件作为新的正文输入。
 
-### 2. 二次语义审查
+### 3. 二次语义审查
 
 按顺序阅读 `source.json` 的 blocks；`copy/rebuild` 需要用图片查看工具检查来源图片，`comic` 只检查文字 blocks，不读取来源图片。删除规则未识别的以下内容：
 
@@ -68,7 +78,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 
 记录被二次清洗删除的 `sourceIndex` 及理由，稍后写入 `article-plan.json.removedSourceIndexes`。保留图片之间及其与相关章节的相对顺序；不要手工复制 blocks 构造 `sourceArchive`，该归档由构建脚本自动生成。
 
-### 3. 文章处理
+### 4. 文章处理
 
 `article-mode=ori`：在二次清洗后按原文顺序输出正文，不进行压缩、转义或重写；保留来源 HTML 中由 `<br>` 和块级节点形成的显式换行，计划中的 `text` 块必须保留这些 `\n`，不得把连续原文行合并成一段；标题直接使用来源原文标题，不得重新命名或改写。
 
@@ -85,11 +95,13 @@ python .agents/skills/recreate-wechat-article-v3/scripts/fetch_article.py "<微�
 5. 从空白页写作，完成后检查是否残留来源文章的标志性长句或连续相似表达。
 6. 除不可避免的专名、数字、短语外，不保留来源句式。
 
-### 4. 生成图片
+### 5. 生成图片
 
 `image-mode=copy|rebuild` 按来源图片逐张处理。`image-mode=comic` 时只根据清洗后的文字理解全文，将内容拆成 `comicCount` 个连续叙事节点；每张图包含少量中文标题、旁白或对白，按节点判断 `sceneType` 并选择对应的 `characters` 角色参考图，不查看、不分析、不传入来源图片。`comic` 生成的图片不带 `sourceIndex`，成功使用 `image` block，失败使用 `generatedImageLink` block。
 
-### 5. 重制每张图片
+多链接时，先准备所有链接对应的图片任务，再按链接输入顺序最多同时运行两篇文章的完整生图与图片处理步骤。前两篇准备完毕后即可分别启动各自的单篇图片批次；任一篇的 imagegen 结果全部结算并完成 artifact 落盘、归一化或本地合成后，释放槽位并启动队列中的下一篇。直到全部文章完成。单篇内部仍一次并发提交全部独立图片请求，并发处理该篇成功图片的归一化或合成；不得拆分单篇批次，任一时刻跨文章同时生图不得超过两篇。
+
+### 6. 重制每张图片
 
 图片计划必须额外记录 `containsHuman`。只要最终画面包含主体、配角、背景人物、局部人体、剪影或人形角色，就标记为 `true`；缺失或非法时按 `true` 处理。`brand on` 且 `containsHuman=true` 时，必须额外传入 `photos/girl.png`，并要求品牌女孩实际出现在画面中并承担可见的叙事作用；`brand off` 时仍不传任何品牌人物参考图。
 
@@ -135,7 +147,7 @@ python .agents/skills/recreate-wechat-article-v3/scripts/compose_card.py --illus
 
 每张请求只尝试一次。`ai`、`comic` 和 `local` 成功结果必须是 `cards/` 下可读且尺寸精确为 864×1080 的 PNG。不得逐图 OCR、重复视觉复查或重试。imagegen、AI 归一或 `local` 合成任一步失败时，都不调用模板卡片，也不嵌入来源图片；普通模式写入 `sourceImageLink`，comic 写入 `generatedImageLink`，由渲染器输出对应占位。
 
-### 5. 渲染 HTML
+### 7. 渲染 HTML
 
 按 [references/manifest-schema.md](references/manifest-schema.md) 创建精简 UTF-8 `article-plan.json`，写入文章/图片模式、标题、可选导语、二次清洗删除的索引、新文章 blocks，以及每张图片的成功路径或失败结果。不得手工整理完整 `sourceArchive` 或计算 `sourceCharacterCount`。
 
@@ -163,4 +175,4 @@ python .agents/skills/recreate-wechat-article-v3/scripts/validate_output.py "<�
 
 ## 完成交付
 
-向用户报告文章目录和最终 HTML 的可点击绝对路径、成功新图数、失败链接占位数、归档原图数量、原图归档告警及被清理内容概况。不要在回答中粘贴来源全文，也不要把内部 manifest 当作用户成品。
+单链接时，向用户报告文章目录和最终 HTML 的可点击绝对路径、成功新图数、失败链接占位数、归档原图数量、原图归档告警及被清理内容概况。多链接时，按输入顺序逐篇报告各文章目录和最终 HTML 路径、成功新图数、失败链接占位数、归档原图数量、原图归档告警及被清理内容概况；另列出未能完成文章的 URL、失败阶段和原因。不要在回答中粘贴来源全文，也不要把内部 manifest 当作用户成品。

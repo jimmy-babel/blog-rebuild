@@ -1,4 +1,4 @@
 interface:
   display_name: "微信文章原创重构（v3）"
   short_description: "使用角色年龄与性别参考图重构微信文章并归档图文"
-  default_prompt: "使用 $recreate-wechat-article-v3 [--article-mode trans|nearby|ori] [--image-mode rebuild|copy|comic] [--comic-count N] [--caption-mode ai|local] [--brand on|off] 处理微信公众号文章链接；文章默认采用 trans，图片默认采用 copy + ai + brand on，按主角性别和年龄选择角色参考图；nearby 使用原标题并逐段近义改写，约 80% 长度仅作参考；brand on 时凡画面包含人类都必须实际加入 girl.png 品牌女孩，最终配图统一归一为 864×1080；comic 默认生成 5 张连续叙事图，并输出含原文归档的离线文章目录。"
+  default_prompt: "使用 $recreate-wechat-article-v3 [--article-mode trans|nearby|ori] [--image-mode rebuild|copy|comic] [--comic-count N] [--caption-mode ai|local] [--brand on|off] 处理一个或多个微信公众号文章链接；文章默认采用 trans，图片默认采用 copy + ai + brand on，按主角性别和年龄选择角色参考图；多链接最多两篇同时生图，按输入顺序补充空闲槽位，单篇内全部图片并发；nearby 使用原标题并逐段近义改写，约 80% 长度仅作参考；brand on 时凡画面包含人类都必须实际加入 girl.png 品牌女孩，最终配图统一归一为 864×1080；comic 默认生成 5 张连续叙事图，并输出含原文归档的离线文章目录。"

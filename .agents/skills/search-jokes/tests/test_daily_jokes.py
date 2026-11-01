@@ -127,7 +127,7 @@ class DailyJokesTests(unittest.TestCase):
     def test_screen_parser_accepts_short_and_long_option_aliases(self):
         parser = daily_jokes.build_parser()
         defaults = parser.parse_args(["screen", "candidates.json"])
-        self.assertEqual((defaults.min_count, defaults.min_dialogue, defaults.count_limit), (90, 6, 120))
+        self.assertEqual((defaults.min_count, defaults.min_dialogue, defaults.count_limit), (90, 6, 150))
         args = parser.parse_args(["screen", "candidates.json", "-count", "100", "-topic", "8", "-countLimit", "150"])
         self.assertEqual((args.min_count, args.min_dialogue, args.count_limit), (100, 8, 150))
 

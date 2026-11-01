@@ -2259,6 +2259,1525 @@
         "normalized_sha256": "6b9bb5507e40e0be0944c9c459c1a88b124961f238ab09b9360b707939cb6fd8",
         "semantic_key": "student-teacher|classroom|monk-necessity|compass-for-alms"
       }
+    },
+    {
+      "id": "wikisource-xlgj-bufengfu-20261019",
+      "text": "千金子骄语人曰：“我富甚，汝何得不奉承？”\n贫者曰：“汝自多金子，我何与而奉汝耶？”\n富者曰：“倘分一半与汝何如？”\n答曰：“汝五百，我五百，我汝等耳，何奉焉？”\n又曰：“悉以相送，难道犹不奉我？”\n答曰：“汝失千金，而我得之，汝又当趋奉我矣。”",
+      "source": {
+        "title": "笑林广记·贫窭部（不奉富）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/贫窭部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "机智反转",
+        "日常幽默"
+      ],
+      "twist_type": "反转",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "富人与穷人",
+        "setting": "谈话",
+        "premise": "富人要求穷人奉承",
+        "punchline": "财产转移后奉承关系反转"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 118,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "531992a3d691ca061326a183021b9fa2c40633bdda3cf175bb7d582256069c02",
+        "semantic_key": "富人与穷人|谈话|富人要求穷人奉承|财产转移后奉承关系反转"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-shizhou-20261019",
+      "text": "一人家贫，每日省米吃粥。\n怕人耻笑，嘱子讳之，人前只说吃饭。\n一日，父同友人讲话，等久不进，子往唤曰：“进来吃饭。”\n父曰：“今日手段快，缘何煮得恁早？”\n子曰：“早倒不早，今日又熬了些清汤。”",
+      "source": {
+        "title": "笑林广记·贫窭部（食粥）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/贫窭部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "家庭",
+        "机智"
+      ],
+      "twist_type": "实话露馅",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "父子",
+        "setting": "家中吃饭",
+        "premise": "父亲掩饰家贫只说吃饭",
+        "punchline": "儿子把粥说成清汤"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 93,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "db08669837c1aee30b549d175ba3ace4a778c23bf77740505ce587d9fa3c3e96",
+        "semantic_key": "父子|家中吃饭|父亲掩饰家贫只说吃饭|儿子把粥说成清汤"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-butingsdang-20261019",
+      "text": "有开当者，本钱甚少。\n初开之月，招牌写一“当”字。\n未几，本钱发尽，赎者不来，乃于“当”字之上，写一“停”字，言停当也。\n及后赎者再来，本钱复至，又于“停”字之上，加一“不”字。\n人见之曰：“我看你这典铺中，实实有些不停当了。”",
+      "source": {
+        "title": "笑林广记·讥刺部（不停当）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/讥刺部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "文字游戏",
+        "生意"
+      ],
+      "twist_type": "招牌文字反转",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "典铺店主与路人",
+        "setting": "典铺门口",
+        "premise": "店主不断往当字上添字说明经营状态",
+        "punchline": "招牌拼成不停当"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 110,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "697761ce43faa65b9af1ab6b5b0935c2d84fed807188f2f04b7f8d96132fda27",
+        "semantic_key": "典铺店主与路人|典铺门口|店主不断往当字上添字说明经营状态|招牌拼成不停当"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-chuchou-20261019",
+      "text": "有屠牛者，过宰猪者之家，其子欲讳“宰猪”二字，回云：“家尊出亥去了。”\n屠牛者归，对子述之，称赞不已。\n子亦领悟，次日屠猪至，其子亦回云：“家父往外出丑去了。”\n问：“几时归？”\n答曰：“出尽丑自然回来了。”",
+      "source": {
+        "title": "笑林广记·谬误部（出丑）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/谬误部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "文字游戏",
+        "家庭"
+      ],
+      "twist_type": "照猫画虎",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "父子与来客",
+        "setting": "家门口",
+        "premise": "孩子用谐音替父亲回避职业",
+        "punchline": "把父亲外出说成出丑"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 100,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "c46820d7b97a58c4fd1bc7361399b032803b47ffe61f8e79fd307bd6555dfe00",
+        "semantic_key": "父子与来客|家门口|孩子用谐音替父亲回避职业|把父亲外出说成出丑"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-lishi-20261019",
+      "text": "一人元旦出门云：“头一日必得利市方妙。”\n遂于桌上写一“吉”字。\n不意连走数家，求一茶不得。\n将“吉”字倒看良久，曰：“原来写了‘口干〈（谐音干）〉’二字，自然没得吃了。”\n再顺看曰：“吾论来，竟该有十一家替我润口。”",
+      "source": {
+        "title": "笑林广记·谬误部（利市）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/谬误部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "文字游戏",
+        "日常"
+      ],
+      "twist_type": "看字解意",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "出门人",
+        "setting": "元旦拜访人家",
+        "premise": "出门人求新年吉利却讨不到茶",
+        "punchline": "把吉字倒看成口干并顺算十一家"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 105,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "33d0ec232e448cfbd5f7da5035c5601b7c5d15582605a36341d8c7ce0968c46b",
+        "semantic_key": "出门人|元旦拜访人家|出门人求新年吉利却讨不到茶|把吉字倒看成口干并顺算十一家"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-zuojian-20261019",
+      "text": "一监生妻，屡劝其夫读书，因假寓于寺中。\n素无书箱，乃唤脚夫以罗担挑书先往。\n脚夫中途疲甚，身坐担上。\n适生至，闻傍人语所坐《通鉴》，因怒责脚夫。\n夫谢罪曰：“小人因为不识字，一时坐了鉴〈（监）〉，弗怪弗怪。”",
+      "source": {
+        "title": "笑林广记·古艳部（坐监）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/古艳部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "文字游戏",
+        "读书"
+      ],
+      "twist_type": "谐音误会",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "书生与脚夫",
+        "setting": "搬运书籍途中",
+        "premise": "脚夫不识字坐在书担上",
+        "punchline": "把坐了鉴解释成坐了监"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 100,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "18cb6938d1ebbfadc4403b9e8924251d4c396c5526ce479490cee514746b1d56",
+        "semantic_key": "书生与脚夫|搬运书籍途中|脚夫不识字坐在书担上|把坐了鉴解释成坐了监"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-shudi-20261019",
+      "text": "一生赁僧房读书，每日游玩，午后归房，呼童取书来。\n童持《文选》，视之，曰：“低。”\n持《汉书》，视之，曰：“低。”\n又持《史记》，视之，曰：“低。”\n僧大诧曰：“此三书，熟其一，足称饱学，俱云低，何也？”\n生曰：“我要睡，取书作枕头耳。”",
+      "source": {
+        "title": "笑林广记·古艳部（书低）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/古艳部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "读书",
+        "反转"
+      ],
+      "twist_type": "用途反转",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "书生与童子",
+        "setting": "僧房",
+        "premise": "书生让童子挑书却逐本嫌低",
+        "punchline": "拿书当枕头睡觉"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 114,
+      "line_count": 6,
+      "fingerprints": {
+        "normalized_sha256": "d251a2be424fbfd6d09c2ea1169009fce246f0b2449024f6cb002845b39c70e2",
+        "semantic_key": "书生与童子|僧房|书生让童子挑书却逐本嫌低|拿书当枕头睡觉"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-cangchu-20261019",
+      "text": "夫在田中耦耕，妻唤吃饭，夫乃高声应曰：“待我藏好锄头，便来也！”\n乃归，妻戒夫曰：“藏锄宜密。\n你既高声，岂不被人偷去？”\n因促之往看，锄果失矣。\n因急归，低声附其妻耳云：“锄已被人偷去了。”",
+      "source": {
+        "title": "笑林广记·殊禀部（藏锄）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/殊禀部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "夫妻",
+        "生活"
+      ],
+      "twist_type": "迟来的保密",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "夫妻",
+        "setting": "田间",
+        "premise": "丈夫高声说要藏锄头",
+        "punchline": "锄头已丢后才压低声音告知妻子"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 92,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "9e5568f6a923f78ec2412c80c68364e87a1a8e4d706ec24c7e7a9da2c670e8e7",
+        "semantic_key": "夫妻|田间|丈夫高声说要藏锄头|锄头已丢后才压低声音告知妻子"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-jiaosui-20261019",
+      "text": "一人新育女，有以两岁儿来议亲者，其人怒曰：“何得欺我！\n吾女一岁，他子两岁，若吾女十岁，渠儿二十岁矣，安得许此老婿！”\n妻谓夫曰：“汝算差矣！\n吾女今年虽一岁，等到明年此时，便与彼儿同庚，如何不许？”",
+      "source": {
+        "title": "笑林广记·殊禀部（较岁）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/殊禀部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "夫妻",
+        "算术"
+      ],
+      "twist_type": "算术反转",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "夫妻",
+        "setting": "谈论子女婚事",
+        "premise": "父亲拒绝女儿与年长孩子议亲",
+        "punchline": "妻子用明年同岁纠正计算"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 97,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "e35b2dccec0edeee4f514ffaf536fb4fc21ca6c59934a955b34aea2a0ac45766",
+        "semantic_key": "夫妻|谈论子女婚事|父亲拒绝女儿与年长孩子议亲|妻子用明年同岁纠正计算"
+      }
+    },
+    {
+      "id": "wikisource-xlgj-yinjiangtou-20261019",
+      "text": "一人生子，虑其难养，请一星家算命。\n星士曰：“关煞倒也没得，大来运限俱好，只是四柱中犯点贼星，不成正局。”\n那人曰：“不妨，只要养得大，就叫他学做银匠。”\n星士曰：“为何？”\n答曰：“做了银匠，那日不偷几分养家活口。”",
+      "source": {
+        "title": "笑林广记·术业部（银匠偷）",
+        "url": "https://zh.wikisource.org/zh-hans/笑林广记/术业部"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "古籍",
+        "职业",
+        "双关"
+      ],
+      "twist_type": "职业反转",
+      "state": "shown",
+      "batch_id": "20261019-daily-jokes-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "父亲与算命先生",
+        "setting": "算命",
+        "premise": "算命说孩子命中犯贼星",
+        "punchline": "父亲把贼星解释成让孩子做银匠偷几分"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 105,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "74d1a55c7ce8cc8a0c6782bc700c16489a9c22f051ef34760a0a017523bab9ca",
+        "semantic_key": "父亲与算命先生|算命|算命说孩子命中犯贼星|父亲把贼星解释成让孩子做银匠偷几分"
+      }
+    },
+    {
+      "id": "20261019-003",
+      "text": "经理：“今天开会的主题是‘如何提高工作效率’。”\n员工甲：“我建议减少开会时间。”\n员工乙：“我建议取消不必要的会议。”\n员工丙：“我建议会议时间改为喝茶时间。”\n经理：“你们的建议很好，现在散会。”",
+      "source": {
+        "title": "15个职场趣事笑话，让你笑到停不下来",
+        "url": "https://www.tides.cn/p_wen-xiaohua-zhi-chang-qu-shi-gao-xiao-xiao-hua-2"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "会议",
+        "群像"
+      ],
+      "twist_type": "议题自指",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "team-manager",
+        "setting": "work-meeting",
+        "premise": "efficiency-meeting",
+        "punchline": "suggestions-end-the-meeting"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 96,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "ddae7b78f8ce8d678d2728d18d85d2fbc4b5682a54f523e298c33ef4d89e3eda",
+        "semantic_key": "team-manager|work-meeting|efficiency-meeting|suggestions-end-the-meeting"
+      }
+    },
+    {
+      "id": "20261019-004",
+      "text": "员工：“经理，我想请假一天。”\n经理：“理由？”\n员工：“我昨天晚上做了个梦，梦到公司倒闭了，我要去看看是不是真的。”\n经理：“那你今天来上班就是为了确认？”\n员工：“是的，现在确认了，所以我要请假庆祝一下。”",
+      "source": {
+        "title": "15个职场趣事笑话，让你笑到停不下来",
+        "url": "https://www.tides.cn/p_wen-xiaohua-zhi-chang-qu-shi-gao-xiao-xiao-hua-2"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "请假",
+        "荒诞"
+      ],
+      "twist_type": "逻辑反转",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "employee-manager",
+        "setting": "workplace",
+        "premise": "dream-company-closed",
+        "punchline": "requests-celebration-leave-after-confirmation"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 101,
+      "line_count": 5,
+      "fingerprints": {
+        "normalized_sha256": "ea823cd8e6788d61a84d81b6dd937d0c08a20443ba28daaabb85fe6f8018c6fd",
+        "semantic_key": "employee-manager|workplace|dream-company-closed|requests-celebration-leave-after-confirmation"
+      }
+    },
+    {
+      "id": "20261019-006",
+      "text": "员工：“经理，我想辞职。”\n经理：“为什么？”\n员工：“因为我找到了一份更好的工作。”\n经理：“什么工作？”\n员工：“我找到了一份不工作也能赚钱的工作。”\n经理：“那是什么工作？”\n员工：“做梦。”",
+      "source": {
+        "title": "15个职场趣事笑话，让你笑到停不下来",
+        "url": "https://www.tides.cn/p_wen-xiaohua-zhi-chang-qu-shi-gao-xiao-xiao-hua-2"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "辞职",
+        "冷幽默"
+      ],
+      "twist_type": "字面反转",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "employee-manager",
+        "setting": "workplace",
+        "premise": "resignation-better-job",
+        "punchline": "dreaming-is-the-job"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 93,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "be1027cecb15c3b0c61bf1cb5062e06b9081e2a659bb4d88c4c7244d0bf45a25",
+        "semantic_key": "employee-manager|workplace|resignation-better-job|dreaming-is-the-job"
+      }
+    },
+    {
+      "id": "20261019-008",
+      "text": "员工：“经理，我想请假一天。”\n经理：“理由？”\n员工：“我今天不舒服。”\n经理：“哪里不舒服？”\n员工：“我看到工作就不舒服。”\n经理：“那你请假一天，看到休息就舒服了？”\n员工：“是的，我看到休息就舒服了。”",
+      "source": {
+        "title": "15个职场趣事笑话，让你笑到停不下来",
+        "url": "https://www.tides.cn/p_wen-xiaohua-zhi-chang-qu-shi-gao-xiao-xiao-hua-2"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "请假",
+        "双关"
+      ],
+      "twist_type": "字面双关",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "employee-manager",
+        "setting": "workplace",
+        "premise": "work-causes-discomfort",
+        "punchline": "rest-cures-discomfort"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 100,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "54ed7f97c34366a068d31b502ee15a874c1b1e340ce143579d7ce1a12ddb6654",
+        "semantic_key": "employee-manager|workplace|work-causes-discomfort|rest-cures-discomfort"
+      }
+    },
+    {
+      "id": "20261019-012",
+      "text": "办公室一女同事为人勤快，每天拿个抹布抹抹桌子，擦擦椅子。。。昨天下午，我从厕所出来，刚坐椅子上，她就一拍我肩膀：“哥，快把屁股抬起来，我帮你擦擦椅子。”我说：“我在厕所已经擦过了。”",
+      "source": {
+        "title": "职场笑话",
+        "url": "https://www.xiaohuayoumo.com/zhichangxiaohua/"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "误会",
+        "双关"
+      ],
+      "twist_type": "对象错位",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "coworkers",
+        "setting": "office",
+        "premise": "coworker-wipes-chair",
+        "punchline": "bathroom-wiping-misunderstanding"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 91,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "8db82e0b28919e337e073697c55dc1e626412ad06077dc3cc7c7d6f2c02c1321",
+        "semantic_key": "coworkers|office|coworker-wipes-chair|bathroom-wiping-misunderstanding"
+      }
+    },
+    {
+      "id": "20261019-014",
+      "text": "饭店中，一人对服务员说，“这汤我没法喝”。服务员说：“不好意思，您稍等，我去找经理来;”这人对经理说，“这汤我没法喝”。经理说：“不好意思，您稍等，我去找厨师来;”这人对厨师说，“这汤我没法喝”。厨师问“为什么呢?”这人回答“没给我勺子”。",
+      "source": {
+        "title": "经典幽默笑话 三句半台词大全 聊天活跃气氛的幽默笑话",
+        "url": "https://k.sina.cn/article_2506867152_956bc1d00010037r6.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "餐饮",
+        "误会",
+        "生活"
+      ],
+      "twist_type": "原因揭晓",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "customer-staff",
+        "setting": "restaurant",
+        "premise": "customer-cannot-drink-soup",
+        "punchline": "no-spoon-provided"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 120,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "97a4abd70b06a7c2e14b6a938855458dd7eca0cc157f8f4c5ac6c34b8d52ce50",
+        "semantic_key": "customer-staff|restaurant|customer-cannot-drink-soup|no-spoon-provided"
+      }
+    },
+    {
+      "id": "20261019-017",
+      "text": "妈妈：“我的表。”\n妈妈：“我的钱包。”\n妈妈：“我的手机。”\n妈妈：“又落什么了呀~~~”\n孩子：“妈妈，今天是星期六吧？”\n妈妈：“是啊”\n孩子：“那我今天不用上学”\n妈妈：“咣当……”",
+      "source": {
+        "title": "小学童言无忌故事",
+        "url": "https://rqxh.net/article/view.aspx?id=11927"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "校园",
+        "亲子",
+        "忘性"
+      ],
+      "twist_type": "拖延上学",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 8,
+      "semantic_signature": {
+        "relationship": "child-mother",
+        "setting": "morning-home",
+        "premise": "child-keeps-returning-for-forgotten-items",
+        "punchline": "forgot-school-is-not-needed-today"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 88,
+      "line_count": 8,
+      "fingerprints": {
+        "normalized_sha256": "5d94ad8e432f538cdc8a464c508edc19c49937049504bf05eb03011b18543778",
+        "semantic_key": "child-mother|morning-home|child-keeps-returning-for-forgotten-items|forgot-school-is-not-needed-today"
+      }
+    },
+    {
+      "id": "20261019-018",
+      "text": "母亲给儿子买了一只鹦鹉，然后乘车回家。在车上，儿子问母亲：“这只鹦鹉是公的还是母的？”“母的。”母亲回答说。“你怎么知道的？”儿子又问。车上鸦雀无声，乘客个个都想听这位母亲如何来回答。只见她不慌不忙地答道：“你没看见这只嘴上涂了口红吗？”",
+      "source": {
+        "title": "老师、学生、老爷爷、等搞笑对话",
+        "url": "https://rqxh.net/article/view.aspx?id=11926"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "亲子",
+        "动物",
+        "误判"
+      ],
+      "twist_type": "外观判断",
+      "state": "shown",
+      "batch_id": "daily-20261019-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "mother-child",
+        "setting": "bus",
+        "premise": "child-asks-parrot-sex",
+        "punchline": "mother-infers-from-lipstick"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 119,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "375707e8559371ec0a491fcd0e6f20025edd81de2887e27d9866159f2a7681ca",
+        "semantic_key": "mother-child|bus|child-asks-parrot-sex|mother-infers-from-lipstick"
+      }
+    },
+    {
+      "id": "20261019-023",
+      "text": "一辆超速汽车被警方巡逻车拦住，警察一边作记录，一边对司机说;“你将得到一张超速罚款传票，因为你刚才的车速超过了六十英里。”司机马上说：“警官先生，请您写上一百英里好吗?要知道，我正要把这辆车卖掉呢!”",
+      "source": {
+        "title": "短篇笑话故事100字（精选12个）",
+        "url": "https://www.yjbys.com/xiaohua/gushi/375325.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "交通",
+        "机智",
+        "反转"
+      ],
+      "twist_type": "利益反转",
+      "state": "shown",
+      "batch_id": "daily-20261019-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "driver-police",
+        "setting": "roadside-stop",
+        "premise": "driver-receives-speeding-ticket",
+        "punchline": "asks-for-higher-speed-to-help-sell-car"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 100,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "f53c9f2151a237f15279b9c1aa5b64ef867925d07e5bc7bd39bb65700377bdb8",
+        "semantic_key": "driver-police|roadside-stop|driver-receives-speeding-ticket|asks-for-higher-speed-to-help-sell-car"
+      }
+    },
+    {
+      "id": "20261019-024",
+      "text": "汤姆来找吉姆要帐，吉姆躲在家里不敢露面。他见吉姆的鞋放在门旁，知道人一定在家，便上前敲门。可屋里一点动静也没有，他就大声说：\"吉姆，我知道你躲在家里，你的鞋子还放在门边呢?\"从里面传来一个声音：\"不，我可以光着脚出去。\"",
+      "source": {
+        "title": "短篇笑话故事100字（精选12个）",
+        "url": "https://www.yjbys.com/xiaohua/gushi/375325.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "朋友",
+        "机智",
+        "误导"
+      ],
+      "twist_type": "反向推理",
+      "state": "shown",
+      "batch_id": "daily-20261019-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "debtor-friend",
+        "setting": "front-door",
+        "premise": "visitor-uses-shoes-to-prove-friend-is-home",
+        "punchline": "friend-says-he-can-leave-barefoot"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 110,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "c526f833ac3243d72e52a84b29cb4ba874f053ac1bb307126020cc86533f064e",
+        "semantic_key": "debtor-friend|front-door|visitor-uses-shoes-to-prove-friend-is-home|friend-says-he-can-leave-barefoot"
+      }
+    },
+    {
+      "id": "20261019-026",
+      "text": "舞会上，某人想逗偶遇的舞伴开心：“你瞧那个傻瓜，他就是我们的经理，我从没见过像他那样的白痴。”“你知道我是谁吗?我就是你们经理的妻子!”女的说。“你知道我是谁吗?”男的问。“不知道。”“噢，谢天谢地。",
+      "source": {
+        "title": "笑话故事100字100篇",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "社交",
+        "脱身"
+      ],
+      "twist_type": "身份反转",
+      "state": "shown",
+      "batch_id": "daily-20261019-02",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "coworker-manager-wife",
+        "setting": "dance",
+        "premise": "man-insults-manager-in-front-of-stranger",
+        "punchline": "stranger-is-manager-wife-man-hides-identity"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 100,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "e076534466b0395b1c0a38e635ebe3e2627f35eff2532e486f20828200f7a979",
+        "semantic_key": "coworker-manager-wife|dance|man-insults-manager-in-front-of-stranger|stranger-is-manager-wife-man-hides-identity"
+      }
+    },
+    {
+      "id": "20261019-030",
+      "text": "一次，员工聚餐，有个同事要了一大瓶雪碧，给大家倒了一圈，轮到自己的时候瓶子空了。于是那同事晃着雪碧瓶，对服务员说：“这个还有吗？”服务员屁颠屁颠地跑过来，接过瓶子仔仔细细地检查了一遍，一脸诚恳地说：“没有了。”",
+      "source": {
+        "title": "笑话故事100字100篇",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "餐饮",
+        "字面理解",
+        "职场"
+      ],
+      "twist_type": "字面回应",
+      "state": "shown",
+      "batch_id": "daily-20261019-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "coworker-server",
+        "setting": "restaurant",
+        "premise": "asks-if-drink-remains",
+        "punchline": "server-honestly-confirms-empty-bottle"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 105,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "038f54ce605ff24fdfb36d371e9b7cd7fe1b178f550a7bd3776d0476668c86ff",
+        "semantic_key": "coworker-server|restaurant|asks-if-drink-remains|server-honestly-confirms-empty-bottle"
+      }
+    },
+    {
+      "id": "20261019-031",
+      "text": "有一次，乘坐公交车时，公交车司机突然停车，将人扔到公交车上，独自跑进便利店。大家等了许久，都很疑惑。然后他买了一瓶可乐就跑回来了。停了几站后，他又停下来逃跑了。车上的乘客更是无语了。结果，司机提着一罐回来，原来是“又一瓶”。。。",
+      "source": {
+        "title": "微信经典幽默笑话精选",
+        "url": "https://www.et53.com/detail/zhichangxiaohua/1265.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "公交",
+        "谐音",
+        "冷幽默"
+      ],
+      "twist_type": "谐音双关",
+      "state": "shown",
+      "batch_id": "daily-20261019-02",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "driver-passengers",
+        "setting": "bus",
+        "premise": "driver-repeatedly-stops-for-drink",
+        "punchline": "buys-yet-another-bottle"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 114,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "319a78e7956495432562f5085adf3693b9bc6ec09b0b8c287b6b97ef38aab325",
+        "semantic_key": "driver-passengers|bus|driver-repeatedly-stops-for-drink|buys-yet-another-bottle"
+      }
+    },
+    {
+      "id": "20261019-034",
+      "text": "某天，收到一莫名信息：我们还是分了吧，以后不要再联系了。我猜估计是一失恋的发错了，出于好心我回了一条：你发错了，我不认识你。片刻，收到另一条：你丫够狠，这么快就装作不认识了，行，算我瞎了眼了。",
+      "source": {
+        "title": "幽默笑话摘抄 活跃气氛的幽默笑话",
+        "url": "https://m.5068.com/cj/xiaohua/1013295.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "短信",
+        "误会",
+        "社交"
+      ],
+      "twist_type": "错认关系",
+      "state": "shown",
+      "batch_id": "daily-20261019-03",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "strangers-texting",
+        "setting": "phone-messages",
+        "premise": "replying-to-misdelivered-breakup-text",
+        "punchline": "sender-thinks-recipient-is-pretending"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 96,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "42b5ee65df535c625bb814d23dc19c47fce2e63d181023bf0dccdda1f65f466d",
+        "semantic_key": "strangers-texting|phone-messages|replying-to-misdelivered-breakup-text|sender-thinks-recipient-is-pretending"
+      }
+    },
+    {
+      "id": "20261019-040",
+      "text": "一个年轻的飞行员想让别人明白在飞行频率上谁说了算。因此，当他第一次在夜间飞近飞机场的时候，他没有向指挥塔询问任何常规的问题，而是问：“猜猜我是谁?”对方关掉了飞机场上的灯，回答：“猜猜你在哪儿! ”",
+      "source": {
+        "title": "幽默笑话摘抄 活跃气氛的幽默笑话",
+        "url": "https://m.5068.com/cj/xiaohua/1013295.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "航空",
+        "冷幽默",
+        "反转"
+      ],
+      "twist_type": "反向回应",
+      "state": "shown",
+      "batch_id": "daily-20261019-03",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "pilot-air-traffic-control",
+        "setting": "night-airport",
+        "premise": "pilot-challenges-control-to-guess-identity",
+        "punchline": "controller-turns-off-runway-lights"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 98,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "c2b1b083c9763cd117ff17eb17f026e6849bfff09ebb995db1f344639053472c",
+        "semantic_key": "pilot-air-traffic-control|night-airport|pilot-challenges-control-to-guess-identity|controller-turns-off-runway-lights"
+      }
+    },
+    {
+      "id": "20261019-041",
+      "text": "一个三流作家写了个剧本，他把本子送给剧院领导审阅。领导说：“对不起，我们是不允许在剧院里听到骂娘一类的脏话的。”作家反驳道：“可是，我的剧本里并没有一句脏话呀!”领导答道：“剧本里是没有，可要是把它搬上舞台，剧场里就会听到不少。”",
+      "source": {
+        "title": "笑话故事100字100篇",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "剧场",
+        "观众",
+        "反转"
+      ],
+      "twist_type": "因果反转",
+      "state": "shown",
+      "batch_id": "daily-20261019-03",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "playwright-theater-manager",
+        "setting": "theater",
+        "premise": "manager-rejects-script-for-profanity",
+        "punchline": "audience-will-supply-the-profanity"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 115,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "718730431490b503900fdeb5c0c560be20dd9cc8305b9906e6ea04f7ebd30f70",
+        "semantic_key": "playwright-theater-manager|theater|manager-rejects-script-for-profanity|audience-will-supply-the-profanity"
+      }
+    },
+    {
+      "id": "20261019-044",
+      "text": "员工：“经理，我想加薪。”\n经理：“为什么？”\n员工：“因为我工作很努力。”\n经理：“那你觉得你值多少钱？”\n员工：“我觉得我至少值月薪10万。”\n经理：“那我给你月薪10万，你能做什么？”\n员工：“我能做月薪10万的梦。”",
+      "source": {
+        "title": "15个职场趣事笑话，让你笑到停不下来",
+        "url": "https://www.tides.cn/p_wen-xiaohua-zhi-chang-qu-shi-gao-xiao-xiao-hua-2"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "职场",
+        "加薪",
+        "谐趣"
+      ],
+      "twist_type": "梦想落差",
+      "state": "shown",
+      "batch_id": "daily-20261019-04",
+      "dialogue_turn_count": 7,
+      "semantic_signature": {
+        "relationship": "employee-manager",
+        "setting": "workplace",
+        "premise": "employee-asks-for-raise",
+        "punchline": "ten-thousand-salary-only-in-dream"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 106,
+      "line_count": 7,
+      "fingerprints": {
+        "normalized_sha256": "92a34302be13a3bfd3efb8824c98dfee01d20c8b22666cb6308428a6a713439f",
+        "semantic_key": "employee-manager|workplace|employee-asks-for-raise|ten-thousand-salary-only-in-dream"
+      }
+    },
+    {
+      "id": "20261019-049",
+      "text": "同学聚会时，班里一二逼同学对老师说：老师，今个必须敬您一杯，感谢你当年那么照顾我，每讲完一道题都问我听懂了没！老师特别淡定的来句：啊。。。其实我是想，只要你明白了大家都会明白。。。",
+      "source": {
+        "title": "感谢你当年那么照顾我",
+        "url": "https://www.xiaohuayoumo.com/xiaoyuanxiaohua/21636.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "校园",
+        "师生",
+        "反转"
+      ],
+      "twist_type": "自嘲反转",
+      "state": "shown",
+      "batch_id": "daily-20261019-05",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "student-teacher",
+        "setting": "class-reunion",
+        "premise": "student-thanks-teacher-for-checking-understanding",
+        "punchline": "teacher-wanted-the-student-to-understand-so-everyone-could"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 90,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "32e6023ae819cbc74f0d5ae0e761bdd2b220bc2b250b196705a4b453ecc479a3",
+        "semantic_key": "student-teacher|class-reunion|student-thanks-teacher-for-checking-understanding|teacher-wanted-the-student-to-understand-so-everyone-could"
+      }
+    },
+    {
+      "id": "20261019-050",
+      "text": "今天下午孩子哭着跑来找我，说:“妈妈，老师不讲理。”“我问怎么了?”他说:“试卷上问9个人过河只有一舟船，一次只能坐2人，问几次能载完!我说8次，老师非说5次。”我一想老师说得对啊!孩子问我:“妈妈船不要人开过来吗?”。",
+      "source": {
+        "title": "幽默笑话：妈妈，老师不讲理",
+        "url": "https://k.sina.cn/article_6446136053_180383af500100657j.html"
+      },
+      "accessed_at": "2026-10-19",
+      "tags": [
+        "亲子",
+        "数学",
+        "理解偏差"
+      ],
+      "twist_type": "问题条件遗漏",
+      "state": "shown",
+      "batch_id": "daily-20261019-05",
+      "dialogue_turn_count": 5,
+      "semantic_signature": {
+        "relationship": "child-mother-teacher",
+        "setting": "home-school",
+        "premise": "child-answers-boat-crossing-question",
+        "punchline": "forgets-boat-must-return"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 110,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "4268d04c6dfc2ac8c88116c7975436409e8217de0eb1ec7aff9d953b2e264e90",
+        "semantic_key": "child-mother-teacher|home-school|child-answers-boat-crossing-question|forgets-boat-must-return"
+      }
+    },
+    {
+      "id": "20261020-012",
+      "text": "第一次在男朋友家住的时候，他家吃火锅，然后我近视没看清楚，筷子夹了块姜，他爸说那是姜，然后全家人看着我，我瞬间尴尬，憨憨地说了一句，我喉咙痒，吃块姜。然后男朋友妈妈给我找了火锅里的全部姜。",
+      "source": {
+        "title": "第一次在男朋友家住的时候 - 家庭笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/68147"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "家庭",
+        "初次见面",
+        "尴尬化解"
+      ],
+      "twist_type": "尴尬升级",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 1,
+      "semantic_signature": {
+        "relationship": "girlfriend-boyfriend-parents",
+        "setting": "first-visit-to-boyfriends-home-hotpot",
+        "premise": "near-sighted-guest-picks-ginger-and-says-throat-itches",
+        "punchline": "boyfriends-mother-finds-all-the-ginger-for-her"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 94,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "c2ca3427d88402dcccc1f42ca0cabf3f1696e26f58608fee740b058b55b18c4c",
+        "semantic_key": "girlfriend-boyfriend-parents|first-visit-to-boyfriends-home-hotpot|near-sighted-guest-picks-ginger-and-says-throat-itches|boyfriends-mother-finds-all-the-ginger-for-her"
+      }
+    },
+    {
+      "id": "20261020-014",
+      "text": "我和我妈手机共用一个iCloud帐号，前段时间我妈手机重装后，我们的通讯录就合并了。刚才在公交车上，我爸打来电话，我掏出手机，上面显示硕大的五个字“老爸或老公”，挤在我旁边的一个大哥看到了我的手机，又看了看我，露出了耐人寻味的浅笑。",
+      "source": {
+        "title": "冷笑话 - 老爸或老公 - 幽默笑话百分百",
+        "url": "https://www.xiaohuayoumo.com/lengxiaohua/13983.html"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "冷笑话",
+        "手机",
+        "误会"
+      ],
+      "twist_type": "误解反转",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 0,
+      "semantic_signature": {
+        "relationship": "adult-daughter-father-mother-stranger",
+        "setting": "bus-ride-with-phone-contact-list",
+        "premise": "parents-share-icloud-account-and-contacts-merge",
+        "punchline": "father-call-shows-contact-name-dad-or-husband-and-stranger-misreads-it"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 116,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "7103af0cc4d49b290d555a16193f76572ecd9a38a96faa2effdeaacb62f8869d",
+        "semantic_key": "adult-daughter-father-mother-stranger|bus-ride-with-phone-contact-list|parents-share-icloud-account-and-contacts-merge|father-call-shows-contact-name-dad-or-husband-and-stranger-misreads-it"
+      }
+    },
+    {
+      "id": "20261020-001",
+      "text": "有一富翁，儿子愚笨，花大钱请了一位名师教儿子念书。\n一年过去了，富翁询问儿子的学习情况，名师说道：“七窍通了六窍。”\n富翁很是高兴，付了学费让名师回家过年。\n家里来了客人，富翁总用名师的话来夸儿子，终于有位来客惊叹道：“一窍未通啊！”",
+      "source": {
+        "title": "七窍通了六窍 - 古代笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/68142"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "古代",
+        "教育",
+        "语言反转"
+      ],
+      "twist_type": "误解反转",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "wealthy-father-teacher-visitor",
+        "setting": "private-tutoring",
+        "premise": "teacher-praises-student-as-six-of-seven-apertures-open",
+        "punchline": "visitor-reframes-phrase-as-one-aperture-still-closed"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 114,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "9478fb60159715d480437f55b0bf1398b8b2e7dbe4d7467e48d3c2b5c02de3d2",
+        "semantic_key": "wealthy-father-teacher-visitor|private-tutoring|teacher-praises-student-as-six-of-seven-apertures-open|visitor-reframes-phrase-as-one-aperture-still-closed"
+      }
+    },
+    {
+      "id": "20261020-002",
+      "text": "老鼠雇佣了一只千里马去两千里外办事，千里马一路疾驰如风，老鼠很是满意，可是行至中途千里马突然停了下来死活不肯前进，老鼠大是生气询问原因。\n千里马清了清嗓子，骄傲的说道：“因为我是千里马！”",
+      "source": {
+        "title": "千里马 - 动物笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/68127"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "动物",
+        "双关",
+        "冷笑话"
+      ],
+      "twist_type": "词义错位",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "mouse-employer-horse-employee",
+        "setting": "long-distance-errand",
+        "premise": "mouse-hires-thousand-mile-horse-for-2000-mile-trip",
+        "punchline": "horse-claims-its-name-means-it-stops-after-1000-miles"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 93,
+      "line_count": 2,
+      "fingerprints": {
+        "normalized_sha256": "81478fd26564b81d82b5ea0b4acb70ade8236ec03a996fca5aab4f8053de1ef3",
+        "semantic_key": "mouse-employer-horse-employee|long-distance-errand|mouse-hires-thousand-mile-horse-for-2000-mile-trip|horse-claims-its-name-means-it-stops-after-1000-miles"
+      }
+    },
+    {
+      "id": "20261020-003",
+      "text": "有一只老猫在虎笼上捉麻雀，不幸跌入虎笼，弹到老虎头上，彼此都大吓一跳。\n这时老虎逼近老猫，老猫急中生智，故作镇静道：小样，我是解救你的虎神！\n老虎想了想：既然你是虎神，那你可见过我妈?\n老猫摇头晃脑：你妈叫你吃饭，所以我来啦，可怜的孩子。",
+      "source": {
+        "title": "急中生智 - 动物笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/68125"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "动物",
+        "临场应变",
+        "身份错位"
+      ],
+      "twist_type": "身份错位",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "cat-tiger",
+        "setting": "tiger-cage",
+        "premise": "cat-falls-into-cage-and-pretends-to-be-tiger-deity",
+        "punchline": "cat-claims-tigers-mother-sent-it-to-call-him-for-dinner"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 116,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "44dfcd30300b9809ab0bfb491481ac8295dd0549336658a7c28854aaa60c424b",
+        "semantic_key": "cat-tiger|tiger-cage|cat-falls-into-cage-and-pretends-to-be-tiger-deity|cat-claims-tigers-mother-sent-it-to-call-him-for-dinner"
+      }
+    },
+    {
+      "id": "20261020-004",
+      "text": "周末访友回家的动车上，我与旁边热情的阿姨聊天，她说我像极了她的侄女。\n我问：“真的吗，那她结婚了没有？”\n阿姨一愣：“结了，为什么这么问？”\n我说：“没事，就是想确定一下就我这种长相能不能嫁得出去。”",
+      "source": {
+        "title": "为什么这么问 - 社会笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/66504"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "生活",
+        "自嘲",
+        "对话反转"
+      ],
+      "twist_type": "自嘲反转",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 4,
+      "semantic_signature": {
+        "relationship": "strangers-on-train",
+        "setting": "weekend-train-ride",
+        "premise": "woman-says-passenger-resembles-her-niece",
+        "punchline": "passenger-asks-if-niece-married-to-gauge-her-own-marriage-prospects"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 97,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "d7588e233ebe42cbde225cb5530093e3719e674a6691e55050ac6cf70260b80a",
+        "semantic_key": "strangers-on-train|weekend-train-ride|woman-says-passenger-resembles-her-niece|passenger-asks-if-niece-married-to-gauge-her-own-marriage-prospects"
+      }
+    },
+    {
+      "id": "20261020-005",
+      "text": "老师组织同学们收看足球赛。比赛结束后，组织大家讨论，主题是：在学习上如何发扬足球精神。“如果说结合学习，”小明发言说：“我们之所以考试分数低，就因为球传的不好，有些人不自觉，别人把球传给他，他抄完了就不肯再往下传。”",
+      "source": {
+        "title": "超逗人的囧事冷笑话-ZOL笑话频道",
+        "url": "https://xiaohua.zol.com.cn/detail59/58022.html"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "校园",
+        "学习",
+        "借用比喻"
+      ],
+      "twist_type": "比喻落地",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 1,
+      "semantic_signature": {
+        "relationship": "teacher-student",
+        "setting": "classroom-discussion-after-soccer",
+        "premise": "class-discusses-applying-soccer-teamwork-to-study",
+        "punchline": "student-says-exam-scores-low-because-answer-sharing-is-like-ball-passing"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 108,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "e2857313b125fd136e1ffb0df7ee870bc1ba4b4a646a394e96ff13aeb198cda4",
+        "semantic_key": "teacher-student|classroom-discussion-after-soccer|class-discusses-applying-soccer-teamwork-to-study|student-says-exam-scores-low-because-answer-sharing-is-like-ball-passing"
+      }
+    },
+    {
+      "id": "20261020-007",
+      "text": "有个同学上厕所时总是拿别人的手纸用，自己从来不买。\n有一次，他拿纸时被人看到，人家气愤地说：“怎么老用别人的手纸？自己不会买吗？”\n他说：“这么小气干吗？不就是一点手纸吗？我用完还你就是了！”",
+      "source": {
+        "title": "这么小气干吗 - 校园笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/68121"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "校园",
+        "生活",
+        "逻辑错位"
+      ],
+      "twist_type": "字面化误解",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "classmates",
+        "setting": "school-restroom",
+        "premise": "student-borrows-others-toilet-paper",
+        "punchline": "borrower-says-he-will-return-the-paper-after-use"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 94,
+      "line_count": 3,
+      "fingerprints": {
+        "normalized_sha256": "bee296e48f2ee03296420466a66d00bb9fc5be7908f8c575c93796f372934c7f",
+        "semantic_key": "classmates|school-restroom|student-borrows-others-toilet-paper|borrower-says-he-will-return-the-paper-after-use"
+      }
+    },
+    {
+      "id": "20261020-008",
+      "text": "和女朋友吵架，我摔门就走，\n她冲着我喊“有本事你就别回来！”\n我这暴脾气，回了句，“回来我是你孙子！”\n半个小时后，我拎着她最爱吃的鸭脖子，对着门口喊“奶奶，奶奶我回来了，还带了吃的~”",
+      "source": {
+        "title": "爱情笑话 - 回来我是你孙子！ - 幽默笑话百分百",
+        "url": "https://www.xiaohuayoumo.com/aiqingxiaohua/21865.html"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "情侣",
+        "吵架",
+        "身份反转"
+      ],
+      "twist_type": "关系倒置",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "girlfriend-boyfriend",
+        "setting": "argument-at-home-door",
+        "premise": "boyfriend-insults-himself-as-grandson-if-he-returns",
+        "punchline": "he-returns-with-her-favorite-food-calling-her-grandma"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 90,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "ecf5ffaae60a2349c703531e50f14a33da189cbe67462762ab2f897385c0ca6b",
+        "semantic_key": "girlfriend-boyfriend|argument-at-home-door|boyfriend-insults-himself-as-grandson-if-he-returns|he-returns-with-her-favorite-food-calling-her-grandma"
+      }
+    },
+    {
+      "id": "20261020-010",
+      "text": "有一天，有两个人在森林里散步，忽然出现了一只大老虎。\n其中一个人赶紧伏下身系好鞋带，准备赶紧跑掉。\n另一个人问：你系什么鞋带啊？难道你还能跑得过老虎吗？\n这个人说：“我哪能跑得过老虎啊。不过，我只要跑得过你就行了！”",
+      "source": {
+        "title": "难道你还能跑得过老虎吗 - 社会笑话 | 知乐知",
+        "url": "https://zhilezhi.com/xiaohua/66494"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "生活",
+        "冷幽默",
+        "反转"
+      ],
+      "twist_type": "目标错位",
+      "state": "shown",
+      "batch_id": "daily-20261020-01",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "two-friends",
+        "setting": "forest-walk-encounter-with-tiger",
+        "premise": "one-person-ties-shoes-to-flee-when-tiger-appears",
+        "punchline": "he-only-needs-to-out-run-his-companion"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-120-chars",
+      "character_count": 105,
+      "line_count": 4,
+      "fingerprints": {
+        "normalized_sha256": "d421c1d3bbf1cbc5b64a29b8a695ab64b2547c52a6cef3f8478113f444aa7587",
+        "semantic_key": "two-friends|forest-walk-encounter-with-tiger|one-person-ties-shoes-to-flee-when-tiger-appears|he-only-needs-to-out-run-his-companion"
+      }
+    },
+    {
+      "id": "20261020-016",
+      "text": "一位孩子兴冲冲地回家，告诉爸爸：“老师说，一个孩子吃河马的奶，一个月内体重增加9千克。”爸爸立刻板起脸，厉声质问：“胡说八道，哪有这样的事！是谁的孩子？”孩子则一本正经地回答：“就是河马的孩子呀！”",
+      "source": {
+        "title": "笑话集锦：7则幽默趣事，让你捧腹大笑！",
+        "url": "https://klqsh.com/news/view/234031"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "亲子",
+        "动物",
+        "误会"
+      ],
+      "twist_type": "指代误会",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "child-parent",
+        "setting": "家庭对话",
+        "premise": "听到孩子喝河马奶后追问是谁家的孩子",
+        "punchline": "孩子指的是河马幼崽"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 99,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "e4b840a361a2d5f6a835eaa16e9ae708d63d4cca6bb7abe38a56e219b2aef234",
+        "semantic_key": "child-parent|家庭对话|听到孩子喝河马奶后追问是谁家的孩子|孩子指的是河马幼崽"
+      }
+    },
+    {
+      "id": "20261020-017",
+      "text": "我在商场逛时，看到一件漂亮的衣服便迫不及待地试穿，甚至把我的外套交给服务员。试穿了一大堆衣服后，心里还有些犹豫，问服务员：“我的外套呢？”服务员却愣愣地回答：“刚才客户太多，好像被我卖了。”",
+      "source": {
+        "title": "笑话集锦：7则幽默趣事，让你捧腹大笑！",
+        "url": "https://klqsh.com/news/view/234031"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "购物",
+        "误会",
+        "生活"
+      ],
+      "twist_type": "身份误认",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "customer-service-worker",
+        "setting": "商场试衣区",
+        "premise": "顾客让服务员保管外套",
+        "punchline": "服务员误把外套当商品卖掉"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 95,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "55b9cb710801ac8b904c5c4343d25308661eae80e4c61278047731ab2223dd90",
+        "semantic_key": "customer-service-worker|商场试衣区|顾客让服务员保管外套|服务员误把外套当商品卖掉"
+      }
+    },
+    {
+      "id": "20261020-018",
+      "text": "大雨倾盆而下，我急匆匆地打车回宾馆。下车后突然意识到手机不见了，心里慌得很，便大喊：“师傅，停车！”跑了一百多米后，我竟发现自己握着手机。这时候司机停车，询问：“怎么了？”我愣住了，思考如何应对尴尬，突然灵机一动，答道：“雨太大了，您慢点开车啊。”",
+      "source": {
+        "title": "笑话集锦：7则幽默趣事，让你捧腹大笑！",
+        "url": "https://klqsh.com/news/view/234031"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "出行",
+        "误会",
+        "生活观察"
+      ],
+      "twist_type": "临场圆场",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "passenger-driver",
+        "setting": "雨天打车",
+        "premise": "乘客以为手机遗失而叫停出租车",
+        "punchline": "发现手机在手后谎称提醒司机慢开"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 124,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "eeb66c10910b25d2d7d25c11122d6bd7654377ecaddd2112c1a927fe037d2fd2",
+        "semantic_key": "passenger-driver|雨天打车|乘客以为手机遗失而叫停出租车|发现手机在手后谎称提醒司机慢开"
+      }
+    },
+    {
+      "id": "20261020-020",
+      "text": "一个学生被老师发现在课堂上睡觉。老师：“你为什么在课堂上睡觉？”一个学生说：“我没睡！”老师：“那你为什么闭上眼睛？”这个学生说：“我闭着眼睛冥想！”老师：“那你为什么直点头？”学生回答：“您刚才说的太有道理！我很赞同。”老师：“那你为什么流口水？”学生答道：“老师，您说得太有趣味了！”",
+      "source": {
+        "title": "问答对话式笑话，12个劲爆幽默搞笑小对白，笑得停不下来",
+        "url": "https://klqsh.com/news/view/176487"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "校园",
+        "对话",
+        "反转"
+      ],
+      "twist_type": "连续圆场",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 8,
+      "semantic_signature": {
+        "relationship": "teacher-student",
+        "setting": "课堂",
+        "premise": "老师逐项追问上课睡觉的学生",
+        "punchline": "学生把点头和流口水解释成赞同和听得入迷"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 144,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "d5f6f680f1dca10dfa07ac1057cbe72410db9e438ad05a87c52d48cc0258d109",
+        "semantic_key": "teacher-student|课堂|老师逐项追问上课睡觉的学生|学生把点头和流口水解释成赞同和听得入迷"
+      }
+    },
+    {
+      "id": "20261020-021",
+      "text": "老李去公园遛狗,不料在一僻静处晕倒,不省人事。幸亏他的狗及时叫来了医生,才使老李转危为安。事后,许多人都夸老李的狗聪明。老李却无奈地说:“聪明什么呀,其实那天它叫来的是一名兽医。”",
+      "source": {
+        "title": "笑话故事100字100篇",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "夫妻",
+        "动物",
+        "生活观察"
+      ],
+      "twist_type": "分类误会",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "owner-dog",
+        "setting": "公园",
+        "premise": "狗为晕倒的主人叫来医生",
+        "punchline": "被叫来的其实是兽医"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 90,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "240e24a5a7e61f4abea65baed611d94bb9e90c7cab43dff805e108a118540fd7",
+        "semantic_key": "owner-dog|公园|狗为晕倒的主人叫来医生|被叫来的其实是兽医"
+      }
+    },
+    {
+      "id": "20261020-023",
+      "text": "有家公司举办新年晚会，一员工经过重重考验，进入到了抽奖环节。台下同事都在起哄：“苹果！苹果！苹果！”结果他真的抽到了张字条：苹果牌笔记本！正当他激动万分之时，司仪缓缓地递给他一个礼品包，里面有一个苹果、一副牌、一个笔记本。",
+      "source": {
+        "title": "笑话故事100字100篇",
+        "url": "https://www.chinajiaoan.cn/doc/1655831609330574.html"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "职场",
+        "抽奖",
+        "文字游戏"
+      ],
+      "twist_type": "词义拆解",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 1,
+      "semantic_signature": {
+        "relationship": "coworkers",
+        "setting": "公司年会",
+        "premise": "员工抽到苹果牌笔记本",
+        "punchline": "奖品是苹果、扑克牌和笔记本三样物品"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 111,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "23e3646e6fee72b9e9d5cab9ba31528d7466da486322ca9351a8b022b28c638f",
+        "semantic_key": "coworkers|公司年会|员工抽到苹果牌笔记本|奖品是苹果、扑克牌和笔记本三样物品"
+      }
+    },
+    {
+      "id": "20261020-024",
+      "text": "数学课上，老师问一个学生：“假如你欠理发师10元，欠卖菜的8元，欠面包房5元，那么总和是多少？”学生立刻答道：“总和等于0！”老师一脸怒气，刚想张口批评，学生马上接着说：“因为我家搬到别处去了！”",
+      "source": {
+        "title": "搞笑幽默的笑话段子集锦（10篇）",
+        "url": "https://klqsh.com/news/view/118763"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "校园",
+        "数学",
+        "反转"
+      ],
+      "twist_type": "语境反转",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "teacher-student",
+        "setting": "数学课",
+        "premise": "学生被问欠款的总和",
+        "punchline": "搬家后认为债务总额归零"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 98,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "4c23b4bce0d09deda40a063249eba2f13ad3ea90a0c29d10ac7cae1c7823aeed",
+        "semantic_key": "teacher-student|数学课|学生被问欠款的总和|搬家后认为债务总额归零"
+      }
+    },
+    {
+      "id": "20261020-028",
+      "text": "爸爸妈妈不知道我谈恋爱了。有次家里包饺子，男朋友说他也想吃，叫我拿给他，他到楼下等我。我不敢当着爸妈的面拿出去。到了楼下，男朋友看我两手空空，问饺子呢？我打开嘴巴，塞着满满的饺子。",
+      "source": {
+        "title": "幽默故事集锦：生活趣事与职场智慧",
+        "url": "https://klqsh.com/news/view/341098"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "家庭",
+        "恋爱",
+        "生活"
+      ],
+      "twist_type": "出乎意料",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 2,
+      "semantic_signature": {
+        "relationship": "dating-couple",
+        "setting": "家中包饺子",
+        "premise": "女友想给楼下男友带饺子但不敢当父母面拿出去",
+        "punchline": "她把饺子全塞进嘴里下楼"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 90,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "83ee6cc481f0b88e4021760027f2ec1c5830776d913b8f31d612f13d3b555e24",
+        "semantic_key": "dating-couple|家中包饺子|女友想给楼下男友带饺子但不敢当父母面拿出去|她把饺子全塞进嘴里下楼"
+      }
+    },
+    {
+      "id": "20261020-031",
+      "text": "早上送我女儿去学校。我逗她，让她称赞我是最帅的。我女儿白了我一眼，什么也没说。我威胁她：“如果你不称赞我英俊帅，我就不允许你中午回家吃饭！”中午放学后，女儿给儿媳妇打电话：“妈妈，我不回去吃饭了！今天早上，我父亲让一个漂亮的女生称赞她英俊。我白了他一眼，他生气了。还不允许我回家吃饭！”",
+      "source": {
+        "title": "家庭经典幽默小笑话，11个逗比家庭搞笑段子，不信你不笑",
+        "url": "https://www.sohu.com/a/392273993_120606571"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "亲子",
+        "家庭",
+        "误会"
+      ],
+      "twist_type": "转述误会",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 3,
+      "semantic_signature": {
+        "relationship": "father-daughter",
+        "setting": "上学途中及中午",
+        "premise": "父亲要求女儿称赞自己帅",
+        "punchline": "女儿把话转述成父亲让漂亮女生夸他"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 143,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "9184b2b0bfed2cc464a26a0ba050a7c37102a83ede69442d940efcfea7e402c7",
+        "semantic_key": "father-daughter|上学途中及中午|父亲要求女儿称赞自己帅|女儿把话转述成父亲让漂亮女生夸他"
+      }
+    },
+    {
+      "id": "20261020-025",
+      "text": "长颈鹿住院，兔子和狮子窗外看。兔子问：“它一直躺着吗？”狮子答：“是啊，五天了。”兔子说可怜，狮子说：“医生说他这辈子站不起来了。”兔子问什么病，狮子答：“恐高症。”",
+      "source": {
+        "title": "幽默故事集锦：笑料百出的生活趣事",
+        "url": "https://klqsh.com/news/view/341099"
+      },
+      "accessed_at": "2026-10-20",
+      "tags": [
+        "动物",
+        "对话",
+        "反转"
+      ],
+      "twist_type": "反差幽默",
+      "state": "shown",
+      "batch_id": "daily-20261020-02",
+      "dialogue_turn_count": 6,
+      "semantic_signature": {
+        "relationship": "animal-animal",
+        "setting": "动物园医院",
+        "premise": "兔子询问住院长颈鹿的状况",
+        "punchline": "长颈鹿躺着是因为恐高症"
+      },
+      "selection_policy": "v3-min-90-chars-or-6-dialogue-turns-max-150-chars",
+      "character_count": 83,
+      "line_count": 1,
+      "fingerprints": {
+        "normalized_sha256": "49428f8c82ff657586e04c3a47dbf52d1fb1967cca1dde24ae3f7e5960da7f73",
+        "semantic_key": "animal-animal|动物园医院|兔子询问住院长颈鹿的状况|长颈鹿躺着是因为恐高症"
+      }
     }
   ]
 }

@@ -337,7 +337,8 @@ def build_html(
                 escaped_url = html.escape(raw_url, quote=True)
                 content = (
                     '原始图片链接：'
-                    f'<a href="{escaped_url}" target="_blank" rel="noreferrer">'
+                    f'<a href="{escaped_url}" target="_blank" rel="noreferrer" '
+                    'style="overflow-wrap:anywhere;word-break:break-all;">'
                     f'{html.escape(raw_url)}</a>'
                 )
             else:

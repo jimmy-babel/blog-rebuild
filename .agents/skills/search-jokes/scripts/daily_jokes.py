@@ -26,7 +26,7 @@ FORBIDDEN = (
 PUSH_POLICY_V2 = "v2-min-100-chars-or-8-dialogue-turns"
 DEFAULT_MIN_COUNT = 90
 DEFAULT_MIN_DIALOGUE = 6
-DEFAULT_COUNT_LIMIT = 120
+DEFAULT_COUNT_LIMIT = 150
 PUSH_POLICY_V3_PREFIX = "v3-min-"
 REQUIRED = {
     "id", "text", "source", "accessed_at", "tags", "twist_type", "state",
